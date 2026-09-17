@@ -1,0 +1,262 @@
+[
+  {
+    "id": "otp_request",
+    "category": "OTP / PIN request",
+    "keywords": ["otp", "one time pin", "one-time pin", "send me the code", "share your pin", "verification code", "confirm your pin", "sms code you received"],
+    "title": "Impersonation asking for your OTP or PIN",
+    "why": [
+      "No bank, mobile money provider, or agent will ever ask you to read out or type in an OTP/PIN to 'verify', 'reverse', or 'unlock' your account.",
+      "OTPs exist specifically so that only you can authorize a transaction — sharing one hands the scammer that authorization."
+    ],
+    "advice": "Never share an OTP or PIN with anyone, even someone who already knows your name, account number, or recent transactions. Hang up and call your bank's official number instead.",
+    "source": "CBN Consumer Protection Advisory on OTP fraud",
+    "severity": "high"
+  },
+  {
+    "id": "account_suspended_link",
+    "category": "Fake bank/wallet alert",
+    "keywords": ["account has been suspended", "account will be blocked", "account has been limited", "click the link below", "verify your account now", "update your bvn", "update your kyc", "your account is on hold"],
+    "title": "Fake 'account suspended' link",
+    "why": [
+      "Real banks/wallets restrict access through their app or branch, not by texting a random link demanding you 'verify' within hours.",
+      "The urgency ('within 24 hours' / 'or your account will be closed') is a pressure tactic to stop you from thinking it through."
+    ],
+    "advice": "Don't tap the link. Open the bank's official app or website directly (type the address yourself) and check your account status there.",
+    "source": "NIBSS fraud pattern report",
+    "severity": "high"
+  },
+  {
+    "id": "loan_upfront_fee",
+    "category": "Fake instant loan app",
+    "keywords": ["loan approved", "pay a processing fee", "pay an activation fee", "instant loan", "loan disbursement fee", "unlock your loan", "small fee to release your loan"],
+    "title": "Loan scam asking for an upfront fee",
+    "why": [
+      "Legitimate lenders deduct fees from the loan amount itself — they don't ask you to pay money first to 'unlock' or 'release' a loan.",
+      "'Approved' loans that need a fee before payout are a classic advance-fee fraud pattern."
+    ],
+    "advice": "Never pay to receive a loan. If a fee is required before any money is disbursed, treat it as a scam and stop the conversation.",
+    "source": "FCCPC advance-fee fraud advisory",
+    "severity": "high"
+  },
+  {
+    "id": "romance_urgent_money",
+    "category": "Romance scam",
+    "keywords": ["i love you", "we have never met but", "i need money urgently", "stuck at the airport", "customs is holding my package", "send money so i can come to you", "my darling"],
+    "title": "Online relationship asking for urgent money",
+    "why": [
+      "A pattern of affection building quickly followed by a sudden financial emergency (stuck traveling, medical bill, customs fee) is one of the most common romance-scam scripts.",
+      "The request usually comes right when you're asked to send money via an untraceable method (gift cards, crypto, wire transfer)."
+    ],
+    "advice": "Pause before sending anything. Do a reverse image search on their photos and video call them. Never send money to someone you haven't met in person.",
+    "source": "INTERPOL romance fraud bulletin",
+    "severity": "medium"
+  },
+  {
+    "id": "guaranteed_investment_returns",
+    "category": "Investment / crypto scam",
+    "keywords": ["guaranteed returns", "double your money", "risk-free investment", "invest today and earn", "forex trading bot", "crypto doubling", "guaranteed profit in 7 days"],
+    "title": "'Guaranteed' investment returns",
+    "why": [
+      "No legitimate investment can guarantee fixed high returns with zero risk — all real investments carry risk.",
+      "These schemes often pay early investors with new investors' money (a Ponzi structure) until it collapses."
+    ],
+    "advice": "Verify the platform is registered with your country's securities/financial regulator before sending any money. If returns sound too good to be true, they are.",
+    "source": "SEC / capital markets authority investor alert",
+    "severity": "high"
+  },
+  {
+    "id": "lottery_prize_scam",
+    "category": "Lottery / prize scam",
+    "keywords": ["you have won", "claim your prize", "lucky winner", "lottery winner", "you have been selected to receive", "inheritance fund", "next of kin to claim"],
+    "title": "'You have won a prize' message",
+    "why": [
+      "You cannot win a lottery or prize draw you never entered.",
+      "Requests to pay 'clearance', 'processing', or 'tax' fees before releasing a prize are a well-known advance-fee scam."
+    ],
+    "advice": "Delete the message. Do not pay any fee to 'release' a prize you never entered for.",
+    "source": "EFCC advance-fee fraud (419) advisory",
+    "severity": "high"
+  },
+  {
+    "id": "sim_swap_data_request",
+    "category": "SIM swap fraud",
+    "keywords": ["upgrade your sim", "sim registration update", "send your nin", "send your bvn and date of birth", "reactivate your line", "your line will be deactivated"],
+    "title": "Request for personal details to 'upgrade' your SIM",
+    "why": [
+      "Scammers collect ID numbers and personal details like this to impersonate you at your telecom provider and hijack your SIM (SIM swap), which lets them intercept your OTPs.",
+      "Telecom providers don't collect full ID + date of birth over SMS or random calls for 'SIM upgrades'."
+    ],
+    "advice": "Don't share personal ID details over SMS/call. Visit an official telecom store in person for any SIM-related update.",
+    "source": "NCC telecom fraud advisory",
+    "severity": "high"
+  },
+  {
+    "id": "courier_customs_fee",
+    "category": "Package / courier scam",
+    "keywords": ["your package is held at customs", "pay a clearance fee", "delivery fee to release your parcel", "your parcel is stuck", "courier has a package for you"],
+    "title": "Fake courier/customs fee request",
+    "why": [
+      "Courier companies bill clearance fees through official invoices tied to a tracked shipment, not via random links asking for card details.",
+      "If you weren't expecting a parcel, there's nothing to 'release'."
+    ],
+    "advice": "Track the parcel directly on the courier's official website using the tracking number, not the link sent to you.",
+    "source": "Consumer protection courier-fraud bulletin",
+    "severity": "medium"
+  },
+  {
+    "id": "job_offer_fee",
+    "category": "Fake job offer",
+    "keywords": ["pay for training materials", "registration fee for the job", "work from home earn", "job offer letter attached pay", "recruitment fee"],
+    "title": "Job offer requiring an upfront payment",
+    "why": [
+      "Genuine employers pay you — they don't ask you to pay for training kits, uniforms, or 'registration' before you start.",
+      "High pay for minimal effort with an upfront cost is a recurring job-scam script."
+    ],
+    "advice": "Never pay to get a job. Verify the company independently (official website, LinkedIn, a phone call to their listed office).",
+    "source": "Labour ministry job-scam advisory",
+    "severity": "medium"
+  },
+  {
+    "id": "hacked_friend_urgent_transfer",
+    "category": "Compromised account scam",
+    "keywords": ["i'm stranded", "send me money on this new number", "my phone got stolen so use this account", "urgent i need cash now"],
+    "title": "Urgent money request from a 'friend's' account",
+    "why": [
+      "A common scam pattern is hacking or cloning a social media account, then messaging the victim's contacts asking for urgent money to a new/unfamiliar account.",
+      "The sudden urgency plus an unfamiliar payment destination is the giveaway."
+    ],
+    "advice": "Call the friend directly on their known number (not through the chat) to confirm before sending anything.",
+    "source": "Community-reported fraud pattern",
+    "severity": "medium"
+  },
+  {
+    "id": "mobile_money_reversal",
+    "category": "Mobile money reversal scam",
+    "keywords": ["sent to you by mistake", "wrong number sent money", "please send it back", "reversed by mistake", "send my money back", "wrongly credited", "mistakenly sent to your account"],
+    "title": "'I sent money to you by mistake, please send it back' scam",
+    "why": [
+      "Scammers first send a fake or reversible payment notification (or a real small payment from a stolen account), then pressure you to 'return' a larger amount from your own funds before the original transaction is confirmed or reverses itself.",
+      "By the time you discover the original 'mistaken' payment never actually settled — or was reversed by the bank — the money you sent back is gone, and it came from your own account, not theirs."
+    ],
+    "advice": "Never send money back based on a screenshot or SMS alone. Check your actual account balance and transaction history through your bank/mobile money app, not the sender's claim. If a payment truly arrived by mistake, ask your bank or mobile money provider to reverse it officially.",
+    "source": "Community-reported mobile money fraud pattern",
+    "severity": "high"
+  },
+  {
+    "id": "celebrity_crypto_giveaway",
+    "category": "Celebrity/crypto giveaway scam",
+    "keywords": ["send 0.1 btc", "double your bitcoin", "elon musk giveaway", "celebrity giveaway", "send crypto to receive double", "verify your wallet by sending", "crypto giveaway event"],
+    "title": "Fake celebrity or crypto 'giveaway' asking you to send crypto first",
+    "why": [
+      "No legitimate giveaway — celebrity, exchange, or otherwise — ever asks you to send cryptocurrency first in order to 'verify' your wallet or receive a larger amount back.",
+      "These scams often use fake verified badges, doctored livestreams, or hijacked social media accounts of real celebrities and companies to look convincing."
+    ],
+    "advice": "Do not send any crypto to 'claim' a giveaway. Real giveaways never require you to send funds first. Report and ignore the account.",
+    "source": "Crypto giveaway scam pattern (widely documented by exchanges and regulators)",
+    "severity": "high"
+  },
+  {
+    "id": "rental_deposit_scam",
+    "category": "Fake rental/apartment listing",
+    "keywords": ["pay the deposit before viewing", "send agreement fee to secure", "caretaker is not around so just pay", "send money to reserve the apartment", "agent fee before inspection"],
+    "title": "Rental listing asking for payment before you view the property",
+    "why": [
+      "Genuine landlords and agents let you inspect a property in person before any money changes hands — asking for a 'deposit' or 'agreement fee' first, especially with an excuse for why you can't view it, is a common online rental scam.",
+      "The same fake listing (often with photos copied from another property) can be used to collect deposits from multiple victims before disappearing."
+    ],
+    "advice": "Never pay for a property you have not physically inspected, and only pay through a verifiable agent or registered platform. Confirm the property exists through a neighbour or local contact before sending anything.",
+    "source": "Community-reported rental fraud pattern",
+    "severity": "medium"
+  },
+  {
+    "id": "fake_customer_care_callback",
+    "category": "Fake customer care / card blocked scam",
+    "keywords": ["your card has been blocked call this number", "your account will be blocked call", "dial this number to unblock your card", "call our customer care line immediately", "your debit card is suspended contact"],
+    "title": "'Your card is blocked, call this number' message",
+    "why": [
+      "This routes you to a scammer-controlled phone line pretending to be your bank's customer care, where they'll ask for your card number, PIN, or OTP to 'unblock' your account.",
+      "Real banks don't send you a message telling you to call an unfamiliar number to fix a card issue — you should always use the number printed on your card or the bank's official app."
+    ],
+    "advice": "Don't call any number given in a message like this. If you're worried about your card, call the number on the back of your card or open your bank's official app directly.",
+    "source": "NIBSS / bank fraud advisory",
+    "severity": "high"
+  },
+  {
+    "id": "impersonated_official_account",
+    "category": "Impersonated company/celebrity account",
+    "keywords": ["official support account", "this is the verified support page", "dm us your details to process your complaint", "contact this account for your refund", "we are the official customer service"],
+    "title": "A social media account impersonating a company or public figure's support page",
+    "why": [
+      "Scammers create lookalike accounts (similar name, copied profile photo, fake verification badge) that reply to real customers' public complaints, offering to 'help' — then ask for account details, PINs, or a 'processing fee' in DMs.",
+      "Real companies rarely resolve account-specific issues in public replies or unofficial-looking DMs, and never ask for your PIN or password to 'process' anything."
+    ],
+    "advice": "Only contact a company through the verified account or official app/website you already trust — check the handle carefully against the company's real website. Never share PINs, passwords or OTPs with any support account, official-looking or not.",
+    "source": "Community-reported social media impersonation pattern",
+    "severity": "medium"
+  },
+  {
+    "id": "tax_refund_phishing",
+    "category": "Fake government tax refund",
+    "keywords": ["tax refund is pending", "claim your tax rebate", "firs refund", "kra refund", "update your tax details to receive refund", "your refund has been approved click"],
+    "title": "Fake tax refund message asking you to 'update your details'",
+    "why": [
+      "Tax authorities (FIRS, KRA, URA, etc.) do not notify refunds by random SMS/WhatsApp links asking you to 'update your bank details' — refunds are processed through your official tax profile.",
+      "The link usually leads to a fake login page designed to steal your ID number, bank details, or tax portal password."
+    ],
+    "advice": "Don't click the link. Log in to the official tax authority website directly (type the address yourself) to check for any real refund, or visit a physical office.",
+    "source": "Tax authority phishing advisory",
+    "severity": "medium"
+  },
+  {
+    "id": "scholarship_fee_scam",
+    "category": "Fake scholarship / study-abroad offer",
+    "keywords": ["scholarship has been approved pay", "processing fee for your scholarship", "pay for your admission letter", "study abroad fee to secure your spot", "visa sponsorship fee for scholarship"],
+    "title": "Scholarship or study-abroad offer requiring an upfront fee",
+    "why": [
+      "Genuine scholarships are typically free to apply for, or fees (if any) are paid directly to the accredited institution through its official portal — not to an individual 'agent' or personal account.",
+      "The promise of a hard-to-get opportunity combined with pressure to pay quickly to 'secure your spot' is a classic advance-fee pattern targeting students."
+    ],
+    "advice": "Verify the scholarship directly on the university or program's official website before paying anything. Never pay an individual's personal account for a scholarship or study opportunity.",
+    "source": "Education fraud advisory pattern",
+    "severity": "medium"
+  },
+  {
+    "id": "family_emergency_new_number",
+    "category": "'Hi Mum/Dad' family emergency scam",
+    "keywords": ["hi mum its my new number", "hi dad this is my new number", "lost my phone this is my new line", "i'm texting from a new number urgent", "my phone fell in water this is my new number"],
+    "title": "Unknown number claiming to be a family member texting from a 'new phone'",
+    "why": [
+      "This is a well-known scam script: someone messages pretending to be your child, sibling, or relative on a new number after 'losing their phone', then quickly asks for urgent money for a bill, phone replacement, or emergency.",
+      "The urgency and emotional pressure ('please don't tell anyone, I'm so embarrassed') is designed to stop you from calling to verify."
+    ],
+    "advice": "Always call the family member's known number (or another relative) to confirm before sending anything, even if the story feels convincing. A real relative won't mind you double-checking.",
+    "source": "Family impersonation scam pattern (widely reported)",
+    "severity": "medium"
+  },
+  {
+    "id": "marketplace_pay_before_delivery",
+    "category": "Online marketplace pay-before-delivery scam",
+    "keywords": ["pay before delivery no inspection", "send payment first then i will ship", "full payment before dispatch", "send money before i send the item", "cash on delivery not available pay upfront"],
+    "title": "Marketplace seller demanding full payment before you see or receive the item",
+    "why": [
+      "Legitimate online sellers on reputable marketplaces typically support inspect-before-you-pay or delivery-on-payment options — refusing any inspection and demanding full upfront payment is a common tactic before disappearing with the money.",
+      "Listings offering prices well below market value are often bait to get buyers to move fast and skip normal caution."
+    ],
+    "advice": "Use a marketplace's built-in escrow/payment protection where available, insist on inspecting the item before paying, and be suspicious of any price far below the norm.",
+    "source": "Online marketplace fraud pattern",
+    "severity": "medium"
+  },
+  {
+    "id": "qr_code_tampering",
+    "category": "Tampered QR code payment scam",
+    "keywords": ["qr code", "scan this qr", "scan the qr code", "new qr code", "updated qr code", "till number changed", "new till number", "scan to complete your payment", "scan to pay", "scan the code to confirm"],
+    "title": "A QR code that may redirect your payment to a scammer's account",
+    "why": [
+      "Scammers sometimes paste a fake QR code sticker over a legitimate business's real one, or send a 'new' QR code by message, redirecting payment to their own account instead of the business.",
+      "Once you scan and pay, the money goes directly to the scammer's account and is very hard to recover — unlike a failed transaction, there's often no error to alert you."
+    ],
+    "advice": "Before scanning, confirm the till/paybill number or account name shown after scanning matches the business you're paying. If a QR code was sent to you directly rather than displayed at the business, verify with the business through a known number first.",
+    "source": "Community-reported QR payment fraud pattern",
+    "severity": "high"
+  }
+]
