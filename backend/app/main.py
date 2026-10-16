@@ -1,4 +1,5 @@
 import hmac
+import os
 import threading
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -10,9 +11,10 @@ from fastapi.staticfiles import StaticFiles
 
 load_dotenv()
 
-from app import checker, db, limits, reports_store, telegram_api, telegram_bot, verdict_engine
+from app import checker, db, limits, reports_store, telegram_api, telegram_bot, verdict_engine, visits_store
 from app.i18n import normalize_lang
 from app.schemas import (
+    VisitRequest,
     ReportRequest,
     ReportResponse,
     StatsResponse,
@@ -48,9 +50,36 @@ def verify(req: VerifyRequest):
     return checker.check_message(req.message, normalize_lang(req.language))
 
 
+def _business_contact() -> str | None:
+    """Where business owners can reach you: an email address or a link (TikTok, Telegram, ...)."""
+    value = os.getenv("BUSINESS_CONTACT", "").strip()
+    if not value:
+        return None
+    if value.startswith(("http://", "https://")):
+        return value
+    return f"mailto:{value}" if "@" in value else None
+
+
 @app.get("/api/config")
 def config():
-    return {"telegram_url": telegram_bot.bot_url()}
+    return {"telegram_url": telegram_bot.bot_url(), "business_contact": _business_contact()}
+
+
+@app.post("/api/visit", dependencies=[Depends(limits.limit_report)])
+def visit(req: VisitRequest):
+    visits_store.record(req.ref)
+    return {"ok": True}
+
+
+@app.get("/api/visits")
+def visits(request: Request, days: int = 30):
+    """Visit counts per link label, for the owner only: needs the ADMIN_KEY in the X-Admin-Key header."""
+    key = os.getenv("ADMIN_KEY", "")
+    if not key:
+        raise HTTPException(status_code=404)
+    if not hmac.compare_digest(request.headers.get("x-admin-key", ""), key):
+        raise HTTPException(status_code=403)
+    return visits_store.counts(max(1, min(days, 90)))
 
 
 @app.post("/telegram/webhook")

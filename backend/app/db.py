@@ -137,6 +137,16 @@ class MonitorAlert(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now, index=True)
 
 
+class SiteVisit(Base):
+    """One website visit and the link label it came with (?ref=tiktok). Nothing identifies the visitor."""
+
+    __tablename__ = "site_visits"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    ref: Mapped[str] = mapped_column(String(24), index=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now, index=True)
+
+
 _engine = None
 _SessionLocal = None
 

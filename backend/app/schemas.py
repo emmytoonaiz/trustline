@@ -26,6 +26,10 @@ class VerifyResponse(BaseModel):
     source_platform: Optional[str] = None
 
 
+class VisitRequest(BaseModel):
+    ref: Optional[str] = Field(default=None, max_length=40)
+
+
 class ReportRequest(BaseModel):
     message: str = Field(min_length=1, max_length=4000)
     category: Optional[str] = Field(default=None, max_length=120)

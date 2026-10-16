@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getConfig, verifyMessage } from "./api.js";
+import { getConfig, recordVisit, verifyMessage } from "./api.js";
 import { COPY, LANGUAGES } from "./copy.js";
 import VerdictCard from "./components/VerdictCard.jsx";
 import StatsPanel from "./components/StatsPanel.jsx";
@@ -11,13 +11,29 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [statsKey, setStatsKey] = useState(0);
   const [telegramUrl, setTelegramUrl] = useState(null);
+  const [businessContact, setBusinessContact] = useState(null);
 
-  const t = COPY[lang];
+  // Only the English text is written for the business section; other languages fall back to it.
+  const t = { ...COPY.en, ...COPY[lang] };
 
   useEffect(() => {
     getConfig()
-      .then((c) => setTelegramUrl(c.telegram_url))
+      .then((c) => {
+        setTelegramUrl(c.telegram_url);
+        setBusinessContact(c.business_contact);
+      })
       .catch(() => setTelegramUrl(null));
+  }, []);
+
+  // One count per browser session, labelled by the link's ?ref= (e.g. a TikTok bio link).
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem("counted")) return;
+      sessionStorage.setItem("counted", "1");
+    } catch {
+      /* storage blocked: count anyway */
+    }
+    recordVisit(new URLSearchParams(window.location.search).get("ref"));
   }, []);
 
   useEffect(() => {
@@ -128,6 +144,24 @@ export default function App() {
               {t.telegramLink} →
             </a>
           )}
+
+          <aside className="business-card">
+            <div className="business-title">{t.businessTitle}</div>
+            <p>{t.businessText}</p>
+            <div className="business-actions">
+              {businessContact && (
+                <a className="business-button" href={businessContact} target="_blank" rel="noopener noreferrer">
+                  {t.businessContact}
+                </a>
+              )}
+              {telegramUrl && (
+                <a className="business-link" href={telegramUrl} target="_blank" rel="noopener noreferrer">
+                  {t.businessTelegram} →
+                </a>
+              )}
+            </div>
+          </aside>
+          <p className="beta-note">{t.betaNote}</p>
         </section>
 
         <StatsPanel t={t} lang={lang} refreshKey={statsKey} />

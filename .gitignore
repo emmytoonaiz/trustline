@@ -10,3 +10,4 @@ backend/app/data/trustline.db
 backend/tests/__pycache__/
 backend/.pytest_cache/
 .pytest_cache/
+marketing/

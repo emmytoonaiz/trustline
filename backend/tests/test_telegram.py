@@ -206,12 +206,12 @@ def test_config_hides_telegram_link_until_the_bot_is_known(client, monkeypatch):
     from app import telegram_bot
 
     monkeypatch.setattr(telegram_bot, "_bot_username", None)
-    assert client.get("/api/config").json() == {"telegram_url": None}
+    assert client.get("/api/config").json()["telegram_url"] is None
 
 
 def test_config_exposes_the_bots_public_link(client, monkeypatch):
     monkeypatch.setenv("TELEGRAM_BOT_USERNAME", "@TrustLineScamBot")
-    assert client.get("/api/config").json() == {"telegram_url": "https://t.me/TrustLineScamBot"}
+    assert client.get("/api/config").json()["telegram_url"] == "https://t.me/TrustLineScamBot"
 
 
 def test_same_update_is_handled_only_once(client, sent):
@@ -346,3 +346,43 @@ def test_typing_indicator_stays_alive_during_a_slow_check_and_then_stops(sent, m
 
     time.sleep(0.2)
     assert len([1 for m, _ in sent if m == "sendChatAction"]) == during, "and stop once the check is done"
+
+
+# ---- site visits + business contact ---------------------------------------------------------
+
+def test_visits_are_counted_per_link_label(client, monkeypatch):
+    from app import visits_store
+
+    before = visits_store.counts()["by_ref"].get("tiktok", 0)
+    assert client.post("/api/visit", json={"ref": "TikTok"}).status_code == 200
+    assert visits_store.counts()["by_ref"]["tiktok"] == before + 1
+
+
+def test_odd_visit_labels_count_as_direct(client):
+    from app import visits_store
+
+    before = visits_store.counts()["by_ref"].get("direct", 0)
+    client.post("/api/visit", json={"ref": "<script>alert(1)</script>"})
+    client.post("/api/visit", json={})
+    assert visits_store.counts()["by_ref"]["direct"] == before + 2
+
+
+def test_visit_counts_need_the_admin_key(client, monkeypatch):
+    monkeypatch.delenv("ADMIN_KEY", raising=False)
+    assert client.get("/api/visits").status_code == 404
+    monkeypatch.setenv("ADMIN_KEY", "s3cret")
+    assert client.get("/api/visits").status_code == 403
+    assert client.get("/api/visits", headers={"x-admin-key": "wrong"}).status_code == 403
+    ok = client.get("/api/visits", headers={"x-admin-key": "s3cret"})
+    assert ok.status_code == 200 and "by_ref" in ok.json()
+
+
+def test_business_contact_is_exposed_as_a_link_or_mailto(client, monkeypatch):
+    monkeypatch.delenv("BUSINESS_CONTACT", raising=False)
+    assert client.get("/api/config").json()["business_contact"] is None
+    monkeypatch.setenv("BUSINESS_CONTACT", "hello@example.com")
+    assert client.get("/api/config").json()["business_contact"] == "mailto:hello@example.com"
+    monkeypatch.setenv("BUSINESS_CONTACT", "https://tiktok.com/@trustline")
+    assert client.get("/api/config").json()["business_contact"] == "https://tiktok.com/@trustline"
+    monkeypatch.setenv("BUSINESS_CONTACT", "javascript:alert(1)")
+    assert client.get("/api/config").json()["business_contact"] is None

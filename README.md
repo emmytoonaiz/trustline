@@ -131,9 +131,13 @@ Set these as service variables in Railway (never commit them):
 | `ACCOUNT_WARN_THRESHOLD` | Optional. How many different people must report a Telegram account before the bot warns about it (default `3`). |
 | `PRIVACY_SALT` | Optional. Secret used to hash Telegram ids. Defaults to a value derived from the bot token; set it explicitly to keep hashes stable if the token is ever rotated. |
 | `DEMO_SEED_STATS` | Optional. Set to `1` to show made-up demo numbers in the community stats panel. Off by default so the panel only shows real reports. |
+| `BUSINESS_CONTACT` | Optional. An email address or link (e.g. a TikTok profile) for the "Join the pilot" button on the site. The button stays hidden until it is set. |
+| `ADMIN_KEY` | Optional. Secret that unlocks `GET /api/visits` (visit counts per `?ref=` label, sent as the `X-Admin-Key` header). The endpoint does not exist until it is set. |
+| `MONITOR_MIN_CONFIDENCE`, `MONITOR_CHECKS_PER_HOUR`, `MONITOR_INCLUDE_OWNER` | Optional. Group-monitoring tuning (see the Telegram section). |
 
 Because the site is public and calls a paid API, `/api/verify` is limited to 20 requests per
 minute per visitor, `/api/report` to 10, and messages to 4,000 characters.
+Visits are counted per link label (`/?ref=tiktok`), with no IP address, cookie or other identifier.
 The community stats shows the last 7 days of real reports and stays hidden until there are some.
 
 ## Telegram bot

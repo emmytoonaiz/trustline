@@ -366,3 +366,57 @@ body {
     max-height: 200px;
   }
 }
+
+/* For businesses */
+
+.business-card {
+  margin-top: 12px;
+  padding: 12px 14px;
+  background: var(--info-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.85rem;
+}
+
+.business-card p {
+  margin: 4px 0 10px;
+  color: var(--text);
+}
+
+.business-title {
+  font-weight: 600;
+}
+
+.business-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.business-button {
+  background: var(--header);
+  color: var(--header-text);
+  padding: 7px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.business-link {
+  color: var(--header);
+  text-decoration: none;
+}
+
+.business-button:hover,
+.business-link:hover,
+.business-button:focus-visible,
+.business-link:focus-visible {
+  text-decoration: underline;
+}
+
+.beta-note {
+  margin: 10px 0 0;
+  font-size: 0.72rem;
+  color: var(--muted);
+}

@@ -31,3 +31,12 @@ export async function getConfig() {
   if (!res.ok) throw new Error("config request failed");
   return res.json();
 }
+
+// Counts one visit under the link label (?ref=tiktok). Nothing identifies the visitor.
+export function recordVisit(ref) {
+  return fetch(`${BASE}/visit`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ ref }),
+  }).catch(() => {});
+}

@@ -31,6 +31,13 @@ export const COPY = {
     errorGeneric: "Something went wrong reaching TrustLine. Please try again.",
     telegramLink: "Prefer Telegram? Chat with the TrustLine bot",
     languageLabel: "Language",
+    businessTitle: "Run a business or a community group?",
+    businessText:
+      "TrustLine can watch your Telegram group for scam messages and alert only you, privately. You decide what gets deleted. We are piloting this with a few businesses.",
+    businessContact: "Join the pilot",
+    businessTelegram: "Try it on Telegram",
+    betaNote:
+      "Proof of concept. Messages checked here are not stored. Never share passwords, BVN or card details with anyone, including us.",
   },
   fr: {
     title: "TrustLine",
