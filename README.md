@@ -125,11 +125,42 @@ Set these as service variables in Railway (never commit them):
 |---|---|
 | `ANTHROPIC_API_KEY` | Enables Claude reasoning for messages the curated library doesn't match. Without it the app still works on the curated patterns alone. |
 | `YOUTUBE_API_KEY` | Enables reading YouTube links. Without it, YouTube links get a "paste the text instead" notice. |
+| `DATABASE_URL` | Postgres connection string (on Railway: add a Postgres service and set `DATABASE_URL=${{Postgres.DATABASE_URL}}`). Without it the app uses a local SQLite file — fine for development, but it is lost on every redeploy. |
+| `TELEGRAM_BOT_TOKEN` | Optional. Turns on the Telegram bot (see below). |
 | `LLM_DAILY_CAP` | Optional. Most AI calls allowed per day (default `1000`) — a cost ceiling for a public site. |
+| `ACCOUNT_WARN_THRESHOLD` | Optional. How many different people must report a Telegram account before the bot warns about it (default `3`). |
+| `PRIVACY_SALT` | Optional. Secret used to hash Telegram ids. Defaults to a value derived from the bot token; set it explicitly to keep hashes stable if the token is ever rotated. |
+| `DEMO_SEED_STATS` | Optional. Set to `1` to show made-up demo numbers in the community stats panel. Off by default so the panel only shows real reports. |
 
 Because the site is public and calls a paid API, `/api/verify` is limited to 20 requests per
 minute per visitor, `/api/report` to 10, and messages to 4,000 characters.
-Community reports are stored on the container's disk, so they reset on each redeploy.
+The community stats shows the last 7 days of real reports and stays hidden until there are some.
+
+## Telegram bot
+
+`POST /telegram/webhook` powers a private-chat bot. Users paste or **forward** a suspicious
+message and get the same verdict as on the website, in their language (picked from their
+Telegram settings, changeable with `/language`). Buttons let them report the scam and, for
+forwarded messages, the sender's account.
+
+Setup: message `@BotFather` on Telegram, create a bot, and add its token as
+`TELEGRAM_BOT_TOKEN`. On start-up the server registers its own webhook (it reads Railway's
+public domain automatically; set `PUBLIC_BASE_URL` to override) — the token is never logged.
+Telegram's requests are verified with a secret header derived from the token.
+
+Privacy and abuse design:
+- **Reporter identities are hashed.** A reporter's Telegram id is stored only as a salted
+  one-way hash, used to stop one person from reporting the same account twice.
+- **No message history.** A checked message is held for 24 hours so the Report buttons work,
+  then deleted; it is only kept if the user taps Report.
+- **Account warnings need several reporters.** The bot only warns about an account once
+  `ACCOUNT_WARN_THRESHOLD` different people reported it, and words it as "reported by N users".
+  The "Report the sender" button is only offered for messages judged scam or uncertain, and
+  each person can file at most 20 account reports a day.
+- The bot never receives IP addresses, phone numbers or locations from Telegram, and doesn't ask.
+
+Run the tests (fake Telegram, throwaway database): `cd backend && python -m pytest tests`.
+Set `TEST_DATABASE_URL` to run them against Postgres.
 
 ## Project structure
 
@@ -140,8 +171,15 @@ trustline/
       main.py            # FastAPI routes: /api/verify, /api/report, /api/stats
       verdict_engine.py  # rule-based matcher + Claude reasoning layer
       link_handler.py    # detects YouTube/X/Facebook/Instagram links, fetches YouTube content
-      i18n.py            # translated headlines/fallbacks/link notices (English, French)
-      reports_store.py   # community report storage + stats aggregation
+      checker.py         # the full check (links, pattern library, Claude), shared by web and bot
+      i18n.py            # translated headlines/fallbacks/link notices
+      limits.py          # per-visitor rate limits and the daily AI-call ceiling
+      db.py              # database tables (Postgres in production, SQLite locally)
+      reports_store.py   # community reports + stats
+      telegram_bot.py    # Telegram bot: messages, buttons, reports, webhook registration
+      telegram_api.py    # thin client for Telegram's Bot API
+      telegram_store.py  # language choices, pending checks, account reports (hashed reporters)
+      bot_i18n.py        # the bot's text in five languages
       schemas.py          # request/response models
       data/scam_patterns.json     # curated scam pattern library (English)
       data/scam_patterns_fr.json  # French translations + French trigger phrases

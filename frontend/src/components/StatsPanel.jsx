@@ -10,7 +10,7 @@ export default function StatsPanel({ t, lang, refreshKey }) {
       .catch(() => setStats(null));
   }, [refreshKey, lang]);
 
-  if (!stats) return null;
+  if (!stats || stats.top_categories.length === 0) return null;
 
   const max = Math.max(...stats.top_categories.map((c) => c.count), 1);
 

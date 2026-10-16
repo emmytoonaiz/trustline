@@ -8,3 +8,5 @@ backend/**/__pycache__
 frontend/node_modules
 frontend/dist
 **/*.pyc
+backend/app/data/trustline.db
+backend/tests
