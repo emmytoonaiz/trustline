@@ -154,7 +154,7 @@ them report the scam and, for forwarded messages, the sender's account.
   it the alert is informational). Cheap pre-filtering (links, phone/account numbers, money,
   risk words, curated patterns) decides which messages get a full check, and only confident
   "likely scam" verdicts (`MONITOR_MIN_CONFIDENCE`, default 70) reach the owner. A per-group cap
-  (`MONITOR_CHECKS_PER_HOUR`, default 60) bounds AI cost. Removing the bot, or demoting it,
+  (`MONITOR_CHECKS_PER_HOUR`, default 60) bounds AI cost. Set `MONITOR_INCLUDE_OWNER=true` to also check the owner's own messages (for testing alone; leave it off in production). Removing the bot, or demoting it,
   stops monitoring. Telegram admin bots see all messages in the group, so this is what the
   owner is consenting to when they promote the bot.
 - **Website link:** the site shows a "chat with the bot" link once the bot is running (the

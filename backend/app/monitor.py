@@ -15,6 +15,8 @@ MIN_TEXT_LENGTH = 8
 # Precision matters more than recall here: hiding a real customer's comment costs the business money,
 # so only confident verdicts reach the owner, and the owner still decides.
 MIN_CONFIDENCE = int(os.getenv("MONITOR_MIN_CONFIDENCE", "70"))
+# For testing alone: also check the owner's own messages (normally skipped).
+INCLUDE_OWNER = os.getenv("MONITOR_INCLUDE_OWNER", "").lower() in ("1", "true", "yes")
 # A busy group must not be able to run up the AI bill.
 _hourly = limits.RateLimiter(max_calls=int(os.getenv("MONITOR_CHECKS_PER_HOUR", "60")), window_seconds=3600)
 
@@ -86,7 +88,7 @@ def handle_group_message(message: dict, chat: dict, sender: dict) -> None:
     watched = monitor_store.get_active_chat(chat["id"])
     if watched is None:
         return
-    if message.get("is_automatic_forward") or message.get("sender_chat") or sender.get("id") == watched.owner_user_id:
+    if message.get("is_automatic_forward") or message.get("sender_chat") or (sender.get("id") == watched.owner_user_id and not INCLUDE_OWNER):
         return
 
     text = (message.get("text") or message.get("caption") or "").strip()

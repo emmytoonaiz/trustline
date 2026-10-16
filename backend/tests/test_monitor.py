@@ -212,3 +212,12 @@ def test_alert_text_cannot_inject_html(client, sent):
     sent.clear()
     post(client, chat, SCAM_TEXT + " <b>pwn</b>")
     assert "<b>pwn</b>" not in dm_to(sent, owner)[0]["text"]
+
+
+def test_owner_messages_are_checked_when_the_test_switch_is_on(client, sent, monkeypatch):
+    chat, owner = new_chat_id(), new_user_id()
+    made_admin(client, chat, owner)
+    sent.clear()
+    monkeypatch.setattr(monitor, "INCLUDE_OWNER", True)
+    post(client, chat, SCAM_TEXT, user_id=owner)
+    assert len(dm_to(sent, owner)) == 1
