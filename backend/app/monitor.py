@@ -135,7 +135,8 @@ def handle_group_message(message: dict, chat: dict, sender: dict) -> None:
         lines += ["", f"<b>{esc(s(lang, 'why'))}</b>"] + [f"• {esc(r[:300])}" for r in reasons]
     elif result.headline:
         lines += ["", esc(result.headline[:300])]
-    tg.send_message(watched.owner_user_id, "\n".join(lines), _alert_keyboard(lang, alert_id, watched.can_delete))
+    delivered = tg.send_message(watched.owner_user_id, "\n".join(lines), _alert_keyboard(lang, alert_id, watched.can_delete))
+    logger.warning("Monitor: alert %s to owner", "delivered" if delivered else "FAILED (owner has not started the bot?)")
 
 
 # ---- the owner pressing a button on an alert --------------------------------------------------------
@@ -159,6 +160,7 @@ def handle_callback(cb: dict, data: str, lang: str) -> None:
         return
     lang = watched.owner_language
 
+    logger.warning("Monitor: owner chose %s", "delete" if action == "d" else "keep")
     if action == "d":
         if not tg.delete_message(watched.tg_chat_id, alert.tg_message_id):
             tg.answer_callback_query(cb_id, s(lang, "mon_delete_failed"))
