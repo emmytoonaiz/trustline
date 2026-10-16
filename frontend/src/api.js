@@ -25,3 +25,9 @@ export async function getStats(language = "en") {
   if (!res.ok) throw new Error("stats request failed");
   return res.json();
 }
+
+export async function getConfig() {
+  const res = await fetch(`${BASE}/config`);
+  if (!res.ok) throw new Error("config request failed");
+  return res.json();
+}

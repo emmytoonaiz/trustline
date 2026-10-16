@@ -6,7 +6,7 @@ from collections import OrderedDict
 
 from fastapi import HTTPException
 
-from app import checker, limits, reports_store
+from app import checker, image_reader, limits, reports_store
 from app import telegram_api as tg
 from app import telegram_store as store
 from app.bot_i18n import COMMANDS, LANGUAGE_NAMES, PRIVACY_NOTE, s
@@ -20,6 +20,8 @@ MAX_MESSAGE_LENGTH = 4000
 ACCOUNT_WARN_THRESHOLD = int(os.getenv("ACCOUNT_WARN_THRESHOLD", "3"))
 
 _limiter = limits.RateLimiter(max_calls=10, window_seconds=60)
+_image_limiter = limits.RateLimiter(max_calls=5, window_seconds=60)
+_group_limiter = limits.RateLimiter(max_calls=8, window_seconds=60)
 _seen: OrderedDict[int, None] = OrderedDict()
 _seen_lock = threading.Lock()
 
@@ -137,34 +139,70 @@ def _language_keyboard() -> dict:
 
 # ---- messages ---------------------------------------------------------------
 
+def _content_of(message: dict, chat_id: int) -> tuple[str | None, str | None, str | None]:
+    """What to check in a message: (text, text read from an image, problem).
+    `problem` is a bot-text key when there is nothing usable to check."""
+    typed = message.get("text") or message.get("caption")
+    image_text = None
+    photos = message.get("photo")
+    if photos:
+        tg.send_chat_action(chat_id)
+        for size in list(reversed(photos))[:2]:  # largest first; fall back to a smaller copy
+            data = tg.get_file_bytes(size["file_id"])
+            if data:
+                image_text = image_reader.transcribe(data)
+                break
+        if not image_text and not typed:
+            return None, None, "image_unreadable"
+    parts = [p for p in (typed, image_text) if p]
+    if not parts:
+        return None, None, "unsupported"
+    return "\n\n".join(parts), image_text, None
+
+
+def _with_image_note(text: str, image_text: str | None, lang: str) -> str:
+    if not image_text:
+        return text
+    return f"{html.escape(s(lang, 'image_read'))}\n<i>{html.escape(_trim(image_text, 300))}</i>\n\n{text}"
+
+
 def _handle_message(message: dict) -> None:
     chat = message.get("chat") or {}
     sender = message.get("from") or {}
-    if chat.get("type") != "private" or sender.get("is_bot"):
-        return  # private chats only, for now
+    if sender.get("is_bot"):
+        return
+    if chat.get("type") == "private":
+        _handle_private(message, chat, sender)
+    elif chat.get("type") in ("group", "supergroup"):
+        _handle_group(message, chat, sender)
 
+
+def _handle_private(message: dict, chat: dict, sender: dict) -> None:
     chat_id = chat["id"]
     chat_hash = store.hash_id("chat", chat_id)
     lang = _language(chat_hash, sender.get("language_code"))
 
     try:
         _limiter.check(chat_hash)
+        if message.get("photo"):
+            _image_limiter.check(chat_hash)
     except HTTPException:
         tg.send_message(chat_id, html.escape(s(lang, "rate_limited")))
         return
 
-    text = message.get("text") or message.get("caption")
-    if not text:
-        tg.send_message(chat_id, html.escape(s(lang, "unsupported")))
+    typed = message.get("text")
+    if typed and typed.startswith("/"):
+        _handle_command(chat_id, lang, typed)
         return
-
-    if text.startswith("/"):
-        _handle_command(chat_id, lang, text)
-        return
-
-    if len(text) > MAX_MESSAGE_LENGTH:
+    if typed and len(typed) > MAX_MESSAGE_LENGTH:
         tg.send_message(chat_id, html.escape(s(lang, "too_long")))
         return
+
+    text, image_text, problem = _content_of(message, chat_id)
+    if problem:
+        tg.send_message(chat_id, html.escape(s(lang, problem)))
+        return
+    text = text[:MAX_MESSAGE_LENGTH]
 
     tg.send_chat_action(chat_id)
     try:
@@ -181,14 +219,63 @@ def _handle_message(message: dict) -> None:
         if n >= ACCOUNT_WARN_THRESHOLD:
             warning = s(lang, "account_warning", n=n)
 
+    reply = _with_image_note(_format(result, lang, warning), image_text, lang)
+
     if result.verdict == "link_unsupported":
-        tg.send_message(chat_id, _format(result, lang, warning), _keyboard(lang, None, False, False))
+        tg.send_message(chat_id, reply, _keyboard(lang, None, False, False))
         return
 
     category = (result.matched.category_en or result.matched.category) if result.matched else "Uncategorized"
     offer_account = bool(account) and result.verdict in ("likely_scam", "uncertain")
     pid = store.create_pending(chat_hash, category, text, account if offer_account else None)
-    tg.send_message(chat_id, _format(result, lang, warning), _keyboard(lang, pid, True, offer_account))
+    tg.send_message(chat_id, reply, _keyboard(lang, pid, True, offer_account))
+
+
+def _handle_group(message: dict, chat: dict, sender: dict) -> None:
+    """Groups: the bot never reads the conversation. It only acts when someone replies to a
+    message with /check, and then answers under that message."""
+    typed = message.get("text") or ""
+    if not typed.startswith("/") or typed.split()[0].split("@")[0].lower() != "/check":
+        return
+
+    chat_id = chat["id"]
+    user_hash = store.hash_id("chat", sender.get("id", 0))  # same hash as that user's private chat
+    lang = _language(user_hash, sender.get("language_code"))
+    ask_id = message.get("message_id")
+    target = message.get("reply_to_message")
+
+    try:
+        _limiter.check(user_hash)
+        _group_limiter.check(store.hash_id("group", chat_id))
+        if target and target.get("photo"):
+            _image_limiter.check(user_hash)
+    except HTTPException:
+        tg.send_message(chat_id, html.escape(s(lang, "rate_limited")), reply_to=ask_id)
+        return
+
+    if not target:
+        tg.send_message(chat_id, html.escape(s(lang, "group_hint")), reply_to=ask_id)
+        return
+    if (target.get("from") or {}).get("is_bot"):
+        return
+
+    text, image_text, problem = _content_of(target, chat_id)
+    if problem:
+        tg.send_message(chat_id, html.escape(s(lang, problem)), reply_to=target.get("message_id"))
+        return
+
+    tg.send_chat_action(chat_id)
+    try:
+        result = checker.check_message(text[:MAX_MESSAGE_LENGTH], lang)
+    except Exception:
+        logger.exception("Group check failed")
+        tg.send_message(chat_id, html.escape(s(lang, "error")), reply_to=ask_id)
+        return
+    tg.send_message(
+        chat_id,
+        _with_image_note(_format(result, lang, None), image_text, lang),
+        reply_to=target.get("message_id"),
+    )
 
 
 def _handle_command(chat_id: int, lang: str, text: str) -> None:
@@ -280,12 +367,23 @@ def _handle_callback(cb: dict) -> None:
 
 # ---- start-up ------------------------------------------------------------------
 
+_bot_username: str | None = None
+
+
+def bot_url() -> str | None:
+    """Public link to the bot (for the website's "Check on Telegram" button), if one is configured."""
+    name = os.getenv("TELEGRAM_BOT_USERNAME") or _bot_username
+    return f"https://t.me/{name.lstrip('@')}" if name else None
+
+
 def register_webhook() -> None:
     """Point Telegram at this server. Uses the bot token from the environment; nothing is
     logged or returned that contains it."""
+    global _bot_username
     bot_token = tg.token()
     if not bot_token:
         return
+    _bot_username = tg.get_bot_username()
     base = os.getenv("PUBLIC_BASE_URL") or (
         f"https://{os.getenv('RAILWAY_PUBLIC_DOMAIN')}" if os.getenv("RAILWAY_PUBLIC_DOMAIN") else None
     )

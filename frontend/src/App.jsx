@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { verifyMessage } from "./api.js";
+import { getConfig, verifyMessage } from "./api.js";
 import { COPY, LANGUAGES } from "./copy.js";
 import VerdictCard from "./components/VerdictCard.jsx";
 import StatsPanel from "./components/StatsPanel.jsx";
@@ -10,8 +10,15 @@ export default function App() {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [statsKey, setStatsKey] = useState(0);
+  const [telegramUrl, setTelegramUrl] = useState(null);
 
   const t = COPY[lang];
+
+  useEffect(() => {
+    getConfig()
+      .then((c) => setTelegramUrl(c.telegram_url))
+      .catch(() => setTelegramUrl(null));
+  }, []);
 
   useEffect(() => {
     document.documentElement.lang = lang === "pcm" ? "pcm" : lang;
@@ -115,6 +122,12 @@ export default function App() {
               {t.send}
             </button>
           </div>
+
+          {telegramUrl && (
+            <a className="telegram-link" href={telegramUrl} target="_blank" rel="noopener noreferrer">
+              {t.telegramLink} →
+            </a>
+          )}
         </section>
 
         <StatsPanel t={t} lang={lang} refreshKey={statsKey} />

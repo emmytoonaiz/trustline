@@ -29,6 +29,7 @@ export const COPY = {
     linkLabel: "Link",
     checkedFrom: "Checked from a {platform} link",
     errorGeneric: "Something went wrong reaching TrustLine. Please try again.",
+    telegramLink: "Prefer Telegram? Chat with the TrustLine bot",
     languageLabel: "Language",
   },
   fr: {
@@ -52,6 +53,7 @@ export const COPY = {
     linkLabel: "Lien",
     checkedFrom: "Vérifié à partir d'un lien {platform}",
     errorGeneric: "Une erreur est survenue en contactant TrustLine. Veuillez réessayer.",
+    telegramLink: "Vous préférez Telegram ? Discutez avec le bot TrustLine",
     languageLabel: "Langue",
   },
   sw: {
@@ -75,6 +77,7 @@ export const COPY = {
     linkLabel: "Kiungo",
     checkedFrom: "Imekaguliwa kutoka kiungo cha {platform}",
     errorGeneric: "Hitilafu imetokea wakati wa kuwasiliana na TrustLine. Tafadhali jaribu tena.",
+    telegramLink: "Unapendelea Telegram? Ongea na bot ya TrustLine",
     languageLabel: "Lugha",
   },
   yo: {
@@ -98,6 +101,7 @@ export const COPY = {
     linkLabel: "Ọ̀nà àsopọ̀",
     checkedFrom: "A ṣàyẹ̀wò láti ọ̀nà àsopọ̀ {platform}",
     errorGeneric: "Ohun kan ṣẹlẹ̀ nígbà tí a ń bá TrustLine sọ̀rọ̀. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan sí i.",
+    telegramLink: "Ṣé Telegram ni o fẹ́? Bá bọ́ọ̀tì TrustLine sọ̀rọ̀",
     languageLabel: "Èdè",
   },
   ha: {
@@ -121,6 +125,7 @@ export const COPY = {
     linkLabel: "Hanyar haɗi",
     checkedFrom: "An bincika daga hanyar haɗi ta {platform}",
     errorGeneric: "An samu matsala wajen tuntuɓar TrustLine. Da fatan za a sake gwadawa.",
+    telegramLink: "Kana son Telegram? Yi hira da bot ɗin TrustLine",
     languageLabel: "Harshe",
   },
   pcm: {
@@ -144,6 +149,7 @@ export const COPY = {
     linkLabel: "Link",
     checkedFrom: "We check am from one {platform} link",
     errorGeneric: "Something don go wrong for TrustLine side. Abeg try again.",
+    telegramLink: "You like Telegram pass? Chat with the TrustLine bot",
     languageLabel: "Language",
   },
 };

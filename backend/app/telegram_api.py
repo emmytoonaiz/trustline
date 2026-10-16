@@ -34,11 +34,40 @@ def _post(method: str, payload: dict, timeout: int = 15) -> dict | None:
         return None
 
 
-def send_message(chat_id: int, text: str, reply_markup: dict | None = None) -> None:
+def send_message(
+    chat_id: int, text: str, reply_markup: dict | None = None, reply_to: int | None = None
+) -> None:
     payload = {"chat_id": chat_id, "text": text, "parse_mode": "HTML", "disable_web_page_preview": True}
     if reply_markup:
         payload["reply_markup"] = reply_markup
+    if reply_to:
+        payload["reply_parameters"] = {"message_id": reply_to, "allow_sending_without_reply": True}
     _post("sendMessage", payload)
+
+
+def get_file_bytes(file_id: str, max_bytes: int = 4_500_000) -> bytes | None:
+    """Download a file the user sent (e.g. a screenshot). The download URL contains the bot
+    token, so it is never logged."""
+    bot_token = token()
+    if not bot_token:
+        return None
+    info = _post("getFile", {"file_id": file_id}, timeout=10)
+    path = ((info or {}).get("result") or {}).get("file_path")
+    if not path:
+        return None
+    try:
+        resp = requests.get(f"{API_BASE}/file/bot{bot_token}/{path}", timeout=20)
+        if resp.status_code != 200 or len(resp.content) > max_bytes:
+            return None
+        return resp.content
+    except Exception:
+        logger.exception("Telegram file download failed")
+        return None
+
+
+def get_bot_username() -> str | None:
+    info = _post("getMe", {}, timeout=10)
+    return ((info or {}).get("result") or {}).get("username")
 
 
 def send_chat_action(chat_id: int, action: str = "typing") -> None:

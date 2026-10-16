@@ -48,6 +48,11 @@ def verify(req: VerifyRequest):
     return checker.check_message(req.message, normalize_lang(req.language))
 
 
+@app.get("/api/config")
+def config():
+    return {"telegram_url": telegram_bot.bot_url()}
+
+
 @app.post("/telegram/webhook")
 async def telegram_webhook(request: Request, background: BackgroundTasks):
     bot_token = telegram_api.token()

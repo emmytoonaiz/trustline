@@ -80,16 +80,138 @@ def test_language_choice_is_remembered(client, sent):
     assert "Ó ṣeé ṣe kó jẹ́ ìjìbìtì" in last_message(sent)["text"]
 
 
-def test_images_and_groups(client, sent):
-    uid = new_user_id()
-    webhook(client, private_message(uid, None, photo=[{"file_id": "x"}]))
-    assert "text and links" in last_message(sent)["text"]
+def test_voice_notes_are_politely_declined(client, sent):
+    webhook(client, private_message(new_user_id(), None, voice={"file_id": "v"}))
+    assert "voice notes" in last_message(sent)["text"]
 
-    sent.clear()
-    group = private_message(uid, SCAM_TEXT)
-    group["message"]["chat"] = {"id": -100, "type": "group"}
-    webhook(client, group)
-    assert sent == [], "the bot ignores group chats"
+
+# ---- screenshots ---------------------------------------------------------------
+
+def read_image_as(monkeypatch, text):
+    """Pretend the downloaded screenshot contains `text` (no real download or AI call)."""
+    from app import image_reader, telegram_api
+
+    monkeypatch.setattr(telegram_api, "get_file_bytes", lambda file_id, max_bytes=0: b"fake-image")
+    monkeypatch.setattr(image_reader, "transcribe", lambda data, media_type="image/jpeg": text)
+
+
+def test_screenshot_is_read_then_checked_like_any_message(client, sent, monkeypatch):
+    read_image_as(monkeypatch, SCAM_TEXT)
+    webhook(client, private_message(new_user_id(), None, photo=[{"file_id": "small"}, {"file_id": "big"}]))
+    msg = last_message(sent)["text"]
+    assert "Text I read from your image" in msg and "till number changed" in msg
+    assert "Likely a scam" in msg
+
+
+def test_screenshot_note_is_translated(client, sent, monkeypatch):
+    read_image_as(monkeypatch, SCAM_TEXT)
+    webhook(client, private_message(new_user_id(), None, lang_code="fr", photo=[{"file_id": "x"}]))
+    assert "Texte lu dans votre image" in last_message(sent)["text"]
+
+
+def test_unreadable_screenshot_asks_for_a_clearer_one(client, sent, monkeypatch):
+    read_image_as(monkeypatch, None)
+    webhook(client, private_message(new_user_id(), None, photo=[{"file_id": "x"}]))
+    assert "read any text in that image" in last_message(sent)["text"]
+
+
+def test_caption_is_still_checked_when_the_image_cannot_be_read(client, sent, monkeypatch):
+    read_image_as(monkeypatch, None)
+    webhook(client, private_message(new_user_id(), None, photo=[{"file_id": "x"}], caption=SCAM_TEXT))
+    assert "Likely a scam" in last_message(sent)["text"]
+
+
+def test_screenshot_text_cannot_inject_html(client, sent, monkeypatch):
+    read_image_as(monkeypatch, "<b>hello</b> " + SCAM_TEXT)
+    webhook(client, private_message(new_user_id(), None, photo=[{"file_id": "x"}]))
+    assert "&lt;b&gt;hello&lt;/b&gt;" in last_message(sent)["text"]
+
+
+def test_screenshots_are_rate_limited_harder_than_text(client, sent, monkeypatch):
+    read_image_as(monkeypatch, SCAM_TEXT)
+    uid = new_user_id()
+    for _ in range(7):
+        webhook(client, private_message(uid, None, photo=[{"file_id": "x"}]))
+    assert "very fast" in last_message(sent)["text"]
+
+
+# ---- group chats: only when asked --------------------------------------------
+
+_group_ids = __import__("itertools").count(-1000)
+
+
+def group_message(text, reply_to=None, user_id=None, lang_code="en"):
+    msg = {
+        "message_id": 50,
+        "from": {"id": user_id or new_user_id(), "is_bot": False, "language_code": lang_code},
+        "chat": {"id": next(_group_ids), "type": "supergroup"},
+        "text": text,
+    }
+    if reply_to is not None:
+        msg["reply_to_message"] = reply_to
+    return {"message": msg}
+
+
+def scam_post(**extra):
+    return {"message_id": 49, "from": {"id": 4242, "is_bot": False}, "text": SCAM_TEXT, **extra}
+
+
+def test_bot_never_reads_ordinary_group_conversation(client, sent):
+    webhook(client, group_message(SCAM_TEXT))
+    webhook(client, group_message("/start"))
+    assert sent == []
+
+
+def test_check_without_a_reply_explains_how(client, sent):
+    webhook(client, group_message("/check"))
+    msg = last_message(sent)
+    assert "reply to it with /check" in msg["text"]
+    assert msg["reply_parameters"]["message_id"] == 50
+
+
+def test_check_in_a_reply_answers_under_the_scam_without_buttons(client, sent):
+    webhook(client, group_message("/check", reply_to=scam_post()))
+    msg = last_message(sent)
+    assert "Likely a scam" in msg["text"]
+    assert msg["reply_parameters"]["message_id"] == 49
+    assert "reply_markup" not in msg
+
+
+def test_check_command_addressed_to_this_bot_works(client, sent):
+    webhook(client, group_message("/check@TrustLineBot", reply_to=scam_post()))
+    assert "Likely a scam" in last_message(sent)["text"]
+
+
+def test_check_uses_the_askers_language(client, sent):
+    webhook(client, group_message("/check", reply_to=scam_post(), lang_code="sw"))
+    assert "Huenda ni ulaghai" in last_message(sent)["text"]
+
+
+def test_bot_messages_are_not_checked_in_groups(client, sent):
+    webhook(client, group_message("/check", reply_to=scam_post(**{"from": {"id": 1, "is_bot": True}})))
+    assert sent == []
+
+
+def test_check_can_read_a_screenshot_posted_in_a_group(client, sent, monkeypatch):
+    read_image_as(monkeypatch, SCAM_TEXT)
+    target = {"message_id": 49, "from": {"id": 4242, "is_bot": False}, "photo": [{"file_id": "x"}]}
+    webhook(client, group_message("/check", reply_to=target))
+    assert "Text I read from your image" in last_message(sent)["text"]
+
+
+# ---- website link to the bot -------------------------------------------------------
+
+def test_config_hides_telegram_link_until_the_bot_is_known(client, monkeypatch):
+    monkeypatch.delenv("TELEGRAM_BOT_USERNAME", raising=False)
+    from app import telegram_bot
+
+    monkeypatch.setattr(telegram_bot, "_bot_username", None)
+    assert client.get("/api/config").json() == {"telegram_url": None}
+
+
+def test_config_exposes_the_bots_public_link(client, monkeypatch):
+    monkeypatch.setenv("TELEGRAM_BOT_USERNAME", "@TrustLineScamBot")
+    assert client.get("/api/config").json() == {"telegram_url": "https://t.me/TrustLineScamBot"}
 
 
 def test_same_update_is_handled_only_once(client, sent):

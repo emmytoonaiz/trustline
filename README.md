@@ -138,10 +138,18 @@ The community stats shows the last 7 days of real reports and stays hidden until
 
 ## Telegram bot
 
-`POST /telegram/webhook` powers a private-chat bot. Users paste or **forward** a suspicious
-message and get the same verdict as on the website, in their language (picked from their
-Telegram settings, changeable with `/language`). Buttons let them report the scam and, for
-forwarded messages, the sender's account.
+`POST /telegram/webhook` powers the bot. In a private chat, users paste or **forward** a
+suspicious message, or send a **screenshot**, and get the same verdict as on the website, in
+their language (picked from their Telegram settings, changeable with `/language`). Buttons let
+them report the scam and, for forwarded messages, the sender's account.
+
+- **Screenshots:** Claude transcribes the image, then the text goes through the normal check
+  (curated library first), and the bot shows what it read so the user can see it understood.
+- **Groups:** the bot never reads a group's conversation. Someone replies to a message with
+  `/check` and the bot answers under that message. Telegram's default privacy mode for bots
+  already limits what a bot can see to commands and replies; keep it on (BotFather → `/setprivacy`).
+- **Website link:** the site shows a "chat with the bot" link once the bot is running (the
+  username comes from Telegram itself; set `TELEGRAM_BOT_USERNAME` to override).
 
 Setup: message `@BotFather` on Telegram, create a bot, and add its token as
 `TELEGRAM_BOT_TOKEN`. On start-up the server registers its own webhook (it reads Railway's
@@ -176,7 +184,8 @@ trustline/
       limits.py          # per-visitor rate limits and the daily AI-call ceiling
       db.py              # database tables (Postgres in production, SQLite locally)
       reports_store.py   # community reports + stats
-      telegram_bot.py    # Telegram bot: messages, buttons, reports, webhook registration
+      telegram_bot.py    # Telegram bot: private chats, groups (/check), buttons, reports, webhook
+      image_reader.py    # reads the text out of screenshots with Claude
       telegram_api.py    # thin client for Telegram's Bot API
       telegram_store.py  # language choices, pending checks, account reports (hashed reporters)
       bot_i18n.py        # the bot's text in five languages
