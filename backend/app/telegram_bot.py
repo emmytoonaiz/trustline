@@ -254,6 +254,12 @@ def _handle_group(message: dict, chat: dict, sender: dict) -> None:
         return
 
     if not target:
+        # Field names only (never content), so we can see what Telegram actually sent.
+        logger.warning(
+            "Group /check arrived without reply_to_message; message fields=%s chat_type=%s",
+            sorted(message.keys()),
+            chat.get("type"),
+        )
         tg.send_message(chat_id, html.escape(s(lang, "group_hint")), reply_to=ask_id)
         return
     if (target.get("from") or {}).get("is_bot"):
