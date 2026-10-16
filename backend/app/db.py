@@ -137,6 +137,37 @@ class MonitorAlert(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now, index=True)
 
 
+class InstagramLink(Base):
+    """An Instagram account whose comments we watch, and the Telegram user who gets the alerts."""
+
+    __tablename__ = "instagram_links"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    ig_user_id: Mapped[str] = mapped_column(String(40), unique=True)
+    username: Mapped[str] = mapped_column(String(64), default="")
+    owner_user_id: Mapped[int] = mapped_column(BigInteger)
+    owner_language: Mapped[str] = mapped_column(String(8), default="en")
+    active: Mapped[bool] = mapped_column(Boolean, default=True)
+    last_polled_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
+
+
+class InstagramAlert(Base):
+    """A flagged Instagram comment waiting for the owner's decision. Purged after 14 days."""
+
+    __tablename__ = "instagram_alerts"
+
+    id: Mapped[str] = mapped_column(String(16), primary_key=True)
+    link_id: Mapped[int] = mapped_column(ForeignKey("instagram_links.id"), index=True)
+    comment_id: Mapped[str] = mapped_column(String(40), unique=True)
+    sender_label: Mapped[str] = mapped_column(String(200), default="")
+    excerpt: Mapped[str] = mapped_column(String(500), default="")
+    category: Mapped[str] = mapped_column(String(120), default="")
+    confidence: Mapped[int] = mapped_column(Integer, default=0)
+    status: Mapped[str] = mapped_column(String(12), default="open")  # open / hidden / deleted / kept
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now, index=True)
+
+
 class SiteVisit(Base):
     """One website visit and the link label it came with (?ref=tiktok). Nothing identifies the visitor."""
 

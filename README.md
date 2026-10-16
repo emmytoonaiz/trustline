@@ -133,6 +133,7 @@ Set these as service variables in Railway (never commit them):
 | `DEMO_SEED_STATS` | Optional. Set to `1` to show made-up demo numbers in the community stats panel. Off by default so the panel only shows real reports. |
 | `BUSINESS_CONTACT` | Optional. An email address or link (e.g. a TikTok profile) for the "Join the pilot" button on the site. The button stays hidden until it is set. |
 | `ADMIN_KEY` | Optional. Secret that unlocks `GET /api/visits` (visit counts per `?ref=` label, sent as the `X-Admin-Key` header). The endpoint does not exist until it is set. |
+| `INSTAGRAM_ACCESS_TOKEN`, `INSTAGRAM_APP_SECRET`, `INSTAGRAM_VERIFY_TOKEN`, `INSTAGRAM_PAIRING_CODE` | Optional. Turn on Instagram comment monitoring for one account (see [docs/INSTAGRAM-SETUP.md](docs/INSTAGRAM-SETUP.md)). |
 | `MONITOR_MIN_CONFIDENCE`, `MONITOR_CHECKS_PER_HOUR`, `MONITOR_INCLUDE_OWNER` | Optional. Group-monitoring tuning (see the Telegram section). |
 
 Because the site is public and calls a paid API, `/api/verify` is limited to 20 requests per
@@ -183,6 +184,14 @@ Privacy and abuse design:
   Messages that are not flagged are never stored.
 - The bot never receives IP addresses, phone numbers or locations from Telegram, and doesn't ask.
 
+## Instagram comment monitoring (prototype)
+
+The same idea as group monitoring, for the comments on an Instagram professional account: a comment that
+looks like a scam produces a private Telegram alert with **Hide / Delete / Keep** buttons, and only the owner's
+tap changes anything on Instagram. Comments arrive through Meta's webhook (`/instagram/webhook`, verified with
+the app secret) and through a light polling fallback that works in Meta's development mode. One account is
+supported for now; letting other businesses connect needs Meta App Review. Setup: [docs/INSTAGRAM-SETUP.md](docs/INSTAGRAM-SETUP.md).
+
 Run the tests (fake Telegram, throwaway database): `cd backend && python -m pytest tests`.
 Set `TEST_DATABASE_URL` to run them against Postgres.
 
@@ -205,6 +214,9 @@ trustline/
       telegram_api.py    # thin client for Telegram's Bot API
       monitor.py         # opt-in group monitoring: private alerts to the owner, delete/keep buttons
       monitor_store.py   # watched groups and alerts
+      instagram.py       # Instagram comments: webhook, polling, pairing, Hide/Delete/Keep buttons
+      instagram_api.py   # thin client for Instagram's Graph API
+      instagram_store.py # linked account and alerts
       triage.py          # cheap risk-signal filter that decides which group messages get an AI check
       telegram_store.py  # language choices, pending checks, account reports (hashed reporters)
       bot_i18n.py        # the bot's text in five languages

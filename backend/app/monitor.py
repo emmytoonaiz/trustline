@@ -100,32 +100,51 @@ def handle_group_message(message: dict, chat: dict, sender: dict) -> None:
         return
     text = text[:MAX_CHECKED_LENGTH]
 
-    if not triage.has_risk_signals(text):
-        logger.warning("Monitor: no risk signals, not checked")
-        return
-    try:
-        _hourly.check(f"chat:{chat['id']}")
-    except HTTPException:
-        logger.warning("Hourly AI-check allowance reached for a watched group")
+    lang = watched.owner_language
+    result = assess(text, f"chat:{chat['id']}", lang)
+    if result is None:
         return
 
-    lang = watched.owner_language
+    sender_label = _sender_label(sender)
+    alert_id = monitor_store.create_alert(watched, message["message_id"], sender_label, text, category_of(result), result.confidence)
+    body = alert_body(lang, watched.title, sender_label, text, result)
+    delivered = tg.send_message(watched.owner_user_id, body, _alert_keyboard(lang, alert_id, watched.can_delete))
+    logger.warning("Monitor: alert %s to owner", "delivered" if delivered else "FAILED (owner has not started the bot?)")
+
+
+# ---- shared by every place we watch (Telegram groups, Instagram comments) -----------------------------
+
+def assess(text: str, limiter_key: str, lang: str):
+    """Decides whether a message deserves an alert: cheap risk filter, per-place hourly allowance,
+    full check, then a confidence floor. Returns the verdict, or None when nothing should be sent."""
+    if not triage.has_risk_signals(text):
+        logger.warning("Monitor: no risk signals, not checked")
+        return None
+    try:
+        _hourly.check(limiter_key)
+    except HTTPException:
+        logger.warning("Hourly AI-check allowance reached for a watched place")
+        return None
     try:
         result = checker.check_message(text, lang)
     except Exception:
         logger.exception("Monitor check failed")
-        return
+        return None
     logger.warning("Monitor: verdict=%s confidence=%s (alert needs likely_scam >= %s)", result.verdict, result.confidence, MIN_CONFIDENCE)
     if result.verdict != "likely_scam" or result.confidence < MIN_CONFIDENCE:
-        return
+        return None
+    return result
 
-    category = (result.matched.category_en or result.matched.category) if result.matched else "Uncategorized"
-    sender_label = _sender_label(sender)
-    alert_id = monitor_store.create_alert(watched, message["message_id"], sender_label, text, category, result.confidence)
 
+def category_of(result) -> str:
+    return (result.matched.category_en or result.matched.category) if result.matched else "Uncategorized"
+
+
+def alert_body(lang: str, title: str, sender_label: str, text: str, result) -> str:
+    """The private alert shown to the owner (HTML-safe: every piece of user text is escaped)."""
     esc = html.escape
     lines = [
-        f"<b>{s(lang, 'mon_alert_title', title=esc(watched.title))}</b> · {result.confidence}%",
+        f"<b>{s(lang, 'mon_alert_title', title=esc(title))}</b> · {result.confidence}%",
         f"{esc(s(lang, 'mon_from'))}: {esc(sender_label)}",
         "",
         f"<i>{esc(text[:300])}</i>",
@@ -135,8 +154,7 @@ def handle_group_message(message: dict, chat: dict, sender: dict) -> None:
         lines += ["", f"<b>{esc(s(lang, 'why'))}</b>"] + [f"• {esc(r[:300])}" for r in reasons]
     elif result.headline:
         lines += ["", esc(result.headline[:300])]
-    delivered = tg.send_message(watched.owner_user_id, "\n".join(lines), _alert_keyboard(lang, alert_id, watched.can_delete))
-    logger.warning("Monitor: alert %s to owner", "delivered" if delivered else "FAILED (owner has not started the bot?)")
+    return "\n".join(lines)
 
 
 # ---- the owner pressing a button on an alert --------------------------------------------------------

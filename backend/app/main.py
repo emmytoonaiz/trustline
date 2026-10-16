@@ -7,11 +7,12 @@ from pathlib import Path
 from dotenv import load_dotenv
 from fastapi import BackgroundTasks, Depends, FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 
 load_dotenv()
 
-from app import checker, db, limits, reports_store, telegram_api, telegram_bot, verdict_engine, visits_store
+from app import checker, db, instagram, limits, reports_store, telegram_api, telegram_bot, verdict_engine, visits_store
 from app.i18n import normalize_lang
 from app.schemas import (
     VisitRequest,
@@ -27,6 +28,7 @@ from app.schemas import (
 async def lifespan(_: FastAPI):
     db.init_db()
     threading.Thread(target=telegram_bot.register_webhook, daemon=True).start()
+    instagram.start_poller()
     yield
 
 
@@ -96,6 +98,29 @@ async def telegram_webhook(request: Request, background: BackgroundTasks):
         raise HTTPException(status_code=400)
     # Answer Telegram immediately; the check (which can take seconds) runs in the background.
     background.add_task(telegram_bot.process_update, update)
+    return {"ok": True}
+
+
+@app.get("/instagram/webhook")
+def instagram_webhook_verify(request: Request):
+    """Meta's one-time handshake when the webhook is saved in the app dashboard."""
+    q = request.query_params
+    wanted = instagram.verify_token()
+    if wanted and q.get("hub.mode") == "subscribe" and hmac.compare_digest(q.get("hub.verify_token", ""), wanted):
+        return PlainTextResponse(q.get("hub.challenge", ""))
+    raise HTTPException(status_code=403)
+
+
+@app.post("/instagram/webhook")
+async def instagram_webhook(request: Request, background: BackgroundTasks):
+    body = await request.body()
+    if not instagram.verify_signature(body, request.headers.get("x-hub-signature-256")):
+        raise HTTPException(status_code=403)
+    try:
+        payload = await request.json()
+    except Exception:
+        raise HTTPException(status_code=400)
+    background.add_task(instagram.handle_webhook, payload)  # answer Meta at once; the check runs afterwards
     return {"ok": True}
 
 

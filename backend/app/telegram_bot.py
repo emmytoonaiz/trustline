@@ -7,7 +7,7 @@ from contextlib import contextmanager
 
 from fastapi import HTTPException
 
-from app import checker, image_reader, limits, monitor, reports_store
+from app import checker, image_reader, instagram, limits, monitor, reports_store
 from app import telegram_api as tg
 from app import telegram_store as store
 from app.bot_i18n import COMMANDS, LANGUAGE_NAMES, PRIVACY_NOTE, s
@@ -215,7 +215,7 @@ def _handle_private(message: dict, chat: dict, sender: dict) -> None:
 
     typed = message.get("text")
     if typed and typed.startswith("/"):
-        _handle_command(chat_id, lang, typed)
+        _handle_command(chat_id, lang, typed, message.get("message_id"))
         return
     if typed and len(typed) > MAX_MESSAGE_LENGTH:
         tg.send_message(chat_id, html.escape(s(lang, "too_long")))
@@ -307,10 +307,12 @@ def _handle_group(message: dict, chat: dict, sender: dict) -> None:
     )
 
 
-def _handle_command(chat_id: int, lang: str, text: str) -> None:
+def _handle_command(chat_id: int, lang: str, text: str, message_id: int | None = None) -> None:
     command = text.split()[0].split("@")[0].lower()
     if command == "/language":
         tg.send_message(chat_id, html.escape(s(lang, "language_prompt")), _language_keyboard())
+    elif command == "/instagram":
+        instagram.handle_link_command(chat_id, lang, text, message_id)
     elif command == "/start":
         tg.send_message(chat_id, s(lang, "welcome"), _keyboard(lang, None, False, False))
     else:
@@ -335,6 +337,9 @@ def _handle_callback(cb: dict) -> None:
 
     if data.startswith("m:"):
         monitor.handle_callback(cb, data, lang)
+        return
+    if data.startswith("i:"):
+        instagram.handle_callback(cb, data, lang)
         return
 
     if data == "lang":
