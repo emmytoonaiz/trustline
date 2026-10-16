@@ -36,13 +36,17 @@ def _post(method: str, payload: dict, timeout: int = 15) -> dict | None:
 
 def send_message(
     chat_id: int, text: str, reply_markup: dict | None = None, reply_to: int | None = None
-) -> None:
+) -> bool:
     payload = {"chat_id": chat_id, "text": text, "parse_mode": "HTML", "disable_web_page_preview": True}
     if reply_markup:
         payload["reply_markup"] = reply_markup
     if reply_to:
         payload["reply_parameters"] = {"message_id": reply_to, "allow_sending_without_reply": True}
-    _post("sendMessage", payload)
+    return bool((_post("sendMessage", payload) or {}).get("ok"))
+
+
+def delete_message(chat_id: int, message_id: int) -> bool:
+    return bool((_post("deleteMessage", {"chat_id": chat_id, "message_id": message_id}) or {}).get("ok"))
 
 
 def get_file_bytes(file_id: str, max_bytes: int = 4_500_000) -> bytes | None:
@@ -88,7 +92,7 @@ def edit_reply_markup(chat_id: int, message_id: int, reply_markup: dict) -> None
 def set_webhook(url: str, secret: str) -> None:
     _post(
         "setWebhook",
-        {"url": url, "secret_token": secret, "allowed_updates": ["message", "callback_query"]},
+        {"url": url, "secret_token": secret, "allowed_updates": ["message", "callback_query", "my_chat_member"]},
     )
 
 

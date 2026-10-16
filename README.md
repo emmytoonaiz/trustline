@@ -145,9 +145,18 @@ them report the scam and, for forwarded messages, the sender's account.
 
 - **Screenshots:** Claude transcribes the image, then the text goes through the normal check
   (curated library first), and the bot shows what it read so the user can see it understood.
-- **Groups:** the bot never reads a group's conversation. Someone replies to a message with
-  `/check` and the bot answers under that message. Telegram's default privacy mode for bots
-  already limits what a bot can see to commands and replies; keep it on (BotFather → `/setprivacy`).
+- **Groups:** by default the bot never reads a group's conversation. Someone replies to a message
+  with `/check` and the bot answers under that message.
+- **Group monitoring (opt-in, for businesses):** when an owner makes the bot an **administrator**
+  of their group, it starts watching that group for scams. Nothing is posted in the group:
+  a suspicious message goes to the owner as a private alert with **Delete** / **Keep** buttons,
+  and only the owner can press them (deleting needs the "delete messages" admin right; without
+  it the alert is informational). Cheap pre-filtering (links, phone/account numbers, money,
+  risk words, curated patterns) decides which messages get a full check, and only confident
+  "likely scam" verdicts (`MONITOR_MIN_CONFIDENCE`, default 70) reach the owner. A per-group cap
+  (`MONITOR_CHECKS_PER_HOUR`, default 60) bounds AI cost. Removing the bot, or demoting it,
+  stops monitoring. Telegram admin bots see all messages in the group, so this is what the
+  owner is consenting to when they promote the bot.
 - **Website link:** the site shows a "chat with the bot" link once the bot is running (the
   username comes from Telegram itself; set `TELEGRAM_BOT_USERNAME` to override).
 
@@ -165,6 +174,9 @@ Privacy and abuse design:
   `ACCOUNT_WARN_THRESHOLD` different people reported it, and words it as "reported by N users".
   The "Report the sender" button is only offered for messages judged scam or uncertain, and
   each person can file at most 20 account reports a day.
+- **Monitoring keeps the minimum.** Only the group's and the owner's Telegram ids (needed to send
+  alerts), plus a 500-character excerpt of each flagged message, which is purged after 14 days.
+  Messages that are not flagged are never stored.
 - The bot never receives IP addresses, phone numbers or locations from Telegram, and doesn't ask.
 
 Run the tests (fake Telegram, throwaway database): `cd backend && python -m pytest tests`.
@@ -187,6 +199,9 @@ trustline/
       telegram_bot.py    # Telegram bot: private chats, groups (/check), buttons, reports, webhook
       image_reader.py    # reads the text out of screenshots with Claude
       telegram_api.py    # thin client for Telegram's Bot API
+      monitor.py         # opt-in group monitoring: private alerts to the owner, delete/keep buttons
+      monitor_store.py   # watched groups and alerts
+      triage.py          # cheap risk-signal filter that decides which group messages get an AI check
       telegram_store.py  # language choices, pending checks, account reports (hashed reporters)
       bot_i18n.py        # the bot's text in five languages
       schemas.py          # request/response models

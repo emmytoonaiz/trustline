@@ -104,6 +104,39 @@ class PendingCheck(Base):
     account_name: Mapped[str | None] = mapped_column(String(200), nullable=True)
 
 
+class MonitoredChat(Base):
+    """A group whose owner asked TrustLine to watch it. We keep the chat and owner ids because
+    the bot has to send the owner private alerts."""
+
+    __tablename__ = "monitored_chats"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    tg_chat_id: Mapped[int] = mapped_column(BigInteger, unique=True)
+    title: Mapped[str] = mapped_column(String(200), default="")
+    owner_user_id: Mapped[int] = mapped_column(BigInteger)
+    owner_language: Mapped[str] = mapped_column(String(8), default="en")
+    can_delete: Mapped[bool] = mapped_column(Boolean, default=False)
+    active: Mapped[bool] = mapped_column(Boolean, default=True)
+    alerts_sent: Mapped[int] = mapped_column(Integer, default=0)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
+
+
+class MonitorAlert(Base):
+    """A flagged message waiting for the owner's decision. Purged after 14 days."""
+
+    __tablename__ = "monitor_alerts"
+
+    id: Mapped[str] = mapped_column(String(16), primary_key=True)
+    chat_id: Mapped[int] = mapped_column(ForeignKey("monitored_chats.id"), index=True)
+    tg_message_id: Mapped[int] = mapped_column(BigInteger)
+    sender_label: Mapped[str] = mapped_column(String(200), default="")
+    excerpt: Mapped[str] = mapped_column(String(500), default="")
+    category: Mapped[str] = mapped_column(String(120), default="")
+    confidence: Mapped[int] = mapped_column(Integer, default=0)
+    status: Mapped[str] = mapped_column(String(12), default="open")  # open / deleted / kept
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now, index=True)
+
+
 _engine = None
 _SessionLocal = None
 

@@ -7,7 +7,7 @@ from contextlib import contextmanager
 
 from fastapi import HTTPException
 
-from app import checker, image_reader, limits, reports_store
+from app import checker, image_reader, limits, monitor, reports_store
 from app import telegram_api as tg
 from app import telegram_store as store
 from app.bot_i18n import COMMANDS, LANGUAGE_NAMES, PRIVACY_NOTE, s
@@ -77,6 +77,8 @@ def process_update(update: dict) -> None:
             _handle_callback(update["callback_query"])
         elif "message" in update:
             _handle_message(update["message"])
+        elif "my_chat_member" in update:
+            monitor.handle_my_chat_member(update["my_chat_member"])
     except Exception:
         logger.exception("Telegram update failed")
 
@@ -252,10 +254,11 @@ def _handle_private(message: dict, chat: dict, sender: dict) -> None:
 
 
 def _handle_group(message: dict, chat: dict, sender: dict) -> None:
-    """Groups: the bot never reads the conversation. It only acts when someone replies to a
-    message with /check, and then answers under that message."""
+    """Groups: unless the owner has switched monitoring on, the bot never reads the conversation.
+    It acts when someone replies to a message with /check, and answers under that message."""
     typed = message.get("text") or ""
     if not typed.startswith("/") or typed.split()[0].split("@")[0].lower() != "/check":
+        monitor.handle_group_message(message, chat, sender)  # only acts in groups the owner asked us to watch
         return
 
     chat_id = chat["id"]
@@ -328,6 +331,10 @@ def _handle_callback(cb: dict) -> None:
     chat_hash = store.hash_id("chat", chat_id)
     lang = _language(chat_hash, user.get("language_code"))
     data = cb.get("data") or ""
+
+    if data.startswith("m:"):
+        monitor.handle_callback(cb, data, lang)
+        return
 
     if data == "lang":
         tg.answer_callback_query(cb_id)
