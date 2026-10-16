@@ -25,12 +25,13 @@ export default function VerdictCard({ result, originalMessage, t }) {
       : result.verdict === "likely_safe"
       ? t.verdictSafe
       : result.verdict === "link_unsupported"
-      ? "Link"
+      ? t.linkLabel
       : t.verdictUncertain;
 
   async function handleReport() {
     try {
-      await reportScam(originalMessage, result.matched?.category);
+      // Curated matches carry the canonical English category so community stats stay in one language.
+      await reportScam(originalMessage, result.matched?.category_en ?? result.matched?.category);
       setReported(true);
     } catch (e) {
       // Best-effort in a prototype: still flip the UI so the demo isn't blocked by a flaky network.
@@ -63,12 +64,17 @@ export default function VerdictCard({ result, originalMessage, t }) {
           <div className="verdict-label">{verdictLabel}</div>
           <div className="verdict-headline">{result.headline}</div>
         </div>
-        <div className="verdict-confidence">{result.confidence}%</div>
+        {result.confidence > 0 && (
+          <div className="verdict-confidence">{result.confidence}%</div>
+        )}
       </div>
 
       {result.source_platform && (
         <div className="verdict-source-platform">
-          Checked from a {PLATFORM_LABELS[result.source_platform] ?? result.source_platform} link
+          {t.checkedFrom.replace(
+            "{platform}",
+            PLATFORM_LABELS[result.source_platform] ?? result.source_platform
+          )}
         </div>
       )}
 

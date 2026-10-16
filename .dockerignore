@@ -1,0 +1,10 @@
+.git
+.gitignore
+submission
+backend/.venv
+backend/.env
+backend/app/data/reports_store.json
+backend/**/__pycache__
+frontend/node_modules
+frontend/dist
+**/*.pyc

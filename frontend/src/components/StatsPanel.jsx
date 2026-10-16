@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { getStats } from "../api.js";
 
-export default function StatsPanel({ t, refreshKey }) {
+export default function StatsPanel({ t, lang, refreshKey }) {
   const [stats, setStats] = useState(null);
 
   useEffect(() => {
-    getStats()
+    getStats(lang)
       .then(setStats)
       .catch(() => setStats(null));
-  }, [refreshKey]);
+  }, [refreshKey, lang]);
 
   if (!stats) return null;
 

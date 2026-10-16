@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { verifyMessage } from "./api.js";
-import { COPY } from "./copy.js";
+import { COPY, LANGUAGES } from "./copy.js";
 import VerdictCard from "./components/VerdictCard.jsx";
 import StatsPanel from "./components/StatsPanel.jsx";
 
@@ -13,6 +13,10 @@ export default function App() {
 
   const t = COPY[lang];
 
+  useEffect(() => {
+    document.documentElement.lang = lang === "pcm" ? "pcm" : lang;
+  }, [lang]);
+
   async function handleSend() {
     const text = input.trim();
     if (!text || loading) return;
@@ -23,7 +27,7 @@ export default function App() {
     setLoading(true);
 
     try {
-      const result = await verifyMessage(text);
+      const result = await verifyMessage(text, lang);
       setMessages((prev) => [
         ...prev,
         { id: Date.now() + 1, role: "bot", result, originalMessage: text },
@@ -32,11 +36,7 @@ export default function App() {
     } catch (e) {
       setMessages((prev) => [
         ...prev,
-        {
-          id: Date.now() + 1,
-          role: "error",
-          text: "Something went wrong reaching TrustLine. Please try again.",
-        },
+        { id: Date.now() + 1, role: "error" },
       ]);
     } finally {
       setLoading(false);
@@ -57,12 +57,18 @@ export default function App() {
           <div className="app-title">{t.title}</div>
           <div className="app-subtitle">{t.subtitle}</div>
         </div>
-        <button
-          className="lang-toggle"
-          onClick={() => setLang((l) => (l === "en" ? "pcm" : "en"))}
+        <select
+          className="lang-select"
+          aria-label={t.languageLabel}
+          value={lang}
+          onChange={(e) => setLang(e.target.value)}
         >
-          {lang === "en" ? "Pidgin" : "EN"}
-        </button>
+          {LANGUAGES.map((l) => (
+            <option key={l.code} value={l.code}>
+              {l.name}
+            </option>
+          ))}
+        </select>
       </header>
 
       <main className="app-main">
@@ -81,7 +87,7 @@ export default function App() {
               if (m.role === "error") {
                 return (
                   <div key={m.id} className="bubble error-bubble">
-                    {m.text}
+                    {t.errorGeneric}
                   </div>
                 );
               }
@@ -111,7 +117,7 @@ export default function App() {
           </div>
         </section>
 
-        <StatsPanel t={t} refreshKey={statsKey} />
+        <StatsPanel t={t} lang={lang} refreshKey={statsKey} />
       </main>
     </div>
   );

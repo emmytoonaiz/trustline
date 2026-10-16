@@ -1,0 +1,202 @@
+{
+  "otp_request": {
+    "category": "Demande de code OTP / PIN",
+    "title": "Usurpation d'identité pour obtenir votre code OTP ou PIN",
+    "keywords": ["code otp", "code de vérification", "envoyez-moi le code", "communiquez votre code", "partagez votre code", "votre code pin", "code reçu par sms"],
+    "why": [
+      "Aucune banque, aucun opérateur de mobile money ni aucun agent ne vous demandera jamais de lire ou de saisir un code OTP/PIN pour « vérifier », « annuler » ou « débloquer » votre compte.",
+      "Les codes OTP existent précisément pour que vous seul puissiez autoriser une transaction — le communiquer revient à donner cette autorisation à l'escroc."
+    ],
+    "advice": "Ne communiquez jamais un code OTP ou PIN à qui que ce soit, même à quelqu'un qui connaît déjà votre nom, votre numéro de compte ou vos dernières transactions. Raccrochez et appelez plutôt le numéro officiel de votre banque."
+  },
+  "account_suspended_link": {
+    "category": "Fausse alerte bancaire / portefeuille",
+    "title": "Faux lien « compte suspendu »",
+    "keywords": ["votre compte a été suspendu", "votre compte sera bloqué", "cliquez sur le lien ci-dessous", "vérifiez votre compte", "mettez à jour vos informations", "votre compte est bloqué"],
+    "why": [
+      "Les vraies banques et les vrais portefeuilles restreignent l'accès via leur application ou en agence, pas en envoyant un lien au hasard qui exige de « vérifier » en quelques heures.",
+      "L'urgence (« sous 24 heures » / « sinon votre compte sera fermé ») est une tactique de pression pour vous empêcher de réfléchir."
+    ],
+    "advice": "Ne touchez pas le lien. Ouvrez directement l'application ou le site officiel de la banque (tapez vous-même l'adresse) et vérifiez-y l'état de votre compte."
+  },
+  "loan_upfront_fee": {
+    "category": "Fausse application de prêt instantané",
+    "title": "Arnaque au prêt exigeant des frais à l'avance",
+    "keywords": ["prêt approuvé", "frais de dossier", "frais d'activation", "payez les frais pour débloquer", "prêt instantané", "frais de déblocage"],
+    "why": [
+      "Les prêteurs légitimes déduisent leurs frais du montant du prêt lui-même — ils ne vous demandent pas de payer d'abord pour « débloquer » ou « libérer » un prêt.",
+      "Un prêt « approuvé » qui exige des frais avant le versement est un schéma classique de fraude aux frais avancés."
+    ],
+    "advice": "Ne payez jamais pour recevoir un prêt. Si des frais sont exigés avant tout versement, considérez qu'il s'agit d'une arnaque et arrêtez la conversation."
+  },
+  "romance_urgent_money": {
+    "category": "Arnaque sentimentale",
+    "title": "Relation en ligne qui demande de l'argent en urgence",
+    "keywords": ["je t'aime", "mon amour", "j'ai besoin d'argent urgemment", "bloqué à l'aéroport", "envoie-moi de l'argent", "les douanes bloquent"],
+    "why": [
+      "Une affection qui grandit très vite, suivie d'une soudaine urgence financière (bloqué en voyage, facture médicale, frais de douane), est l'un des scénarios les plus courants des arnaques sentimentales.",
+      "La demande arrive généralement au moment où on vous pousse à envoyer de l'argent par un moyen intraçable (cartes cadeaux, cryptomonnaie, virement)."
+    ],
+    "advice": "Faites une pause avant d'envoyer quoi que ce soit. Faites une recherche d'image inversée sur ses photos et proposez un appel vidéo. N'envoyez jamais d'argent à quelqu'un que vous n'avez jamais rencontré en personne."
+  },
+  "guaranteed_investment_returns": {
+    "category": "Arnaque à l'investissement / aux cryptomonnaies",
+    "title": "Rendements d'investissement « garantis »",
+    "keywords": ["rendement garanti", "doublez votre argent", "investissement sans risque", "gains garantis", "profit garanti", "robot de trading"],
+    "why": [
+      "Aucun investissement légitime ne peut garantir des rendements élevés et fixes sans risque — tout vrai investissement comporte un risque.",
+      "Ces montages paient souvent les premiers investisseurs avec l'argent des nouveaux (un système de Ponzi) jusqu'à son effondrement."
+    ],
+    "advice": "Vérifiez que la plateforme est enregistrée auprès du régulateur financier de votre pays avant d'envoyer de l'argent. Si les rendements semblent trop beaux pour être vrais, c'est qu'ils le sont."
+  },
+  "lottery_prize_scam": {
+    "category": "Arnaque à la loterie / aux prix",
+    "title": "Message « vous avez gagné un prix »",
+    "keywords": ["vous avez gagné", "réclamez votre prix", "heureux gagnant", "tirage au sort", "héritage", "frais pour débloquer votre gain"],
+    "why": [
+      "Vous ne pouvez pas gagner une loterie ou un tirage auquel vous n'avez jamais participé.",
+      "Les demandes de « frais de dédouanement », de « traitement » ou de « taxes » avant de libérer un prix sont une arnaque aux frais avancés bien connue."
+    ],
+    "advice": "Supprimez le message. Ne payez aucun frais pour « libérer » un prix d'un tirage auquel vous n'avez pas participé."
+  },
+  "sim_swap_data_request": {
+    "category": "Fraude au changement de SIM",
+    "title": "Demande d'informations personnelles pour « mettre à jour » votre SIM",
+    "keywords": ["mise à jour de votre carte sim", "envoyez votre numéro d'identité", "réactiver votre ligne", "votre ligne sera désactivée", "changement de sim"],
+    "why": [
+      "Les escrocs collectent des numéros d'identité et des données personnelles de cette façon pour se faire passer pour vous auprès de votre opérateur et détourner votre SIM (SIM swap), ce qui leur permet d'intercepter vos codes OTP.",
+      "Les opérateurs ne demandent pas votre pièce d'identité complète et votre date de naissance par SMS ou lors d'appels inattendus pour une « mise à jour de SIM »."
+    ],
+    "advice": "Ne communiquez pas de données d'identité par SMS ou par téléphone. Rendez-vous en personne dans une boutique officielle de votre opérateur pour toute opération liée à votre SIM."
+  },
+  "courier_customs_fee": {
+    "category": "Arnaque au colis / à la livraison",
+    "title": "Fausse demande de frais de livraison ou de douane",
+    "keywords": ["votre colis est bloqué", "frais de douane", "frais de livraison pour libérer", "votre colis est retenu", "colis en attente"],
+    "why": [
+      "Les sociétés de livraison facturent les frais de dédouanement par des factures officielles liées à un envoi suivi, pas par des liens envoyés au hasard qui demandent vos coordonnées bancaires.",
+      "Si vous n'attendiez aucun colis, il n'y a rien à « libérer »."
+    ],
+    "advice": "Suivez le colis directement sur le site officiel du transporteur avec le numéro de suivi, et non via le lien qui vous a été envoyé."
+  },
+  "job_offer_fee": {
+    "category": "Fausse offre d'emploi",
+    "title": "Offre d'emploi exigeant un paiement à l'avance",
+    "keywords": ["frais d'inscription pour le poste", "payer la formation", "offre d'emploi", "travail à domicile", "frais de recrutement"],
+    "why": [
+      "Les vrais employeurs vous paient — ils ne vous demandent pas de payer un kit de formation, des uniformes ou des « frais d'inscription » avant de commencer.",
+      "Un salaire élevé pour très peu d'effort, assorti d'un coût initial, est un scénario récurrent des fausses offres d'emploi."
+    ],
+    "advice": "Ne payez jamais pour obtenir un emploi. Vérifiez l'entreprise de façon indépendante (site officiel, LinkedIn, appel à son bureau officiel)."
+  },
+  "hacked_friend_urgent_transfer": {
+    "category": "Arnaque par compte piraté",
+    "title": "Demande d'argent urgente depuis le compte d'un « ami »",
+    "keywords": ["je suis bloqué", "envoie-moi de l'argent sur ce nouveau numéro", "mon téléphone a été volé", "j'ai besoin d'argent maintenant", "urgent j'ai besoin"],
+    "why": [
+      "Un scénario fréquent consiste à pirater ou cloner un compte de réseau social, puis à écrire aux contacts de la victime pour demander de l'argent en urgence vers un compte nouveau ou inconnu.",
+      "L'urgence soudaine associée à une destination de paiement inhabituelle est ce qui trahit l'arnaque."
+    ],
+    "advice": "Appelez directement votre ami sur son numéro habituel (pas via la discussion) pour confirmer avant d'envoyer quoi que ce soit."
+  },
+  "mobile_money_reversal": {
+    "category": "Arnaque à l'annulation de transfert mobile money",
+    "title": "Arnaque « je t'ai envoyé de l'argent par erreur, renvoie-le-moi »",
+    "keywords": ["envoyé par erreur", "renvoyez-moi l'argent", "renvoie-moi mon argent", "transfert par erreur", "crédité par erreur", "mauvais numéro"],
+    "why": [
+      "Les escrocs envoient d'abord une fausse notification de paiement (ou un vrai petit paiement depuis un compte volé), puis vous pressent de « renvoyer » une somme plus importante depuis vos propres fonds avant que la transaction initiale soit confirmée ou annulée.",
+      "Quand vous découvrez que le « paiement par erreur » n'a jamais abouti — ou a été annulé par la banque — l'argent que vous avez renvoyé a disparu, et il venait de votre compte, pas du leur."
+    ],
+    "advice": "Ne renvoyez jamais d'argent sur la base d'une capture d'écran ou d'un SMS. Vérifiez votre solde réel et l'historique de vos transactions dans l'application de votre banque ou de mobile money, pas selon les dires de l'expéditeur. Si un paiement est vraiment arrivé par erreur, demandez à votre banque ou à votre opérateur de l'annuler officiellement."
+  },
+  "celebrity_crypto_giveaway": {
+    "category": "Arnaque aux faux cadeaux de célébrités / crypto",
+    "title": "Faux « giveaway » de célébrité ou de crypto qui vous demande d'envoyer des cryptomonnaies d'abord",
+    "keywords": ["doublez vos bitcoins", "cadeau de célébrité", "envoyez des cryptomonnaies", "giveaway crypto", "envoyez 0,1 btc", "concours crypto"],
+    "why": [
+      "Aucun cadeau légitime — de célébrité, de plateforme d'échange ou autre — ne vous demande d'envoyer d'abord des cryptomonnaies pour « vérifier » votre portefeuille ou recevoir une somme plus importante.",
+      "Ces arnaques utilisent souvent de faux badges de vérification, des directs truqués ou des comptes piratés de vraies célébrités et entreprises pour paraître crédibles."
+    ],
+    "advice": "N'envoyez aucune cryptomonnaie pour « réclamer » un cadeau. Les vrais cadeaux n'exigent jamais d'envoyer des fonds d'abord. Signalez le compte et ignorez-le."
+  },
+  "rental_deposit_scam": {
+    "category": "Fausse annonce de location / d'appartement",
+    "title": "Annonce de location qui exige un paiement avant la visite",
+    "keywords": ["payez la caution avant la visite", "frais de dossier pour réserver", "envoyez l'argent pour réserver l'appartement", "le gardien n'est pas là", "frais d'agence avant visite"],
+    "why": [
+      "Les vrais propriétaires et agents vous laissent visiter le bien en personne avant tout paiement — exiger une « caution » ou des « frais de dossier » d'abord, avec une excuse pour ne pas visiter, est une arnaque de location en ligne courante.",
+      "La même fausse annonce (souvent avec des photos copiées d'un autre logement) peut servir à encaisser des cautions auprès de plusieurs victimes avant de disparaître."
+    ],
+    "advice": "Ne payez jamais pour un bien que vous n'avez pas visité physiquement, et ne payez que via un agent vérifiable ou une plateforme enregistrée. Confirmez que le logement existe auprès d'un voisin ou d'un contact local avant d'envoyer quoi que ce soit."
+  },
+  "fake_customer_care_callback": {
+    "category": "Faux service client / carte bloquée",
+    "title": "Message « votre carte est bloquée, appelez ce numéro »",
+    "keywords": ["votre carte a été bloquée", "appelez ce numéro", "contactez notre service client immédiatement", "carte suspendue", "débloquer votre carte"],
+    "why": [
+      "Ce message vous dirige vers une ligne téléphonique contrôlée par des escrocs qui se font passer pour le service client de votre banque et vous demandent le numéro de carte, le PIN ou le code OTP pour « débloquer » votre compte.",
+      "Les vraies banques ne vous envoient pas de message vous disant d'appeler un numéro inconnu pour régler un problème de carte — utilisez toujours le numéro imprimé sur votre carte ou l'application officielle de la banque."
+    ],
+    "advice": "N'appelez aucun numéro indiqué dans un message de ce type. Si vous êtes inquiet pour votre carte, appelez le numéro au dos de la carte ou ouvrez directement l'application officielle de votre banque."
+  },
+  "impersonated_official_account": {
+    "category": "Compte d'entreprise / de célébrité usurpé",
+    "title": "Compte de réseau social qui se fait passer pour le support d'une entreprise ou d'une personnalité",
+    "keywords": ["compte officiel", "support officiel", "envoyez-nous vos informations en message privé", "service client officiel", "contactez ce compte pour votre remboursement"],
+    "why": [
+      "Les escrocs créent des comptes imitant les vrais (nom similaire, photo de profil copiée, faux badge de vérification) qui répondent aux réclamations publiques de vrais clients pour « aider » — puis demandent en message privé des coordonnées, des PIN ou des « frais de traitement ».",
+      "Les vraies entreprises règlent rarement des problèmes de compte dans des réponses publiques ou des messages privés d'apparence non officielle, et ne demandent jamais votre PIN ou mot de passe pour « traiter » quoi que ce soit."
+    ],
+    "advice": "Contactez une entreprise uniquement via le compte vérifié ou l'application/le site officiel que vous connaissez déjà — comparez soigneusement le nom du compte avec le vrai site de l'entreprise. Ne communiquez jamais de PIN, de mot de passe ni de code OTP à un compte de support, même d'apparence officielle."
+  },
+  "tax_refund_phishing": {
+    "category": "Faux remboursement d'impôt",
+    "title": "Faux message de remboursement d'impôt qui demande de « mettre à jour vos informations »",
+    "keywords": ["remboursement d'impôt", "remboursement fiscal", "votre remboursement a été approuvé", "mettez à jour vos coordonnées pour recevoir", "impôts remboursement en attente"],
+    "why": [
+      "Les administrations fiscales (FIRS, KRA, URA, etc.) n'annoncent pas les remboursements par des liens SMS/WhatsApp envoyés au hasard demandant de « mettre à jour vos coordonnées bancaires » — les remboursements passent par votre profil fiscal officiel.",
+      "Le lien mène généralement à une fausse page de connexion conçue pour voler votre numéro d'identité, vos coordonnées bancaires ou le mot de passe de votre portail fiscal."
+    ],
+    "advice": "Ne cliquez pas sur le lien. Connectez-vous directement au site officiel de l'administration fiscale (tapez vous-même l'adresse) pour vérifier un éventuel remboursement, ou rendez-vous dans un bureau."
+  },
+  "scholarship_fee_scam": {
+    "category": "Fausse bourse d'études / offre d'études à l'étranger",
+    "title": "Offre de bourse ou d'études à l'étranger exigeant des frais à l'avance",
+    "keywords": ["bourse d'études approuvée", "frais de traitement de votre bourse", "payez pour votre lettre d'admission", "frais pour réserver votre place", "visa d'études frais"],
+    "why": [
+      "Les vraies bourses sont généralement gratuites à demander, ou les éventuels frais sont payés directement à l'établissement accrédité via son portail officiel — pas à un « agent » ni sur un compte personnel.",
+      "La promesse d'une opportunité difficile à obtenir, associée à la pression de payer vite pour « réserver votre place », est un schéma classique de frais avancés ciblant les étudiants."
+    ],
+    "advice": "Vérifiez la bourse directement sur le site officiel de l'université ou du programme avant de payer quoi que ce soit. Ne payez jamais le compte personnel d'un individu pour une bourse ou une opportunité d'études."
+  },
+  "family_emergency_new_number": {
+    "category": "Arnaque « Salut maman/papa » (urgence familiale)",
+    "title": "Numéro inconnu qui prétend être un proche écrivant depuis un « nouveau téléphone »",
+    "keywords": ["salut maman", "salut papa", "c'est mon nouveau numéro", "j'ai perdu mon téléphone", "mon téléphone est tombé dans l'eau", "nouveau numéro urgent"],
+    "why": [
+      "C'est un scénario d'arnaque bien connu : quelqu'un vous écrit en se faisant passer pour votre enfant, frère, sœur ou proche depuis un nouveau numéro après avoir « perdu son téléphone », puis demande vite de l'argent pour une facture, un remplacement de téléphone ou une urgence.",
+      "L'urgence et la pression émotionnelle (« ne le dis à personne, j'ai trop honte ») sont conçues pour vous empêcher d'appeler et de vérifier."
+    ],
+    "advice": "Appelez toujours le proche sur son numéro habituel (ou un autre membre de la famille) pour confirmer avant d'envoyer quoi que ce soit, même si l'histoire semble convaincante. Un vrai proche ne vous en voudra pas de vérifier."
+  },
+  "marketplace_pay_before_delivery": {
+    "category": "Arnaque au paiement avant livraison sur une place de marché",
+    "title": "Vendeur qui exige le paiement intégral avant que vous voyiez ou receviez l'article",
+    "keywords": ["paiement avant livraison", "payez d'abord et je vous envoie", "paiement intégral avant l'expédition", "envoyez l'argent avant que j'envoie", "aucune inspection"],
+    "why": [
+      "Les vendeurs légitimes des places de marché sérieuses acceptent généralement l'inspection avant paiement ou le paiement à la livraison — refuser toute inspection et exiger un paiement intégral à l'avance est une tactique courante avant de disparaître avec l'argent.",
+      "Les annonces à un prix bien inférieur au marché servent souvent d'appât pour vous faire agir vite et abandonner votre prudence habituelle."
+    ],
+    "advice": "Utilisez la protection de paiement (séquestre) de la place de marché quand elle existe, exigez d'inspecter l'article avant de payer, et méfiez-vous de tout prix très inférieur à la normale."
+  },
+  "qr_code_tampering": {
+    "category": "Arnaque au code QR de paiement falsifié",
+    "title": "Un code QR qui peut détourner votre paiement vers le compte d'un escroc",
+    "keywords": ["code qr", "scannez ce qr", "nouveau code qr", "numéro till a changé", "scannez pour payer", "scannez pour finaliser"],
+    "why": [
+      "Des escrocs collent parfois un faux autocollant QR sur le vrai code d'un commerce, ou envoient un « nouveau » code QR par message, pour rediriger le paiement vers leur propre compte au lieu de celui du commerçant.",
+      "Une fois le code scanné et le paiement effectué, l'argent va directement sur le compte de l'escroc et est très difficile à récupérer — contrairement à une transaction échouée, rien ne vous alerte."
+    ],
+    "advice": "Avant de scanner, vérifiez que le numéro de till/paybill ou le nom du compte affiché après le scan correspond bien au commerce que vous payez. Si un code QR vous a été envoyé directement au lieu d'être affiché chez le commerçant, vérifiez d'abord auprès de lui via un numéro que vous connaissez."
+  }
+}

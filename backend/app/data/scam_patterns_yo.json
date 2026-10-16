@@ -1,0 +1,182 @@
+{
+  "otp_request": {
+    "category": "Ìbéèrè fún kóòdù OTP / PIN",
+    "title": "Ẹnìkan tó ń díbọ́n láti gba OTP tàbí PIN rẹ",
+    "why": [
+      "Kò sí báńkì, olùpèsè owó orí fóònù, tàbí aṣojú kankan tó máa ní kí o kà jáde tàbí kí o tẹ OTP/PIN láti 'jẹ́rìísí', 'fagilé' tàbí 'ṣí' àkáǹtì rẹ.",
+      "OTP wà kí ìwọ nìkan lè fọwọ́ sí ìdúnàádúrà kan — bí o bá pín in, o ń fún oníjìbìtì ní àṣẹ náà."
+    ],
+    "advice": "Má ṣe pín OTP tàbí PIN rẹ pẹ̀lú ẹnikẹ́ni, kódà bí ó bá mọ orúkọ rẹ, nọ́ńbà àkáǹtì rẹ tàbí àwọn ìdúnàádúrà rẹ láìpẹ́. Gbé fóònù kalẹ̀, kí o sì pe nọ́ńbà oníbiṣẹ́ báńkì rẹ tó jẹ́ ti òtítọ́."
+  },
+  "account_suspended_link": {
+    "category": "Ìkìlọ̀ èké láti báńkì/àpò owó",
+    "title": "Ọ̀nà àsopọ̀ èké 'a ti dá àkáǹtì dúró'",
+    "why": [
+      "Àwọn báńkì àti àpò owó gidi máa ń ṣàkóso wíwọlé nípasẹ̀ áàpù tàbí ẹ̀ka wọn, kì í ṣe nípa fífi ọ̀nà àsopọ̀ àìròtẹ́lẹ̀ ránṣẹ́ tó ń fipá mú ọ láti 'jẹ́rìísí' láàárín wákàtí díẹ̀.",
+      "Ìkánjú ('láàárín wákàtí 24' / 'bí kò bá rí bẹ́ẹ̀ a ó tì àkáǹtì rẹ') jẹ́ ọgbọ́n ìfipámúni láti dá ọ dúró kí o má lè ronú."
+    ],
+    "advice": "Má ṣe tẹ ọ̀nà àsopọ̀ náà. Ṣí áàpù tàbí ojú-òpó wẹ́ẹ̀bù báńkì tó jẹ́ ti òtítọ́ tààrà (kọ àdírẹ́sì náà fúnra rẹ), kí o sì wo ipò àkáǹtì rẹ níbẹ̀."
+  },
+  "loan_upfront_fee": {
+    "category": "Áàpù ìyáwó kíákíá èké",
+    "title": "Ìjìbìtì ìyáwó tó ń béèrè owó ìsanwó ṣáájú",
+    "why": [
+      "Àwọn olùyáwó tó tọ́ máa ń yọ owó iṣẹ́ wọn kúrò nínú ìyáwó fúnra rẹ̀ — wọn kì í sọ pé kí o san owó ná kí wọ́n tó 'ṣí' tàbí 'tú' ìyáwó sílẹ̀.",
+      "Ìyáwó 'tí a fọwọ́ sí' tó nílò owó kí wọ́n tó san án jẹ́ ọ̀nà ìjìbìtì owó ìṣáájú tí a mọ̀ dáadáa."
+    ],
+    "advice": "Má ṣe san owó rárá láti gba ìyáwó. Bí wọ́n bá nílò owó kí wọ́n tó fún ọ ní owó kankan, ka á sí ìjìbìtì kí o sì dá ọ̀rọ̀ náà dúró."
+  },
+  "romance_urgent_money": {
+    "category": "Ìjìbìtì ìfẹ́",
+    "title": "Ìfẹ́ orí ayélujára tó ń béèrè owó lójijì",
+    "why": [
+      "Ìfẹ́ tó ń dàgbà kíákíá tí ìpọ́njú owó tí kò retí tẹ̀lé e (dídúró lójú ọ̀nà àjò, owó ilé-ìwòsàn, owó kọ́sítọ́mù) jẹ́ ọ̀kan lára àwọn ìtàn ìjìbìtì ìfẹ́ tó wọ́pọ̀ jùlọ.",
+      "Ìbéèrè náà sábà máa ń wá nígbà tí wọ́n bá ní kí o fi owó ránṣẹ́ ní ọ̀nà tí a kò lè tọ pa (káàdì ẹ̀bùn, crypto, ìfiránṣẹ́ owó orí wáyà)."
+    ],
+    "advice": "Dúró díẹ̀ kí o tó fi nǹkan ránṣẹ́. Wá àwòrán wọn lórí ayélujára láti mọ̀ bóyá wọ́n jí i, kí o sì pè wọ́n lórí fídíò. Má ṣe fi owó ránṣẹ́ sí ẹni tí o kò tíì pàdé ní ojúkojú."
+  },
+  "guaranteed_investment_returns": {
+    "category": "Ìjìbìtì ìdókòwò / crypto",
+    "title": "Èrè ìdókòwò 'tí a ṣèlérí'",
+    "why": [
+      "Kò sí ìdókòwò tó tọ́ tó lè ṣèlérí èrè gíga tí kò yípadà láìsí ewu — gbogbo ìdókòwò gidi ní ewu.",
+      "Àwọn ètò wọ̀nyí sábà máa ń san àwọn olùdókòwò àkọ́kọ́ pẹ̀lú owó àwọn olùdókòwò tuntun (ìṣètò Ponzi) títí yóò fi wó."
+    ],
+    "advice": "Jẹ́rìísí pé ilé-iṣẹ́ náà ti forúkọ sílẹ̀ pẹ̀lú olùdarí ọjà ìnáwó orílẹ̀-èdè rẹ kí o tó fi owó ránṣẹ́. Bí èrè bá dún dáadáa jù, bẹ́ẹ̀ gan-an ni."
+  },
+  "lottery_prize_scam": {
+    "category": "Ìjìbìtì lọ́tárì / ẹ̀bùn",
+    "title": "Ìfiránṣẹ́ 'o ti gba ẹ̀bùn'",
+    "why": [
+      "O kò lè gba lọ́tárì tàbí ìdíje tí o kò kópa nínú rẹ̀.",
+      "Ìbéèrè láti san owó 'ìgbaniláàyè', 'ìṣàkóso' tàbí 'owó orí' kí wọ́n tó tú ẹ̀bùn sílẹ̀ jẹ́ ìjìbìtì owó ìṣáájú tí a mọ̀ dáadáa."
+    ],
+    "advice": "Pa ìfiránṣẹ́ náà rẹ́. Má ṣe san owó kankan láti 'tú' ẹ̀bùn tí o kò kópa nínú rẹ̀ sílẹ̀."
+  },
+  "sim_swap_data_request": {
+    "category": "Ìjìbìtì pípààrọ̀ SIM",
+    "title": "Ìbéèrè fún àlàyé ara ẹni láti 'gbé SIM rẹ ga'",
+    "why": [
+      "Àwọn oníjìbìtì máa ń kó nọ́ńbà ìdánimọ̀ àti àlàyé ara ẹni bí èyí jọ láti díbọ́n bí ìwọ níbi olùpèsè nẹ́tíwọ́kì rẹ kí wọ́n sì jí SIM rẹ (SIM swap), èyí tó ń jẹ́ kí wọ́n gba OTP rẹ.",
+      "Àwọn olùpèsè nẹ́tíwọ́kì kì í gba káàdì ìdánimọ̀ pípé àti ọjọ́ ìbí nípasẹ̀ SMS tàbí ìpè àìròtẹ́lẹ̀ fún 'ìgbéga SIM'."
+    ],
+    "advice": "Má ṣe pín àlàyé ìdánimọ̀ rẹ nípasẹ̀ SMS tàbí ìpè. Lọ sí ilé-ìtajà olùpèsè nẹ́tíwọ́kì tó jẹ́ ti òtítọ́ ní ojúkojú fún ìyípadà kankan tó jẹ mọ́ SIM."
+  },
+  "courier_customs_fee": {
+    "category": "Ìjìbìtì àpò / ìfiránṣẹ́",
+    "title": "Ìbéèrè èké fún owó ìfiránṣẹ́/kọ́sítọ́mù",
+    "why": [
+      "Àwọn ilé-iṣẹ́ ìfiránṣẹ́ máa ń gba owó ìgbaniláàyè nípasẹ̀ ìwé-ìsanwó tó jẹ mọ́ àpò tí a ń tọ pa, kì í ṣe nípasẹ̀ àwọn ọ̀nà àsopọ̀ àìròtẹ́lẹ̀ tó ń béèrè àlàyé káàdì.",
+      "Bí o kò bá retí àpò kankan, kò sí nǹkan kan láti 'tú' sílẹ̀."
+    ],
+    "advice": "Tọ àpò náà pa tààrà lórí ojú-òpó wẹ́ẹ̀bù ilé-iṣẹ́ ìfiránṣẹ́ tó jẹ́ ti òtítọ́ nípa lílo nọ́ńbà ìtọ pa, kì í ṣe ọ̀nà àsopọ̀ tí wọ́n fi ránṣẹ́ sí ọ."
+  },
+  "job_offer_fee": {
+    "category": "Iṣẹ́ èké",
+    "title": "Ìfilọ́lẹ̀ iṣẹ́ tó ń béèrè ìsanwó ṣáájú",
+    "why": [
+      "Àwọn agbanisíṣẹ́ tòótọ́ ń san owó fún ọ — wọn kì í ní kí o san owó fún ohun èlò ìkẹ́kọ̀ọ́, aṣọ iṣẹ́ tàbí 'ìforúkọsílẹ̀' kí o tó bẹ̀rẹ̀.",
+      "Owó iṣẹ́ gíga fún làálàá kékeré pẹ̀lú owó ìbẹ̀rẹ̀ jẹ́ ìtàn ìjìbìtì iṣẹ́ tó máa ń tún ara rẹ̀ ṣe."
+    ],
+    "advice": "Má ṣe san owó rárá láti gba iṣẹ́. Jẹ́rìísí ilé-iṣẹ́ náà lọ́nà tirẹ̀ (ojú-òpó wẹ́ẹ̀bù wọn, LinkedIn, ìpè sí ọ́fíìsì wọn tí a ṣàkójọ)."
+  },
+  "hacked_friend_urgent_transfer": {
+    "category": "Ìjìbìtì àkáǹtì tí a fọ́",
+    "title": "Ìbéèrè owó lójijì láti àkáǹtì 'ọ̀rẹ́'",
+    "why": [
+      "Ọ̀nà ìjìbìtì tó wọ́pọ̀ ni fífọ́ tàbí ṣíṣe ẹ̀dà àkáǹtì orí ayélujára, lẹ́yìn náà kí wọ́n fi ìfiránṣẹ́ ránṣẹ́ sí àwọn tí olóhun mọ̀ tí wọ́n ń béèrè owó lójijì sí àkáǹtì tuntun/àìmọ̀.",
+      "Ìkánjú òjijì pẹ̀lú ibi ìsanwó tí a kò mọ̀ ni àmì pàtàkì."
+    ],
+    "advice": "Pe ọ̀rẹ́ náà tààrà lórí nọ́ńbà rẹ̀ tí o mọ̀ (kì í ṣe nípasẹ̀ ìjíròrò orí ayélujára náà) láti jẹ́rìísí kí o tó fi nǹkan ránṣẹ́."
+  },
+  "mobile_money_reversal": {
+    "category": "Ìjìbìtì ìdápadà owó orí fóònù",
+    "title": "Ìjìbìtì 'mo fi owó ránṣẹ́ sí ọ nípa àṣìṣe, jọ̀wọ́ dá a padà'",
+    "why": [
+      "Àwọn oníjìbìtì kọ́kọ́ máa ń fi ìkéde ìsanwó èké ránṣẹ́ (tàbí ìsanwó kékeré gidi láti àkáǹtì tí a jí), lẹ́yìn náà wọ́n á fipá mú ọ láti 'dá' owó tó pọ̀ jù padà láti inú owó rẹ kí ìdúnàádúrà àkọ́kọ́ tó jẹ́ ìdánilójú tàbí kí ó fagilé ara rẹ̀.",
+      "Nígbà tí o bá rí i pé ìsanwó 'àṣìṣe' náà kò parí rárá — tàbí báńkì fagilé i — owó tí o dá padà ti lọ, ó sì jáde láti àkáǹtì rẹ, kì í ṣe tiwọn."
+    ],
+    "advice": "Má ṣe dá owó padà nítorí àwòrán ojú-ìwé tàbí SMS nìkan. Ṣàyẹ̀wò ìwọ̀nba owó rẹ àti ìtàn ìdúnàádúrà nínú áàpù báńkì/owó orí fóònù rẹ, kì í ṣe ohun tí olùfiránṣẹ́ sọ. Bí owó bá wá nípa àṣìṣe lóòótọ́, bèèrè lọ́wọ́ báńkì tàbí olùpèsè owó orí fóònù rẹ láti fagilé i ní ọ̀nà tó tọ́."
+  },
+  "celebrity_crypto_giveaway": {
+    "category": "Ìjìbìtì ẹ̀bùn gbajúgbajà / crypto",
+    "title": "'Ẹ̀bùn' èké láti ọ̀dọ̀ gbajúgbajà tàbí crypto tó ń ní kí o kọ́kọ́ fi crypto ránṣẹ́",
+    "why": [
+      "Kò sí ẹ̀bùn tó tọ́ — láti ọ̀dọ̀ gbajúgbajà, ilé-iṣẹ́ pàṣípààrọ̀ tàbí ẹlòmíràn — tó máa ní kí o kọ́kọ́ fi cryptocurrency ránṣẹ́ láti 'jẹ́rìísí' àpò owó rẹ tàbí láti gba iye tó pọ̀ jù padà.",
+      "Àwọn ìjìbìtì wọ̀nyí sábà máa ń lo àmì ìjẹ́rìísí èké, àwọn ìgbóhùnsáfẹ́fẹ́ tí a yí padà tàbí àwọn àkáǹtì gbajúgbajà àti ilé-iṣẹ́ gidi tí a fọ́ láti dàbí òtítọ́."
+    ],
+    "advice": "Má ṣe fi crypto ránṣẹ́ láti 'gba' ẹ̀bùn. Àwọn ẹ̀bùn gidi kì í ní kí o kọ́kọ́ fi owó ránṣẹ́. Ròyìn àkáǹtì náà kí o sì fojú fò ó."
+  },
+  "rental_deposit_scam": {
+    "category": "Ìkéde ilé ìyáwó èké",
+    "title": "Ìkéde ilé ìyáwó tó ń béèrè ìsanwó kí o tó rí ilé náà",
+    "why": [
+      "Àwọn onílé àti aṣojú tòótọ́ máa ń jẹ́ kí o wo ilé náà ní ojúkojú kí owó tó yí ọwọ́ padà — bíbéèrè 'owó ìdógò' tàbí 'owó àdéhùn' ṣáájú, pàápàá pẹ̀lú àwáwí ìdí tí o kò fi lè wò ó, jẹ́ ìjìbìtì ilé ìyáwó orí ayélujára tó wọ́pọ̀.",
+      "Ìkéde èké kan náà (tí ó sábà máa ń ní àwòrán tí a ṣe ẹ̀dà láti ilé mìíràn) lè jẹ́ lílò láti kó owó ìdógò lọ́wọ́ ọ̀pọ̀ àwọn tí wọ́n jìbìtì kí ó tó pòórá."
+    ],
+    "advice": "Má ṣe san owó fún ilé tí o kò tíì wò ní ojúkojú, kí o sì san nípasẹ̀ aṣojú tí a lè jẹ́rìísí tàbí ìkànnì tí a ti forúkọ sílẹ̀ nìkan. Jẹ́rìísí pé ilé náà wà nípasẹ̀ aládùúgbò tàbí ẹni àdúgbò kí o tó fi nǹkan ránṣẹ́."
+  },
+  "fake_customer_care_callback": {
+    "category": "Iṣẹ́ ìrànlọ́wọ́ oníbàárà èké / ìjìbìtì káàdì tí a dí",
+    "title": "Ìfiránṣẹ́ 'a ti dí káàdì rẹ, pe nọ́ńbà yìí'",
+    "why": [
+      "Èyí máa ń darí rẹ sí ìlà fóònù tí àwọn oníjìbìtì ń darí tí wọ́n ń díbọ́n bí iṣẹ́ ìrànlọ́wọ́ oníbàárà báńkì rẹ, níbi tí wọ́n ti máa béèrè nọ́ńbà káàdì, PIN tàbí OTP láti 'ṣí' àkáǹtì rẹ.",
+      "Àwọn báńkì gidi kì í fi ìfiránṣẹ́ ránṣẹ́ pé kí o pe nọ́ńbà tí o kò mọ̀ láti yanjú ìṣòro káàdì — máa lo nọ́ńbà tí a tẹ̀ sẹ́yìn káàdì rẹ tàbí áàpù báńkì tó jẹ́ ti òtítọ́ nígbà gbogbo."
+    ],
+    "advice": "Má ṣe pe nọ́ńbà kankan tí a fún ọ nínú ìfiránṣẹ́ bí èyí. Bí ìdààmú bá bá ọ nípa káàdì rẹ, pe nọ́ńbà tó wà lẹ́yìn káàdì náà tàbí ṣí áàpù báńkì rẹ tó jẹ́ ti òtítọ́ tààrà."
+  },
+  "impersonated_official_account": {
+    "category": "Àkáǹtì ilé-iṣẹ́/gbajúgbajà tí a díbọ́n",
+    "title": "Àkáǹtì orí ẹ̀rọ alátagbà tó ń díbọ́n bí ojú-ìwé ìrànlọ́wọ́ ilé-iṣẹ́ tàbí gbajúgbajà",
+    "why": [
+      "Àwọn oníjìbìtì ń ṣẹ̀dá àwọn àkáǹtì tó jọra (orúkọ tó jọra, fọ́tò àkọsílẹ̀ tí a ṣe ẹ̀dà, àmì ìjẹ́rìísí èké) tó ń dáhùn sí àwọn ẹ̀dùn ọkàn gbangba ti àwọn oníbàárà gidi, tí wọ́n ń fi 'ìrànlọ́wọ́' lọ̀ — lẹ́yìn náà wọ́n á béèrè àlàyé àkáǹtì, PIN tàbí 'owó ìṣàkóso' nínú ìfiránṣẹ́ àdáni.",
+      "Àwọn ilé-iṣẹ́ gidi kì í sábà yanjú ọ̀rọ̀ àkáǹtì nínú ìdáhùn gbangba tàbí ìfiránṣẹ́ àdáni tí kò dàbí ti òtítọ́, wọn kì í sì í béèrè PIN tàbí ọ̀rọ̀ìpamọ́ rẹ láti 'ṣàkóso' ohunkóhun."
+    ],
+    "advice": "Kàn sí ilé-iṣẹ́ nípasẹ̀ àkáǹtì tí a ti jẹ́rìísí tàbí áàpù/ojú-òpó wẹ́ẹ̀bù tó jẹ́ ti òtítọ́ tí o ti gbẹ́kẹ̀lé nìkan — fi ìṣọ́ra ṣe àfiwé orúkọ àkáǹtì náà pẹ̀lú ojú-òpó wẹ́ẹ̀bù gidi ti ilé-iṣẹ́ náà. Má ṣe pín PIN, ọ̀rọ̀ìpamọ́ tàbí OTP pẹ̀lú àkáǹtì ìrànlọ́wọ́ kankan, kódà bí ó bá dàbí ti òtítọ́."
+  },
+  "tax_refund_phishing": {
+    "category": "Ìdápadà owó orí ìjọba èké",
+    "title": "Ìfiránṣẹ́ ìdápadà owó orí èké tó ń ní kí o 'ṣe àtúnṣe àlàyé rẹ'",
+    "why": [
+      "Àwọn aláṣẹ owó orí (FIRS, KRA, URA àti bẹ́ẹ̀ bẹ́ẹ̀ lọ) kì í kéde ìdápadà nípasẹ̀ àwọn ọ̀nà àsopọ̀ SMS/WhatsApp àìròtẹ́lẹ̀ tó ń ní kí o 'ṣe àtúnṣe àlàyé báńkì rẹ' — a ń ṣàkóso ìdápadà nípasẹ̀ àkọsílẹ̀ owó orí rẹ tó jẹ́ ti òtítọ́.",
+      "Ọ̀nà àsopọ̀ náà sábà máa ń darí sí ojú-ìwé wíwọlé èké tí a ṣe láti jí nọ́ńbà ìdánimọ̀ rẹ, àlàyé báńkì tàbí ọ̀rọ̀ìpamọ́ ojú-òpó owó orí rẹ."
+    ],
+    "advice": "Má ṣe tẹ ọ̀nà àsopọ̀ náà. Wọlé sí ojú-òpó wẹ́ẹ̀bù aláṣẹ owó orí tó jẹ́ ti òtítọ́ tààrà (kọ àdírẹ́sì náà fúnra rẹ) láti ṣàyẹ̀wò ìdápadà gidi kan, tàbí lọ sí ọ́fíìsì ní ojúkojú."
+  },
+  "scholarship_fee_scam": {
+    "category": "Ìfilọ́lẹ̀ ẹ̀kọ́ ọ̀fẹ́ / ìkẹ́kọ̀ọ́ ní òkè òkun èké",
+    "title": "Ìfilọ́lẹ̀ ẹ̀kọ́ ọ̀fẹ́ tàbí ìkẹ́kọ̀ọ́ ní òkè òkun tó ń béèrè owó ṣáájú",
+    "why": [
+      "Àwọn ẹ̀kọ́ ọ̀fẹ́ gidi sábà máa ń jẹ́ ọ̀fẹ́ láti béèrè fún, tàbí owó (bí ó bá wà) ni a máa ń san tààrà sí ilé-ẹ̀kọ́ tí a mọ̀ nípasẹ̀ ojú-òpó rẹ̀ tó jẹ́ ti òtítọ́ — kì í ṣe sí 'aṣojú' tàbí àkáǹtì ẹnìkan.",
+      "Ìlérí àǹfààní tí ó ṣòro láti rí pẹ̀lú ìfipámúni láti san owó kíákíá láti 'ṣe ìpamọ́ ipò rẹ' jẹ́ ọ̀nà ìjìbìtì owó ìṣáájú tó ń tẹ̀ sí àwọn akẹ́kọ̀ọ́."
+    ],
+    "advice": "Jẹ́rìísí ẹ̀kọ́ ọ̀fẹ́ náà tààrà lórí ojú-òpó wẹ́ẹ̀bù ilé-ẹ̀kọ́ gíga tàbí ètò náà kí o tó san owó kankan. Má ṣe san owó sí àkáǹtì ẹnìkan fún ẹ̀kọ́ ọ̀fẹ́ tàbí àǹfààní ìkẹ́kọ̀ọ́."
+  },
+  "family_emergency_new_number": {
+    "category": "Ìjìbìtì 'Báwo Mọ́mì/Dáddì' ìpọ́njú ẹbí",
+    "title": "Nọ́ńbà àìmọ̀ tó ń sọ pé òun jẹ́ ọmọ ẹbí tó ń fi ìfiránṣẹ́ ránṣẹ́ láti 'fóònù tuntun'",
+    "why": [
+      "Èyí jẹ́ ètò ìjìbìtì tí a mọ̀ dáadáa: ẹnìkan ń fi ìfiránṣẹ́ ránṣẹ́ sí ọ tí ó ń díbọ́n bí ọmọ rẹ, arákùnrin, tàbí ìbátan rẹ lórí nọ́ńbà tuntun lẹ́yìn 'pípàdánù fóònù', lẹ́yìn náà ni kíákíá yóò béèrè owó fún owó ìsanwó, ìpààrọ̀ fóònù tàbí ìpọ́njú.",
+      "Ìkánjú àti ìfipámúni nípa ìmọ̀lára ('jọ̀wọ́ má sọ fún ẹnikẹ́ni, ojú ń tì mí gan-an') ni a ṣe láti dá ọ dúró láti pe kí o jẹ́rìísí."
+    ],
+    "advice": "Máa pe ọmọ ẹbí náà lórí nọ́ńbà rẹ̀ tí o mọ̀ (tàbí ìbátan mìíràn) láti jẹ́rìísí kí o tó fi nǹkan ránṣẹ́, kódà bí ìtàn náà bá dàbí ẹni pé ó gbagbọ́. Ìbátan gidi kò ní bínú pé o jẹ́rìísí."
+  },
+  "marketplace_pay_before_delivery": {
+    "category": "Ìjìbìtì sísan owó ṣáájú ìfijiṣẹ́ lórí ọjà orí ayélujára",
+    "title": "Olùtajà tó ń béèrè ìsanwó pípé kí o tó rí tàbí gba ohun náà",
+    "why": [
+      "Àwọn olùtajà tó tọ́ lórí àwọn ọjà orí ayélujára tí a gbẹ́kẹ̀lé sábà máa ń gbà kí a ṣàyẹ̀wò ṣáájú ìsanwó tàbí ìsanwó nígbà ìfijiṣẹ́ — kíkọ̀ ìṣàyẹ̀wò kankan àti bíbéèrè ìsanwó pípé ṣáájú jẹ́ ọgbọ́n tó wọ́pọ̀ kí wọ́n tó sá lọ pẹ̀lú owó náà.",
+      "Àwọn ìkéde tí owó rẹ̀ kéré ju ti ọjà lọ ni a sábà máa ń lò gẹ́gẹ́ bí ìdẹkùn láti mú kí o yára kí o sì gbàgbé ìṣọ́ra déédé."
+    ],
+    "advice": "Lo ààbò ìsanwó (escrow) ọjà náà níbi tó bá wà, fi dandan lé e pé kí o ṣàyẹ̀wò ohun náà kí o tó sanwó, kí o sì ṣọ́ra fún owó tó kéré ju ti déédé lọ."
+  },
+  "qr_code_tampering": {
+    "category": "Ìjìbìtì kóòdù QR ìsanwó tí a yí padà",
+    "title": "Kóòdù QR tó lè darí ìsanwó rẹ sí àkáǹtì oníjìbìtì",
+    "why": [
+      "Àwọn oníjìbìtì máa ń lẹ̀ àmì QR èké mọ́ orí èyí tó jẹ́ ti òtítọ́ ti ilé-iṣẹ́, tàbí kí wọ́n fi kóòdù QR 'tuntun' ránṣẹ́ nípasẹ̀ ìfiránṣẹ́, tí wọ́n ń darí ìsanwó sí àkáǹtì wọn dípò ti ilé-iṣẹ́ náà.",
+      "Ní kété tí o bá ti ṣàyẹ̀wò tí o sì ti sanwó, owó náà á lọ tààrà sí àkáǹtì oníjìbìtì, ó sì ṣòro gan-an láti gba padà — láìdà bí ìdúnàádúrà tí kò yọrí, kò sábà sí àṣìṣe kankan tó máa kìlọ̀ fún ọ."
+    ],
+    "advice": "Kí o tó ṣàyẹ̀wò, jẹ́rìísí pé nọ́ńbà till/paybill tàbí orúkọ àkáǹtì tí ó hàn lẹ́yìn ṣíṣàyẹ̀wò bá ilé-iṣẹ́ tí o ń sanwó fún mu. Bí wọ́n bá fi kóòdù QR ránṣẹ́ sí ọ tààrà dípò kí a fi hàn ní ilé-iṣẹ́ náà, jẹ́rìísí pẹ̀lú ilé-iṣẹ́ náà lákọ̀ọ́kọ́ nípasẹ̀ nọ́ńbà tí o mọ̀."
+  }
+}

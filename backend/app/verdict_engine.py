@@ -8,6 +8,8 @@ from typing import Optional
 import anthropic
 from pydantic import BaseModel
 
+from app import limits
+from app.i18n import LANG_NAMES, normalize_lang, t
 from app.schemas import MatchedPattern, VerifyResponse
 
 logger = logging.getLogger("trustline.verdict_engine")
@@ -28,6 +30,19 @@ asking for, any urgency or pressure). Do not invent a "source" or "official refe
 Keep language plain and simple enough for someone with no technical background."""
 
 
+def _system_prompt(lang: str) -> str:
+    # Always name the answer language explicitly: without it Claude mirrors the language of the
+    # pasted message, which mixes languages on screen when it differs from the interface language.
+    language = LANG_NAMES.get(lang, "English")
+    return (
+        SYSTEM_PROMPT
+        + f"\n\nIMPORTANT: Write every text field (headline, category, why, advice) in natural, clear "
+        f"{language} suited to everyday readers, even if the message you are checking is written in a "
+        "different language. The `verdict` field must still be exactly one of the English values: "
+        "likely_scam, uncertain, likely_safe."
+    )
+
+
 class LLMVerdict(BaseModel):
     verdict: str
     confidence: int
@@ -46,14 +61,23 @@ def _get_client() -> anthropic.Anthropic:
         _client = anthropic.Anthropic()
     return _client
 
-DATA_PATH = Path(__file__).parent / "data" / "scam_patterns.json"
 
-with open(DATA_PATH, encoding="utf-8") as f:
+DATA_DIR = Path(__file__).parent / "data"
+
+with open(DATA_DIR / "scam_patterns.json", encoding="utf-8") as f:
     PATTERNS = json.load(f)
+
+TRANSLATED_PATTERNS: dict[str, dict] = {}
+for _lang in LANG_NAMES:
+    with open(DATA_DIR / f"scam_patterns_{_lang}.json", encoding="utf-8") as f:
+        TRANSLATED_PATTERNS[_lang] = json.load(f)
 
 URGENCY_WORDS = [
     "urgent", "immediately", "act now", "within 24 hours", "last chance",
     "final warning", "act fast", "expires today", "right now",
+    "immédiatement", "d'urgence", "agissez maintenant", "dans les 24 heures",
+    "dernière chance", "expire aujourd'hui", "tout de suite", "sans tarder",
+    "mara moja", "kwa dharura", "ndani ya saa 24", "nan da nan", "cikin gaggawa",
 ]
 
 
@@ -62,7 +86,10 @@ def _normalize(text: str) -> str:
 
 
 def _score_pattern(text: str, pattern: dict) -> int:
-    return sum(1 for kw in pattern["keywords"] if kw in text)
+    keywords = list(pattern["keywords"])
+    for translated in TRANSLATED_PATTERNS.values():
+        keywords += translated.get(pattern["id"], {}).get("keywords", [])
+    return sum(1 for kw in keywords if kw in text)
 
 
 def _best_match(text: str) -> tuple[dict, int] | tuple[None, int]:
@@ -74,7 +101,26 @@ def _best_match(text: str) -> tuple[dict, int] | tuple[None, int]:
     return best, best_score
 
 
-def _llm_analyze(message: str) -> LLMVerdict | None:
+def category_labels(lang: str) -> dict[str, str]:
+    """English category name -> its label in `lang`, for translating community stats."""
+    translated = TRANSLATED_PATTERNS.get(lang, {})
+    return {p["category"]: translated[p["id"]]["category"] for p in PATTERNS if p["id"] in translated}
+
+
+def _matched(pattern: dict, lang: str) -> MatchedPattern:
+    localized = TRANSLATED_PATTERNS.get(lang, {}).get(pattern["id"])
+    source = localized or pattern
+    return MatchedPattern(
+        category=source["category"],
+        category_en=pattern["category"],
+        title=source["title"],
+        why=source["why"],
+        advice=source["advice"],
+        source=pattern["source"],
+    )
+
+
+def _llm_analyze(message: str, lang: str) -> LLMVerdict | None:
     """
     Free-form reasoning over messages the curated pattern list doesn't cleanly cover.
 
@@ -84,12 +130,15 @@ def _llm_analyze(message: str) -> LLMVerdict | None:
     """
     if not os.getenv("ANTHROPIC_API_KEY"):
         return None
+    if not limits.consume_llm_call():
+        logger.warning("Daily AI-call ceiling reached; using rule-based fallback")
+        return None
     try:
         response = _get_client().messages.parse(
             model=MODEL,
             max_tokens=2048,
             output_config={"effort": "low"},
-            system=SYSTEM_PROMPT,
+            system=_system_prompt(lang),
             messages=[{"role": "user", "content": f"Message to check:\n\n{message}"}],
             output_format=LLMVerdict,
         )
@@ -99,7 +148,7 @@ def _llm_analyze(message: str) -> LLMVerdict | None:
         return None
 
 
-def _from_llm(v: LLMVerdict) -> VerifyResponse:
+def _from_llm(v: LLMVerdict, lang: str) -> VerifyResponse:
     verdict = v.verdict if v.verdict in ("likely_scam", "uncertain", "likely_safe") else "uncertain"
     matched = (
         MatchedPattern(
@@ -107,7 +156,7 @@ def _from_llm(v: LLMVerdict) -> VerifyResponse:
             title=v.headline,
             why=v.why,
             advice=v.advice,
-            source="TrustLine AI reasoning (not from the curated pattern list)",
+            source=t(lang, "ai_source"),
         )
         if v.category
         else None
@@ -121,59 +170,59 @@ def _from_llm(v: LLMVerdict) -> VerifyResponse:
     )
 
 
-def analyze(message: str) -> VerifyResponse:
+def analyze(message: str, language: str = "en") -> VerifyResponse:
+    lang = normalize_lang(language)
     text = _normalize(message)
     pattern, score = _best_match(text)
     has_urgency = any(w in text for w in URGENCY_WORDS)
 
     if pattern and score >= 2:
         confidence = min(95, 60 + score * 12 + (10 if has_urgency else 0))
+        matched = _matched(pattern, lang)
         return VerifyResponse(
             verdict="likely_scam",
             confidence=confidence,
-            headline=f"Likely a scam — {pattern['category']}",
-            matched=MatchedPattern(
-                category=pattern["category"],
-                title=pattern["title"],
-                why=pattern["why"],
-                advice=pattern["advice"],
-                source=pattern["source"],
-            ),
+            headline=t(lang, "likely_scam", category=matched.category),
+            matched=matched,
         )
 
     # No confident keyword match -- let the LLM reason freely if a key is configured.
     # Falls through to the rule-based heuristics below when no key is set or the call fails.
-    llm_verdict = _llm_analyze(message)
+    llm_verdict = _llm_analyze(message, lang)
     if llm_verdict is not None:
-        return _from_llm(llm_verdict)
+        return _from_llm(llm_verdict, lang)
 
     if pattern and score == 1:
         confidence = 45 + (15 if has_urgency else 0)
+        matched = _matched(pattern, lang)
         return VerifyResponse(
             verdict="uncertain",
             confidence=confidence,
-            headline=f"This has some warning signs of '{pattern['category']}' — be careful",
-            matched=MatchedPattern(
-                category=pattern["category"],
-                title=pattern["title"],
-                why=pattern["why"],
-                advice=pattern["advice"],
-                source=pattern["source"],
-            ),
-            generic_advice="Before acting on this message, verify it through an official channel you trust (the company's app, a number you already have saved) rather than any contact info in the message itself.",
+            headline=t(lang, "weak_match", category=matched.category),
+            matched=matched,
+            generic_advice=t(lang, "verify_officially"),
         )
 
     if has_urgency:
         return VerifyResponse(
             verdict="uncertain",
             confidence=40,
-            headline="No exact match, but this message uses pressure tactics",
-            generic_advice="Messages that push you to act 'immediately' or 'urgently' are a common scam tactic even when the specific request doesn't match a known pattern. Slow down and verify independently before responding.",
+            headline=t(lang, "pressure_headline"),
+            generic_advice=t(lang, "pressure_advice"),
+        )
+
+    if os.getenv("ANTHROPIC_API_KEY"):
+        # A key is configured, so reaching here means the AI call failed -- never tell the user "safe" in that case.
+        return VerifyResponse(
+            verdict="uncertain",
+            confidence=0,
+            headline=t(lang, "ai_failed_headline"),
+            generic_advice=t(lang, "ai_failed_advice"),
         )
 
     return VerifyResponse(
         verdict="likely_safe",
         confidence=55,
-        headline="No known scam pattern detected",
-        generic_advice="We didn't match this against any known scam pattern, but that isn't a guarantee it's safe. If money, passwords, or personal ID details are involved, verify through an official channel first.",
+        headline=t(lang, "safe_headline"),
+        generic_advice=t(lang, "safe_advice"),
     )

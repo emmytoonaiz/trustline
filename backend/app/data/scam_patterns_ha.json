@@ -1,0 +1,182 @@
+{
+  "otp_request": {
+    "category": "Neman lambar OTP / PIN",
+    "title": "Wani yana kwaikwayon wani don samun OTP ko PIN ɗinka",
+    "why": [
+      "Babu banki, ko kamfanin kuɗin waya, ko wakili da zai taɓa neman ka karanta ko ka shigar da OTP/PIN don 'tabbatarwa', 'sokewa' ko 'buɗe' asusunka.",
+      "An ƙirƙiri OTP ne don kai kaɗai ka amince da wata mu'amala — idan ka bayar da shi, ka ba mai zamba wannan izinin."
+    ],
+    "advice": "Kada ka taɓa raba OTP ko PIN da kowa, ko da wanda ya san sunanka, lambar asusunka ko mu'amalolinka na kwanan nan. Ka kashe kiran, ka kira lambar banki ta hukuma maimakon haka."
+  },
+  "account_suspended_link": {
+    "category": "Faɗakarwar ƙarya ta banki/jakar kuɗi",
+    "title": "Hanyar haɗi ta ƙarya ta 'an dakatar da asusunka'",
+    "why": [
+      "Bankuna da jakunkunan kuɗi na gaskiya suna sarrafa shiga ta manhajarsu ko reshensu, ba ta aika hanyar haɗi ba tare da sani ba da ke tilasta maka 'tabbatarwa' cikin awanni.",
+      "Gaggawar ('cikin awa 24' / 'in ba haka ba za a rufe asusunka') dabara ce ta matsa lamba don hana ka tunani."
+    ],
+    "advice": "Kada ka taɓa hanyar haɗin. Buɗe manhajar ko shafin yanar gizo na banki kai tsaye (ka rubuta adireshin da kanka) ka duba matsayin asusunka a can."
+  },
+  "loan_upfront_fee": {
+    "category": "Manhajar rancen gaggawa ta ƙarya",
+    "title": "Zamba ta rance da ke neman kuɗi tun da farko",
+    "why": [
+      "Masu ba da rance na gaskiya suna cire kuɗinsu daga cikin rancen kansa — ba sa neman ka biya kuɗi tukuna don 'buɗe' ko 'saki' rance.",
+      "Rancen da aka 'amince' amma yana buƙatar kuɗi kafin a biya shi tsohon salon zamba ne na kuɗin gaba."
+    ],
+    "advice": "Kada ka taɓa biyan kuɗi don karɓar rance. Idan ana buƙatar kuɗi kafin a ba ka wani kuɗi, ɗauke shi zamba ne ka daina magana."
+  },
+  "romance_urgent_money": {
+    "category": "Zambar soyayya",
+    "title": "Soyayya ta yanar gizo da ke neman kuɗi cikin gaggawa",
+    "why": [
+      "Soyayyar da ke girma da sauri sannan ta biyo bayan bala'in kuɗi na farat ɗaya (makale a tafiya, kuɗin asibiti, kuɗin kwastam) na daga cikin labaran zambar soyayya mafi yawa.",
+      "Yawanci ana yin buƙatar ne lokacin da aka nemi ka aika kuɗi ta hanyar da ba za a iya bibiya ba (katunan kyauta, kuɗin crypto, aikawa ta waya)."
+    ],
+    "advice": "Ka tsaya kafin ka aika komai. Ka nemi hotunansu a intanet ka ga ko an sata, ka kuma kira su ta bidiyo. Kada ka taɓa aika kuɗi ga wanda ba ka taɓa haɗuwa da shi ido da ido ba."
+  },
+  "guaranteed_investment_returns": {
+    "category": "Zambar saka jari / crypto",
+    "title": "Ribar saka jari 'da aka tabbatar'",
+    "why": [
+      "Babu wani saka jari na gaskiya da zai iya tabbatar da riba mai yawa kuma tsayayye ba tare da haɗari ba — kowane saka jari na gaske yana da haɗari.",
+      "Waɗannan tsare-tsaren galibi suna biyan masu saka jari na farko da kuɗin sababbi (tsarin Ponzi) har sai ya rushe."
+    ],
+    "advice": "Ka tabbatar an yi wa dandalin rajista a hukumar kula da kasuwannin kuɗi ta ƙasarka kafin ka aika kuɗi. Idan riba ta yi kama da mai kyau fiye da kima, haka take."
+  },
+  "lottery_prize_scam": {
+    "category": "Zambar caca / kyauta",
+    "title": "Saƙon 'ka ci kyauta'",
+    "why": [
+      "Ba za ka iya cin caca ko zaɓen kyauta da ba ka shiga ba.",
+      "Neman ka biya kuɗin 'izini', 'sarrafawa' ko 'haraji' kafin a saki kyauta sanannen zambar kuɗin gaba ne."
+    ],
+    "advice": "Ka goge saƙon. Kada ka biya kowane kuɗi don 'sakin' kyautar da ba ka shiga neman ta ba."
+  },
+  "sim_swap_data_request": {
+    "category": "Zambar sauya SIM",
+    "title": "Neman bayanan sirri don 'inganta' SIM ɗinka",
+    "why": [
+      "Masu zamba suna tattara lambobin shaida da bayanan sirri irin waɗannan don su kwaikwayi ka a wurin kamfanin wayarka su sace SIM ɗinka (SIM swap), wanda ke ba su damar tare OTP ɗinka.",
+      "Kamfanonin waya ba sa tattara cikakken shaida da ranar haihuwa ta SMS ko kiran bazata don 'inganta SIM'."
+    ],
+    "advice": "Kada ka raba bayanan shaida ta SMS/kira. Ka je shagon kamfanin waya na hukuma da kanka don kowane sabuntawa da ya shafi SIM."
+  },
+  "courier_customs_fee": {
+    "category": "Zambar kaya / jigilar kaya",
+    "title": "Neman kuɗin jigila/kwastam na ƙarya",
+    "why": [
+      "Kamfanonin jigila suna cajin kuɗin izini ta takardar biyan kuɗi ta hukuma mai alaƙa da kayan da ake bibiya, ba ta hanyoyin haɗi ba tare da sani ba da ke neman bayanan katin ba.",
+      "Idan ba ka tsammanin wani kaya, babu abin da za a 'saki'."
+    ],
+    "advice": "Ka bibiyi kayan kai tsaye a shafin yanar gizo na kamfanin jigilar na hukuma ta amfani da lambar bibiya, ba hanyar haɗin da aka aiko maka ba."
+  },
+  "job_offer_fee": {
+    "category": "Tayin aiki na ƙarya",
+    "title": "Tayin aiki da ke buƙatar biyan kuɗi tun da farko",
+    "why": [
+      "Masu ɗaukar aiki na gaskiya suna biyan ka — ba sa neman ka biya kuɗin kayan horo, kayan aiki ko 'rajista' kafin ka fara.",
+      "Albashi mai yawa don ƙaramin ƙoƙari tare da kuɗin farawa labarin zambar aiki ne da ke maimaita kansa."
+    ],
+    "advice": "Kada ka taɓa biyan kuɗi don samun aiki. Ka tabbatar da kamfanin da kanka (shafin yanar gizonsu na hukuma, LinkedIn, kira zuwa ofishinsu da aka jera)."
+  },
+  "hacked_friend_urgent_transfer": {
+    "category": "Zambar asusun da aka yi kutse",
+    "title": "Neman kuɗi cikin gaggawa daga asusun 'aboki'",
+    "why": [
+      "Wani salon zamba da aka saba shi ne yin kutse ko kwafin asusun sada zumunta, sannan a aika saƙo ga waɗanda mai asusun ya sani ana neman kuɗi cikin gaggawa zuwa sabon asusu/wanda ba a sani ba.",
+      "Gaggawar farat ɗaya tare da wurin biyan kuɗi da ba a sani ba ita ce alamar."
+    ],
+    "advice": "Ka kira abokin kai tsaye a lambarsa da ka sani (ba ta hira ba) don tabbatarwa kafin ka aika komai."
+  },
+  "mobile_money_reversal": {
+    "category": "Zambar mayar da kuɗin waya",
+    "title": "Zambar 'na aika maka kuɗi bisa kuskure, don Allah ka mayar min'",
+    "why": [
+      "Masu zamba da farko suna aika sanarwar biyan kuɗi ta ƙarya (ko ƙaramin biyan kuɗi na gaske daga asusun da aka sace), sannan su matsa maka ka 'mayar' da kuɗi mafi yawa daga kuɗinka kafin a tabbatar da mu'amalar farko ko ta soke kanta.",
+      "Lokacin da ka gano cewa biyan 'kuskuren' bai cika ba — ko banki ya soke shi — kuɗin da ka mayar ya ɓace, kuma ya fito daga asusunka ne, ba nasu ba."
+    ],
+    "advice": "Kada ka taɓa mayar da kuɗi bisa hoton allo ko SMS kaɗai. Ka duba ainihin ma'aunin asusunka da tarihin mu'amaloli a manhajar bankinka/kuɗin waya, ba bisa abin da mai aikawa ya ce ba. Idan kuɗi ya zo bisa kuskure da gaske, ka nemi bankinka ko kamfanin kuɗin wayarka su soke shi bisa ƙa'ida."
+  },
+  "celebrity_crypto_giveaway": {
+    "category": "Zambar kyautar shahararru / crypto",
+    "title": "'Kyauta' ta ƙarya ta shahararre ko crypto da ke neman ka fara aika crypto",
+    "why": [
+      "Babu wata kyauta ta gaskiya — ta shahararre, kasuwar musaya ko wani — da za ta taɓa neman ka fara aika cryptocurrency don 'tabbatar' da jakarka ko karɓar adadi mafi yawa.",
+      "Waɗannan zambar galibi suna amfani da alamun tabbatarwa na ƙarya, kai tsaye na bidiyo da aka canza, ko asusun shahararru da kamfanoni na gaske da aka yi wa kutse don su yi kama da amintattu."
+    ],
+    "advice": "Kada ka aika kowane crypto don 'ka karɓi' kyauta. Kyaututtuka na gaske ba sa neman ka fara aika kuɗi. Ka kai rahoton asusun ka yi watsi da shi."
+  },
+  "rental_deposit_scam": {
+    "category": "Tallan gidan haya na ƙarya",
+    "title": "Tallan haya da ke neman biyan kuɗi kafin ka ga kadarar",
+    "why": [
+      "Masu gidaje da wakilai na gaskiya suna barin ka duba kadarar da kanka kafin kuɗi ya sauya hannu — neman 'jingina' ko 'kuɗin yarjejeniya' tukuna, musamman da ƙarin dalilin da ya sa ba za ka gani ba, zamban haya ne na intanet da aka saba.",
+      "Za a iya amfani da tallan ƙarya iri ɗaya (galibi da hotunan da aka kwafa daga wata kadara) don tara jinginar mutane da yawa kafin ya ɓace."
+    ],
+    "advice": "Kada ka biya kuɗi don kadarar da ba ka duba da idonka ba, kuma ka biya ta wakili wanda za a iya tabbatarwa ko dandalin da aka yi wa rajista kaɗai. Ka tabbatar kadarar tana nan ta wurin maƙwabci ko wani na wurin kafin ka aika komai."
+  },
+  "fake_customer_care_callback": {
+    "category": "Ma'aikatan sabis na ƙarya / zambar katin da aka toshe",
+    "title": "Saƙon 'an toshe katinka, kira wannan lamba'",
+    "why": [
+      "Wannan yana kai ka ga layin waya da masu zamba ke sarrafawa suna kwaikwayon sabis ɗin abokan cinikin bankinka, inda za su nemi lambar kati, PIN ko OTP don 'buɗe' asusunka.",
+      "Bankuna na gaskiya ba sa aiko maka saƙon ka kira lambar da ba ka sani ba don gyara matsalar kati — ka yi amfani da lambar da aka buga a bayan katinka ko manhajar bankin ta hukuma koyaushe."
+    ],
+    "advice": "Kada ka kira kowace lamba da aka bayar a saƙo irin wannan. Idan kana damuwa game da katinka, ka kira lambar da ke bayan katin ko ka buɗe manhajar bankinka ta hukuma kai tsaye."
+  },
+  "impersonated_official_account": {
+    "category": "Asusun kamfani/shahararre da aka kwaikwaya",
+    "title": "Asusun sada zumunta da ke kwaikwayon shafin tallafin kamfani ko shahararre",
+    "why": [
+      "Masu zamba suna ƙirƙirar asusu masu kama (suna mai kama, hoton bayani da aka kwafa, alamar tabbatarwa ta ƙarya) da ke amsa koken abokan ciniki na gaske a bainar jama'a, suna ba da 'taimako' — sannan su nemi bayanan asusu, PIN ko 'kuɗin sarrafawa' a saƙon sirri.",
+      "Kamfanoni na gaskiya ba safai suke warware matsalolin asusu a amsoshin jama'a ko saƙonnin sirri marasa kama da na hukuma ba, kuma ba sa taɓa neman PIN ko kalmar sirrinka don 'sarrafa' wani abu."
+    ],
+    "advice": "Ka tuntuɓi kamfani ta asusun da aka tabbatar ko manhaja/shafin yanar gizo na hukuma da ka riga ka amince da shi kaɗai — ka kwatanta sunan asusun da shafin kamfanin na gaske a hankali. Kada ka taɓa raba PIN, kalmar sirri ko OTP da kowane asusun tallafi, ko da yana kama da na hukuma."
+  },
+  "tax_refund_phishing": {
+    "category": "Dawo da harajin gwamnati na ƙarya",
+    "title": "Saƙon dawo da haraji na ƙarya da ke neman ka 'sabunta bayananka'",
+    "why": [
+      "Hukumomin haraji (FIRS, KRA, URA, da sauransu) ba sa sanar da mayar da kuɗi ta hanyoyin haɗi na SMS/WhatsApp bazata da ke neman ka 'sabunta bayanan bankinka' — ana sarrafa mayar da kuɗi ne ta bayanin harajinka na hukuma.",
+      "Hanyar haɗin galibi tana kai wa shafin shiga na ƙarya da aka ƙera don satar lambar shaidarka, bayanan banki ko kalmar sirrin shafin harajinka."
+    ],
+    "advice": "Kada ka taɓa hanyar haɗin. Ka shiga shafin yanar gizo na hukumar haraji ta hukuma kai tsaye (ka rubuta adireshin da kanka) don duba ko akwai mayar da kuɗi na gaske, ko ka ziyarci ofis da kanka."
+  },
+  "scholarship_fee_scam": {
+    "category": "Tallafin karatu / tayin karatu a waje na ƙarya",
+    "title": "Tayin tallafin karatu ko karatu a waje da ke neman kuɗi tun da farko",
+    "why": [
+      "Tallafin karatu na gaskiya galibi kyauta ne a nema, ko kuɗin (idan akwai) ana biya kai tsaye ga cibiyar da aka amince da ita ta hanyar shafinta na hukuma — ba ga 'wakili' ko asusun mutum ba.",
+      "Alkawarin wata dama mai wuyar samu tare da matsa lamba ka biya da sauri don 'ka riƙe matsayinka' tsohon salon zamba ne na kuɗin gaba da ke kai wa ɗalibai hari."
+    ],
+    "advice": "Ka tabbatar da tallafin karatun kai tsaye a shafin yanar gizo na jami'a ko shirin kafin ka biya komai. Kada ka taɓa biyan asusun mutum ɗaya don tallafin karatu ko damar karatu."
+  },
+  "family_emergency_new_number": {
+    "category": "Zambar 'Sannu Mama/Baba' ta gaggawar iyali",
+    "title": "Lambar da ba a sani ba da ke iƙirarin ita ɗan uwa ne yana rubuta saƙo daga 'sabuwar waya'",
+    "why": [
+      "Wannan sanannen salon zamba ne: wani yana aiko maka saƙo yana kwaikwayon ɗanka, ɗan'uwanka ko danginka a sabuwar lamba bayan 'asarar waya', sannan da sauri ya nemi kuɗi don biyan kuɗi, maye gurbin waya ko gaggawa.",
+      "Gaggawar da matsin lambar tunani ('don Allah kada ka gaya wa kowa, ina jin kunya sosai') an ƙera su ne don hana ka kira don tabbatarwa."
+    ],
+    "advice": "Koyaushe ka kira ɗan uwan a lambarsa da ka sani (ko wani dangi) don tabbatarwa kafin ka aika komai, ko da labarin yana kama da gaskiya. Ɗan uwa na gaske ba zai damu da ka tabbatar ba."
+  },
+  "marketplace_pay_before_delivery": {
+    "category": "Zambar biyan kuɗi kafin isarwa a kasuwar intanet",
+    "title": "Mai siyarwa da ke neman cikakken biyan kuɗi kafin ka ga ko ka karɓi kayan",
+    "why": [
+      "Masu siyarwa na gaskiya a kasuwannin intanet masu aminci galibi suna barin dubawa kafin biyan kuɗi ko biyan kuɗi lokacin isarwa — ƙin duk wani dubawa da neman cikakken biyan kuɗi tun da farko dabara ce da aka saba kafin a ɓace da kuɗin.",
+      "Tallace-tallace masu farashi ƙasa da na kasuwa galibi ƙugiya ne don ka yi gaggawa ka bar taka tsantsan na yau da kullum."
+    ],
+    "advice": "Ka yi amfani da kariyar biyan kuɗi (escrow) ta kasuwar idan akwai, ka dage sai ka duba kayan kafin ka biya, ka kuma yi hankali da duk wani farashi ƙasa da na al'ada."
+  },
+  "qr_code_tampering": {
+    "category": "Zambar lambar QR ta biyan kuɗi da aka canza",
+    "title": "Lambar QR da za ta iya karkatar da biyan kuɗinka zuwa asusun mai zamba",
+    "why": [
+      "Masu zamba wani lokaci suna manna lambar QR ta ƙarya bisa ta gaskiya ta kasuwanci, ko su aiko da 'sabuwar' lambar QR ta saƙo, suna karkatar da biyan kuɗi zuwa asusunsu maimakon na kasuwancin.",
+      "Da zarar ka duba ka biya, kuɗin yana tafiya kai tsaye zuwa asusun mai zamba kuma yana da wuya sosai a dawo da shi — ba kamar mu'amalar da ta gaza ba, galibi babu kuskuren da zai faɗakar da kai."
+    ],
+    "advice": "Kafin ka duba, ka tabbatar lambar till/paybill ko sunan asusun da ya bayyana bayan dubawa ya dace da kasuwancin da kake biya. Idan aka aiko maka lambar QR kai tsaye maimakon a nuna ta a kasuwancin, ka fara tabbatarwa da kasuwancin ta lambar da ka sani."
+  }
+}

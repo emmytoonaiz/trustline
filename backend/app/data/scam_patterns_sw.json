@@ -1,0 +1,202 @@
+{
+  "otp_request": {
+    "category": "Ombi la nambari ya OTP / PIN",
+    "title": "Kujifanya mtu mwingine ili kupata OTP au PIN yako",
+    "keywords": ["nambari ya otp", "nambari ya uthibitisho", "nitumie nambari", "nambari yako ya pin", "msimbo wa uthibitisho"],
+    "why": [
+      "Hakuna benki, mtoa huduma wa pesa za simu wala wakala atakayekuomba kusoma au kuandika OTP/PIN ili 'kuthibitisha', 'kubatilisha' au 'kufungua' akaunti yako.",
+      "OTP zipo ili wewe pekee uidhinishe muamala — kuishiriki humpa mlaghai idhini hiyo."
+    ],
+    "advice": "Usishiriki OTP au PIN na mtu yeyote, hata kama anajua jina lako, nambari ya akaunti au miamala yako ya hivi karibuni. Kata simu na upigie nambari rasmi ya benki yako badala yake."
+  },
+  "account_suspended_link": {
+    "category": "Tahadhari bandia ya benki/pochi",
+    "title": "Kiungo bandia cha 'akaunti imesimamishwa'",
+    "keywords": ["akaunti yako imesimamishwa", "akaunti yako itafungwa", "bofya kiungo hapa chini", "thibitisha akaunti yako", "sasisha taarifa zako", "akaunti yako imefungwa"],
+    "why": [
+      "Benki na pochi halisi hudhibiti ufikiaji kupitia programu au tawi lao, si kwa kutuma kiungo ovyo kinachokutaka 'uthibitishe' ndani ya saa chache.",
+      "Dharura ('ndani ya saa 24' / 'la sivyo akaunti yako itafungwa') ni mbinu ya kukushinikiza ili usifikirie."
+    ],
+    "advice": "Usibofye kiungo. Fungua programu au tovuti rasmi ya benki moja kwa moja (andika anwani mwenyewe) na uangalie hali ya akaunti yako huko."
+  },
+  "loan_upfront_fee": {
+    "category": "Programu bandia ya mkopo wa papo hapo",
+    "title": "Ulaghai wa mkopo unaodai ada mapema",
+    "keywords": ["mkopo umeidhinishwa", "lipa ada ya usindikaji", "ada ya kuwezesha", "mkopo wa papo hapo", "ada ya kutoa mkopo"],
+    "why": [
+      "Wakopeshaji halali hukata ada kutoka kwenye kiasi cha mkopo wenyewe — hawakuombi ulipe pesa kwanza ili 'kufungua' au 'kutoa' mkopo.",
+      "Mkopo 'ulioidhinishwa' unaohitaji ada kabla ya malipo ni mbinu ya kawaida ya ulaghai wa ada ya awali."
+    ],
+    "advice": "Usilipe kamwe ili kupokea mkopo. Ikiwa ada inahitajika kabla ya pesa yoyote kutolewa, chukulia kuwa ni ulaghai na uache mazungumzo."
+  },
+  "romance_urgent_money": {
+    "category": "Ulaghai wa kimapenzi",
+    "title": "Mpenzi wa mtandaoni anayeomba pesa kwa dharura",
+    "keywords": ["nakupenda", "mpenzi wangu", "ninahitaji pesa haraka", "nimekwama uwanja wa ndege", "forodha wanashikilia", "nitumie pesa nikuje"],
+    "why": [
+      "Upendo unaokua haraka ukifuatwa na dharura ya ghafla ya kifedha (kukwama safarini, bili ya hospitali, ada ya forodha) ni mojawapo ya hadithi za kawaida za ulaghai wa kimapenzi.",
+      "Ombi hilo kwa kawaida hutokea unapoombwa utume pesa kwa njia isiyofuatilika (kadi za zawadi, sarafu za kidijitali, uhamisho wa benki)."
+    ],
+    "advice": "Simama kabla ya kutuma chochote. Tafuta picha zao kwa utafutaji wa picha kinyume na upige simu ya video. Usitume pesa kamwe kwa mtu ambaye hujawahi kukutana naye ana kwa ana."
+  },
+  "guaranteed_investment_returns": {
+    "category": "Ulaghai wa uwekezaji / sarafu za kidijitali",
+    "title": "Faida 'iliyohakikishwa' ya uwekezaji",
+    "keywords": ["faida iliyohakikishwa", "mara mbili ya pesa yako", "uwekezaji usio na hatari", "wekeza leo upate", "roboti ya biashara ya forex", "faida ya uhakika"],
+    "why": [
+      "Hakuna uwekezaji halali unaoweza kuhakikisha faida kubwa isiyobadilika bila hatari — uwekezaji wote halisi una hatari.",
+      "Mipango hii mara nyingi hulipa wawekezaji wa mwanzo kwa pesa za wapya (muundo wa Ponzi) hadi inapoanguka."
+    ],
+    "advice": "Thibitisha kuwa jukwaa limesajiliwa na mdhibiti wa masoko ya fedha wa nchi yako kabla ya kutuma pesa. Faida ikisikika nzuri kupita kiasi, ndivyo ilivyo."
+  },
+  "lottery_prize_scam": {
+    "category": "Ulaghai wa bahati nasibu / zawadi",
+    "title": "Ujumbe wa 'umeshinda zawadi'",
+    "keywords": ["umeshinda", "dai zawadi yako", "mshindi mwenye bahati", "mshindi wa bahati nasibu", "umechaguliwa kupokea", "pesa za urithi"],
+    "why": [
+      "Huwezi kushinda bahati nasibu au droo ambayo hukushiriki.",
+      "Maombi ya kulipa ada za 'kibali', 'usindikaji' au 'kodi' kabla ya kutoa zawadi ni ulaghai maarufu wa ada ya awali."
+    ],
+    "advice": "Futa ujumbe. Usilipe ada yoyote ya 'kutoa' zawadi ambayo hukushiriki kuipata."
+  },
+  "sim_swap_data_request": {
+    "category": "Ulaghai wa kubadilisha SIM",
+    "title": "Ombi la taarifa binafsi ili 'kuboresha' SIM yako",
+    "keywords": ["boresha sim yako", "tuma nambari yako ya kitambulisho", "washa upya laini yako", "laini yako itazimwa", "usajili wa sim"],
+    "why": [
+      "Walaghai hukusanya nambari za vitambulisho na taarifa binafsi kama hizi ili wajifanye wewe kwa mtoa huduma wako wa simu na kuiba SIM yako (SIM swap), jambo linalowawezesha kuingilia OTP zako.",
+      "Watoa huduma wa simu hawakusanyi kitambulisho kamili na tarehe ya kuzaliwa kupitia SMS au simu zisizotarajiwa kwa 'uboreshaji wa SIM'."
+    ],
+    "advice": "Usishiriki taarifa za kitambulisho kupitia SMS/simu. Tembelea duka rasmi la mtoa huduma wa simu ana kwa ana kwa mabadiliko yoyote yanayohusu SIM."
+  },
+  "courier_customs_fee": {
+    "category": "Ulaghai wa vifurushi / usafirishaji",
+    "title": "Ombi bandia la ada ya usafirishaji/forodha",
+    "keywords": ["kifurushi chako kimezuiliwa forodhani", "lipa ada ya forodha", "ada ya kutoa kifurushi", "kifurushi chako kimekwama", "kuna kifurushi kwa ajili yako"],
+    "why": [
+      "Kampuni za usafirishaji hutoza ada za kibali kupitia ankara rasmi zinazohusiana na mzigo unaofuatiliwa, si kupitia viungo ovyo vinavyoomba taarifa za kadi.",
+      "Ikiwa hukutarajia kifurushi, hakuna cha 'kutoa'."
+    ],
+    "advice": "Fuatilia kifurushi moja kwa moja kwenye tovuti rasmi ya kampuni ya usafirishaji ukitumia nambari ya ufuatiliaji, si kiungo ulichotumiwa."
+  },
+  "job_offer_fee": {
+    "category": "Ofa bandia ya kazi",
+    "title": "Ofa ya kazi inayodai malipo ya mapema",
+    "keywords": ["lipia vifaa vya mafunzo", "ada ya usajili wa kazi", "fanya kazi ukiwa nyumbani upate", "ada ya uajiri"],
+    "why": [
+      "Waajiri halali hukulipa — hawakuombi ulipie vifaa vya mafunzo, sare au 'usajili' kabla ya kuanza.",
+      "Malipo makubwa kwa juhudi kidogo pamoja na gharama ya awali ni hadithi ya kawaida ya ulaghai wa kazi."
+    ],
+    "advice": "Usilipe kamwe ili kupata kazi. Thibitisha kampuni kwa njia huru (tovuti rasmi, LinkedIn, simu kwa ofisi yao iliyoorodheshwa)."
+  },
+  "hacked_friend_urgent_transfer": {
+    "category": "Ulaghai wa akaunti iliyodukuliwa",
+    "title": "Ombi la pesa la dharura kutoka akaunti ya 'rafiki'",
+    "keywords": ["nimekwama", "nitumie pesa kwenye nambari hii mpya", "simu yangu iliibiwa", "nahitaji pesa sasa hivi"],
+    "why": [
+      "Mbinu ya kawaida ya ulaghai ni kudukua au kunakili akaunti ya mitandao ya kijamii, kisha kuwatumia ujumbe wawasiliani wa mwathiriwa wakiomba pesa za dharura kwenye akaunti mpya/isiyojulikana.",
+      "Dharura ya ghafla pamoja na mahali pa malipo pasipojulikana ndiyo ishara kuu."
+    ],
+    "advice": "Mpigie rafiki moja kwa moja kwa nambari yake unayoijua (si kupitia gumzo) ili kuthibitisha kabla ya kutuma chochote."
+  },
+  "mobile_money_reversal": {
+    "category": "Ulaghai wa kurejesha pesa za simu",
+    "title": "Ulaghai wa 'nilikutumia pesa kimakosa, tafadhali nirudishie'",
+    "keywords": ["nilikutumia kimakosa", "tafadhali nirudishie", "nirudishie pesa yangu", "imetumwa kimakosa", "imeingia kimakosa", "nimetuma kwa namba isiyo sahihi"],
+    "why": [
+      "Walaghai kwanza hutuma arifa ya malipo bandia (au malipo halisi madogo kutoka akaunti iliyoibiwa), kisha hukushinikiza 'urudishe' kiasi kikubwa zaidi kutoka pesa zako mwenyewe kabla ya muamala wa awali kuthibitishwa au kubatilishwa.",
+      "Unapogundua kuwa malipo ya 'kimakosa' hayakukamilika kamwe — au yalibatilishwa na benki — pesa ulizorudisha zimeshapotea, na zilitoka akaunti yako, si yao."
+    ],
+    "advice": "Usirudishe pesa kwa kutegemea picha ya skrini au SMS peke yake. Angalia salio halisi na historia ya miamala kupitia programu ya benki/pesa za simu, si kwa maneno ya mtumaji. Ikiwa malipo yalikuja kimakosa kweli, muombe mtoa huduma wako wa benki au pesa za simu ayabatilishe rasmi."
+  },
+  "celebrity_crypto_giveaway": {
+    "category": "Ulaghai wa zawadi za watu maarufu / sarafu za kidijitali",
+    "title": "'Zawadi' bandia ya mtu maarufu au sarafu za kidijitali inayokutaka utume sarafu kwanza",
+    "keywords": ["mara mbili ya bitcoin yako", "zawadi ya mtu maarufu", "tuma sarafu upokee mara mbili", "thibitisha pochi yako kwa kutuma", "tuma 0.1 btc"],
+    "why": [
+      "Hakuna zawadi halali — ya mtu maarufu, soko la kubadilishana au vinginevyo — inayokutaka utume sarafu za kidijitali kwanza ili 'kuthibitisha' pochi yako au kupokea kiasi kikubwa zaidi.",
+      "Ulaghai huu mara nyingi hutumia alama bandia za uthibitisho, matangazo ya moja kwa moja yaliyoghushiwa au akaunti zilizodukuliwa za watu maarufu na kampuni halisi ili uonekane wa kuaminika."
+    ],
+    "advice": "Usitume sarafu yoyote ili 'kudai' zawadi. Zawadi halisi hazikutaki utume pesa kwanza. Ripoti akaunti hiyo na uipuuze."
+  },
+  "rental_deposit_scam": {
+    "category": "Tangazo bandia la kupangisha nyumba",
+    "title": "Tangazo la kupangisha linalodai malipo kabla ya kuona mali",
+    "keywords": ["lipa amana kabla ya kuona", "tuma ada ya makubaliano ili kuhifadhi", "tuma pesa kuhifadhi nyumba", "ada ya wakala kabla ya ukaguzi"],
+    "why": [
+      "Wenye nyumba na mawakala halali hukuruhusu kukagua mali ana kwa ana kabla ya pesa yoyote kubadilishana mikono — kudai 'amana' au 'ada ya makubaliano' kwanza, hasa kwa kisingizio cha kwa nini huwezi kuona, ni ulaghai wa kawaida wa upangishaji mtandaoni.",
+      "Tangazo hilo hilo bandia (mara nyingi na picha zilizonakiliwa kutoka mali nyingine) linaweza kutumika kukusanya amana kutoka kwa waathiriwa wengi kabla ya kutoweka."
+    ],
+    "advice": "Usilipe kamwe kwa mali ambayo hujakagua kimwili, na ulipe tu kupitia wakala anayeweza kuthibitishwa au jukwaa lililosajiliwa. Thibitisha kuwa mali ipo kupitia jirani au mtu wa eneo hilo kabla ya kutuma chochote."
+  },
+  "fake_customer_care_callback": {
+    "category": "Huduma kwa wateja bandia / ulaghai wa kadi iliyozuiwa",
+    "title": "Ujumbe wa 'kadi yako imezuiwa, piga nambari hii'",
+    "keywords": ["kadi yako imezuiwa piga nambari hii", "akaunti yako itazuiwa piga", "piga nambari hii kufungua kadi yako", "piga simu huduma kwa wateja mara moja", "kadi yako imesimamishwa"],
+    "why": [
+      "Hii inakuelekeza kwenye laini ya simu inayodhibitiwa na walaghai wanaojifanya huduma kwa wateja wa benki yako, ambapo watakuomba nambari ya kadi, PIN au OTP ili 'kufungua' akaunti yako.",
+      "Benki halisi hazikutumii ujumbe wa kupiga nambari usiyoifahamu ili kutatua tatizo la kadi — tumia daima nambari iliyochapishwa nyuma ya kadi yako au programu rasmi ya benki."
+    ],
+    "advice": "Usipige nambari yoyote iliyotolewa kwenye ujumbe kama huu. Ikiwa una wasiwasi kuhusu kadi yako, piga nambari iliyo nyuma ya kadi au fungua programu rasmi ya benki yako moja kwa moja."
+  },
+  "impersonated_official_account": {
+    "category": "Akaunti ya kampuni/mtu maarufu inayoigwa",
+    "title": "Akaunti ya mitandao ya kijamii inayojifanya ukurasa wa msaada wa kampuni au mtu maarufu",
+    "keywords": ["akaunti rasmi ya msaada", "huu ni ukurasa rasmi wa msaada", "tutumie taarifa zako dm", "wasiliana na akaunti hii kwa marejesho yako", "sisi ni huduma rasmi kwa wateja"],
+    "why": [
+      "Walaghai huunda akaunti zinazofanana (jina linalofanana, picha ya wasifu iliyonakiliwa, alama bandia ya uthibitisho) zinazojibu malalamiko ya hadharani ya wateja halisi, zikitoa 'msaada' — kisha huomba maelezo ya akaunti, PIN au 'ada ya usindikaji' kwenye ujumbe wa faragha.",
+      "Kampuni halisi mara chache hutatua masuala ya akaunti kwenye majibu ya hadharani au ujumbe wa faragha usio rasmi, na hazikuombi kamwe PIN au nenosiri ili 'kushughulikia' chochote."
+    ],
+    "advice": "Wasiliana na kampuni kupitia akaunti iliyothibitishwa au programu/tovuti rasmi unayoiamini pekee — linganisha jina la akaunti kwa makini na tovuti halisi ya kampuni. Usishiriki kamwe PIN, nenosiri au OTP na akaunti yoyote ya msaada, hata inayoonekana rasmi."
+  },
+  "tax_refund_phishing": {
+    "category": "Marejesho bandia ya kodi ya serikali",
+    "title": "Ujumbe bandia wa marejesho ya kodi unaokutaka 'usasishe taarifa zako'",
+    "keywords": ["marejesho ya kodi", "marejesho ya kra", "marejesho yako yameidhinishwa", "sasisha taarifa zako za kodi", "marejesho ya kodi yanasubiri"],
+    "why": [
+      "Mamlaka za kodi (FIRS, KRA, URA n.k.) hazitangazi marejesho kupitia viungo vya SMS/WhatsApp ovyo vinavyokutaka 'usasishe taarifa za benki' — marejesho hushughulikiwa kupitia wasifu wako rasmi wa kodi.",
+      "Kiungo huwa kinaelekeza kwenye ukurasa bandia wa kuingia ulioundwa kuiba nambari yako ya kitambulisho, taarifa za benki au nenosiri la tovuti ya kodi."
+    ],
+    "advice": "Usibofye kiungo. Ingia moja kwa moja kwenye tovuti rasmi ya mamlaka ya kodi (andika anwani mwenyewe) kuangalia marejesho yoyote halisi, au tembelea ofisi ya kawaida."
+  },
+  "scholarship_fee_scam": {
+    "category": "Ufadhili wa masomo / ofa ya kusoma nje bandia",
+    "title": "Ofa ya ufadhili wa masomo au kusoma nje inayodai ada ya mapema",
+    "keywords": ["ufadhili wa masomo umeidhinishwa lipa", "ada ya usindikaji wa ufadhili wako", "lipia barua yako ya udahili", "ada ya kusoma nje ili kuhifadhi nafasi yako", "ada ya ufadhili wa visa"],
+    "why": [
+      "Ufadhili halisi wa masomo huwa bila malipo kuomba, au ada (ikiwepo) hulipwa moja kwa moja kwa taasisi iliyoidhinishwa kupitia lango lake rasmi — si kwa 'wakala' au akaunti ya mtu binafsi.",
+      "Ahadi ya fursa ngumu kupatikana pamoja na shinikizo la kulipa haraka ili 'kuhifadhi nafasi yako' ni muundo wa kawaida wa ada ya awali unaowalenga wanafunzi."
+    ],
+    "advice": "Thibitisha ufadhili moja kwa moja kwenye tovuti rasmi ya chuo au programu kabla ya kulipa chochote. Usilipe kamwe akaunti ya mtu binafsi kwa ufadhili wa masomo au fursa ya kusoma."
+  },
+  "family_emergency_new_number": {
+    "category": "Ulaghai wa 'Hi Mama/Baba' wa dharura ya familia",
+    "title": "Nambari isiyojulikana inayodai kuwa mwanafamilia anayetuma ujumbe kutoka 'simu mpya'",
+    "keywords": ["hujambo mama hii ni nambari yangu mpya", "hujambo baba hii ni nambari yangu mpya", "nilipoteza simu hii ndiyo laini yangu mpya", "natuma kutoka nambari mpya ni dharura", "simu yangu ilidondoka majini"],
+    "why": [
+      "Huu ni mpango wa ulaghai unaojulikana: mtu anakutumia ujumbe akijifanya mtoto wako, ndugu au jamaa kwa nambari mpya baada ya 'kupoteza simu', kisha haraka anaomba pesa kwa bili, kubadilisha simu au dharura.",
+      "Dharura na shinikizo la kihisia ('tafadhali usimwambie mtu, nina aibu sana') vimeundwa ili likuzuie kupiga simu kuthibitisha."
+    ],
+    "advice": "Mpigie daima mwanafamilia kwa nambari yake unayoijua (au ndugu mwingine) kuthibitisha kabla ya kutuma chochote, hata kama hadithi inaonekana ya kushawishi. Jamaa halisi hatajali ukithibitisha."
+  },
+  "marketplace_pay_before_delivery": {
+    "category": "Ulaghai wa soko la mtandaoni wa kulipa kabla ya kuletewa",
+    "title": "Muuzaji anayedai malipo kamili kabla ya kuona au kupokea bidhaa",
+    "keywords": ["lipa kabla ya kuletewa bila ukaguzi", "tuma malipo kwanza kisha nitatuma", "malipo kamili kabla ya kutuma", "tuma pesa kabla sijatuma bidhaa"],
+    "why": [
+      "Wauzaji halali kwenye masoko ya mtandaoni yanayoaminika kwa kawaida huruhusu kukagua kabla ya kulipa au kulipa wakati wa kuletewa — kukataa ukaguzi wowote na kudai malipo kamili mapema ni mbinu ya kawaida kabla ya kutoweka na pesa.",
+      "Matangazo yenye bei ya chini sana kuliko soko mara nyingi ni chambo ili ufanye haraka na uruke tahadhari ya kawaida."
+    ],
+    "advice": "Tumia ulinzi wa malipo (escrow) wa soko inapopatikana, kagua bidhaa kabla ya kulipa, na kuwa mwangalifu na bei yoyote iliyo chini sana ya kawaida."
+  },
+  "qr_code_tampering": {
+    "category": "Ulaghai wa msimbo wa QR wa malipo uliobadilishwa",
+    "title": "Msimbo wa QR unaoweza kuelekeza malipo yako kwenye akaunti ya mlaghai",
+    "keywords": ["msimbo wa qr", "changanua qr hii", "msimbo mpya wa qr", "namba ya till imebadilika", "namba mpya ya till", "changanua ili kulipa", "changanua kukamilisha malipo"],
+    "why": [
+      "Walaghai wakati mwingine hubandika stika bandia ya QR juu ya ile halisi ya biashara, au hutuma msimbo 'mpya' wa QR kwa ujumbe, wakielekeza malipo kwenye akaunti yao badala ya biashara.",
+      "Ukishachanganua na kulipa, pesa huenda moja kwa moja kwenye akaunti ya mlaghai na ni vigumu sana kuzirejesha — tofauti na muamala ulioshindwa, mara nyingi hakuna hitilafu ya kukuarifu."
+    ],
+    "advice": "Kabla ya kuchanganua, thibitisha kuwa nambari ya till/paybill au jina la akaunti linaloonyeshwa baada ya kuchanganua linalingana na biashara unayolipa. Ikiwa msimbo wa QR ulitumwa kwako moja kwa moja badala ya kuonyeshwa kwenye biashara, thibitisha kwanza na biashara kupitia nambari unayoijua."
+  }
+}

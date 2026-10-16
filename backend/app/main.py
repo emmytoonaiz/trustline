@@ -1,10 +1,14 @@
+from pathlib import Path
+
 from dotenv import load_dotenv
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 load_dotenv()
 
-from app import link_handler, reports_store, verdict_engine
+from app import limits, link_handler, reports_store, verdict_engine
+from app.i18n import normalize_lang, t
 from app.schemas import (
     ReportRequest,
     ReportResponse,
@@ -28,11 +32,12 @@ def health():
     return {"status": "ok"}
 
 
-@app.post("/api/verify", response_model=VerifyResponse)
+@app.post("/api/verify", response_model=VerifyResponse, dependencies=[Depends(limits.limit_verify)])
 def verify(req: VerifyRequest):
+    lang = normalize_lang(req.language)
     link = link_handler.find_link(req.message)
     if link is None:
-        return verdict_engine.analyze(req.message)
+        return verdict_engine.analyze(req.message, lang)
 
     platform, url = link
     label = link_handler.PLATFORM_LABELS[platform]
@@ -44,32 +49,44 @@ def verify(req: VerifyRequest):
             # Keep the user's own wrapper text (e.g. "claim your prize") alongside the fetched
             # video info -- a legitimate-looking video can still be wrapped in a fraudulent claim.
             combined = f"Message from the user sharing this link:\n{req.message}\n\nFetched YouTube video info:\n{fetched_text}"
-            result = verdict_engine.analyze(combined)
+            result = verdict_engine.analyze(combined, lang)
             result.source_platform = "youtube"
             return result
         return VerifyResponse(
             verdict="link_unsupported",
             confidence=0,
-            headline="Couldn't fetch that YouTube video's details",
-            link_notice="We couldn't automatically read this video right now. Paste the video's title, description, or comment text instead and we'll check that.",
+            headline=t(lang, "yt_failed_headline"),
+            link_notice=t(lang, "yt_failed_notice"),
             source_platform="youtube",
         )
 
     return VerifyResponse(
         verdict="link_unsupported",
         confidence=0,
-        headline=f"We can't automatically read {label} links yet",
-        link_notice=f"{label} blocks automatic reading of posts. Copy the caption or message text from the post and paste it here instead — we'll check that.",
+        headline=t(lang, "platform_headline", platform=label),
+        link_notice=t(lang, "platform_notice", platform=label),
         source_platform=platform,
     )
 
 
-@app.post("/api/report", response_model=ReportResponse)
+@app.post("/api/report", response_model=ReportResponse, dependencies=[Depends(limits.limit_report)])
 def report(req: ReportRequest):
     new_id = reports_store.add_report(req.message, req.category, req.location)
     return ReportResponse(status="ok", id=new_id)
 
 
 @app.get("/api/stats", response_model=StatsResponse)
-def stats():
-    return reports_store.get_stats()
+def stats(language: str = "en"):
+    result = reports_store.get_stats()
+    labels = verdict_engine.category_labels(normalize_lang(language))
+    result["top_categories"] = [
+        {**c, "category": labels.get(c["category"], c["category"])} for c in result["top_categories"]
+    ]
+    return result
+
+
+# In production the built frontend is copied next to the backend and served from the same
+# address, so the browser calls /api on its own origin. Absent locally (Vite serves it there).
+STATIC_DIR = Path(__file__).resolve().parent.parent / "static"
+if STATIC_DIR.is_dir():
+    app.mount("/", StaticFiles(directory=STATIC_DIR, html=True), name="frontend")

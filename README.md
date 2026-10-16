@@ -53,9 +53,17 @@ link, share an OTP, or send money.
 - Designed from day one for **real-world constraints** the hackathon brief calls out:
   - *Low bandwidth*: plain-text chat UI, no heavy images/frameworks.
   - *Accessibility*: large tap targets, plain language, mobile-first layout.
-  - *Multilingual access*: UI copy is already structured for language switching
-    (`frontend/src/copy.js`, English + Nigerian Pidgin included as a starting pair); the
-    verdict content itself is the next translation target.
+  - *Multilingual access*: English, **French**, **Swahili** (Kenya), **Yoruba** and **Hausa**
+    (Nigeria), plus a Nigerian Pidgin interface. The four translated languages are supported
+    end to end — the interface, all 20 curated scam explanations
+    (`backend/app/data/scam_patterns_<lang>.json`), Claude's live answers (it is told to reply
+    in the user's language), the link notices, and the community stats. French and Swahili also
+    carry local trigger phrases so a scam text in that language is caught instantly by the free
+    library; Yoruba and Hausa messages go to Claude instead, since tone marks and special letters
+    are typed inconsistently. Pidgin covers the interface only. The Yoruba and Hausa
+    translations are machine-drafted and should be reviewed by native speakers before real
+    deployment. Adding another language means one new copy block, one strings block in
+    `backend/app/i18n.py`, and one translated pattern file.
   - *Privacy*: no login, no phone number collection — you paste text, you get an answer.
   - *Trust & verification*: every scam verdict cites a specific reason and source instead of
     a black-box "trust me."
@@ -104,6 +112,25 @@ npm run dev
 Then open the printed Vite URL (default `http://localhost:5173`). The frontend proxies
 `/api/*` calls to the backend on port 8000.
 
+## Deploying (Railway)
+
+The `Dockerfile` at the repo root builds the React frontend and serves it from the FastAPI
+backend, so one service hosts the whole app (the browser calls `/api` on its own address).
+Railway builds it straight from this repo (`railway.json` points at the Dockerfile and uses
+`/health` as the health check).
+
+Set these as service variables in Railway (never commit them):
+
+| Variable | Purpose |
+|---|---|
+| `ANTHROPIC_API_KEY` | Enables Claude reasoning for messages the curated library doesn't match. Without it the app still works on the curated patterns alone. |
+| `YOUTUBE_API_KEY` | Enables reading YouTube links. Without it, YouTube links get a "paste the text instead" notice. |
+| `LLM_DAILY_CAP` | Optional. Most AI calls allowed per day (default `1000`) — a cost ceiling for a public site. |
+
+Because the site is public and calls a paid API, `/api/verify` is limited to 20 requests per
+minute per visitor, `/api/report` to 10, and messages to 4,000 characters.
+Community reports are stored on the container's disk, so they reset on each redeploy.
+
 ## Project structure
 
 ```
@@ -113,14 +140,16 @@ trustline/
       main.py            # FastAPI routes: /api/verify, /api/report, /api/stats
       verdict_engine.py  # rule-based matcher + Claude reasoning layer
       link_handler.py    # detects YouTube/X/Facebook/Instagram links, fetches YouTube content
+      i18n.py            # translated headlines/fallbacks/link notices (English, French)
       reports_store.py   # community report storage + stats aggregation
       schemas.py          # request/response models
-      data/scam_patterns.json  # curated scam pattern library
+      data/scam_patterns.json     # curated scam pattern library (English)
+      data/scam_patterns_fr.json  # French translations + French trigger phrases
   frontend/
     src/
       App.jsx             # chat UI shell
       components/VerdictCard.jsx
       components/StatsPanel.jsx
-      copy.js              # EN / Pidgin UI strings
+      copy.js              # EN / FR / Pidgin UI strings + language list
       api.js
 ```

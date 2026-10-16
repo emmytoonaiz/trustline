@@ -63,14 +63,23 @@ body {
   opacity: 0.85;
 }
 
-.lang-toggle {
+.lang-select {
   background: rgba(255, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.4);
   color: var(--header-text);
   border-radius: 999px;
-  padding: 6px 12px;
-  font-size: 0.75rem;
+  padding: 6px 10px;
+  font-size: 0.8rem;
   cursor: pointer;
+}
+
+.lang-select option {
+  color: #1f2a24;
+}
+
+.lang-select:focus-visible {
+  outline: 2px solid var(--header-text);
+  outline-offset: 1px;
 }
 
 .app-main {
