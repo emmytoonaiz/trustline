@@ -329,3 +329,20 @@ def test_website_report_and_stats_use_the_database(client):
 def test_website_verify_still_works(client):
     r = client.post("/api/verify", json={"message": SCAM_TEXT, "language": "fr"})
     assert r.status_code == 200 and r.json()["verdict"] == "likely_scam"
+
+
+# ---- responsiveness -------------------------------------------------------------
+
+def test_typing_indicator_stays_alive_during_a_slow_check_and_then_stops(sent, monkeypatch):
+    import time
+
+    from app import telegram_bot
+
+    monkeypatch.setattr(telegram_bot, "TYPING_REFRESH_SECONDS", 0.05)
+    with telegram_bot._typing(123):
+        time.sleep(0.3)
+    during = len([1 for m, _ in sent if m == "sendChatAction"])
+    assert during >= 3, "indicator should refresh repeatedly while the check runs"
+
+    time.sleep(0.2)
+    assert len([1 for m, _ in sent if m == "sendChatAction"]) == during, "and stop once the check is done"

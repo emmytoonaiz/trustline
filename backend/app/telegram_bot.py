@@ -3,6 +3,7 @@ import logging
 import os
 import threading
 from collections import OrderedDict
+from contextlib import contextmanager
 
 from fastapi import HTTPException
 
@@ -24,6 +25,27 @@ _image_limiter = limits.RateLimiter(max_calls=5, window_seconds=60)
 _group_limiter = limits.RateLimiter(max_calls=8, window_seconds=60)
 _seen: OrderedDict[int, None] = OrderedDict()
 _seen_lock = threading.Lock()
+
+TYPING_REFRESH_SECONDS = 4  # Telegram clears "typing…" after about 5 seconds
+
+
+@contextmanager
+def _typing(chat_id: int):
+    """Keep the "typing…" indicator alive while a slow check runs, so the bot never looks frozen."""
+    stop = threading.Event()
+
+    def keep_alive():
+        while not stop.is_set():
+            tg.send_chat_action(chat_id)
+            stop.wait(TYPING_REFRESH_SECONDS)
+
+    thread = threading.Thread(target=keep_alive, daemon=True)
+    thread.start()
+    try:
+        yield
+    finally:
+        stop.set()
+
 
 _ICON = {"likely_scam": "⚠️", "uncertain": "🤔", "likely_safe": "✅", "link_unsupported": "🔗"}
 _LABEL_KEY = {
@@ -146,7 +168,6 @@ def _content_of(message: dict, chat_id: int) -> tuple[str | None, str | None, st
     image_text = None
     photos = message.get("photo")
     if photos:
-        tg.send_chat_action(chat_id)
         for size in list(reversed(photos))[:2]:  # largest first; fall back to a smaller copy
             data = tg.get_file_bytes(size["file_id"])
             if data:
@@ -198,19 +219,18 @@ def _handle_private(message: dict, chat: dict, sender: dict) -> None:
         tg.send_message(chat_id, html.escape(s(lang, "too_long")))
         return
 
-    text, image_text, problem = _content_of(message, chat_id)
-    if problem:
-        tg.send_message(chat_id, html.escape(s(lang, problem)))
-        return
-    text = text[:MAX_MESSAGE_LENGTH]
-
-    tg.send_chat_action(chat_id)
-    try:
-        result = checker.check_message(text, lang)
-    except Exception:
-        logger.exception("Check failed")
-        tg.send_message(chat_id, html.escape(s(lang, "error")))
-        return
+    with _typing(chat_id):
+        text, image_text, problem = _content_of(message, chat_id)
+        if problem:
+            tg.send_message(chat_id, html.escape(s(lang, problem)))
+            return
+        text = text[:MAX_MESSAGE_LENGTH]
+        try:
+            result = checker.check_message(text, lang)
+        except Exception:
+            logger.exception("Check failed")
+            tg.send_message(chat_id, html.escape(s(lang, "error")))
+            return
 
     account = _forwarded_account(message, sender)
     warning = None
@@ -265,18 +285,17 @@ def _handle_group(message: dict, chat: dict, sender: dict) -> None:
     if (target.get("from") or {}).get("is_bot"):
         return
 
-    text, image_text, problem = _content_of(target, chat_id)
-    if problem:
-        tg.send_message(chat_id, html.escape(s(lang, problem)), reply_to=target.get("message_id"))
-        return
-
-    tg.send_chat_action(chat_id)
-    try:
-        result = checker.check_message(text[:MAX_MESSAGE_LENGTH], lang)
-    except Exception:
-        logger.exception("Group check failed")
-        tg.send_message(chat_id, html.escape(s(lang, "error")), reply_to=ask_id)
-        return
+    with _typing(chat_id):
+        text, image_text, problem = _content_of(target, chat_id)
+        if problem:
+            tg.send_message(chat_id, html.escape(s(lang, problem)), reply_to=target.get("message_id"))
+            return
+        try:
+            result = checker.check_message(text[:MAX_MESSAGE_LENGTH], lang)
+        except Exception:
+            logger.exception("Group check failed")
+            tg.send_message(chat_id, html.escape(s(lang, "error")), reply_to=ask_id)
+            return
     tg.send_message(
         chat_id,
         _with_image_note(_format(result, lang, None), image_text, lang),
