@@ -258,6 +258,7 @@ def _handle_group(message: dict, chat: dict, sender: dict) -> None:
     It acts when someone replies to a message with /check, and answers under that message."""
     typed = message.get("text") or ""
     if not typed.startswith("/") or typed.split()[0].split("@")[0].lower() != "/check":
+        logger.warning("Group message update in chat type=%s (monitored check follows)", chat.get("type"))
         monitor.handle_group_message(message, chat, sender)  # only acts in groups the owner asked us to watch
         return
 

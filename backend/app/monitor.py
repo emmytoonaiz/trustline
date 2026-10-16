@@ -44,11 +44,13 @@ def _alert_keyboard(lang: str, alert_id: str, can_delete: bool) -> dict:
 def handle_my_chat_member(update: dict) -> None:
     chat = update.get("chat") or {}
     if chat.get("type") not in ("group", "supergroup"):
+        logger.warning("Monitor: ignored membership change in a %s chat", chat.get("type"))
         return
     new = update.get("new_chat_member") or {}
     actor = update.get("from") or {}
     status = new.get("status")
     chat_id = chat["id"]
+    logger.warning("Monitor: bot status in a %s is now %r (can_delete=%s)", chat.get("type"), status, new.get("can_delete_messages"))
 
     if status in ("left", "kicked"):
         monitor_store.stop_monitoring(chat_id)
@@ -89,14 +91,17 @@ def handle_group_message(message: dict, chat: dict, sender: dict) -> None:
     if watched is None:
         return
     if message.get("is_automatic_forward") or message.get("sender_chat") or (sender.get("id") == watched.owner_user_id and not INCLUDE_OWNER):
+        logger.warning("Monitor: skipped (owner, channel or automatic post)")
         return
 
     text = (message.get("text") or message.get("caption") or "").strip()
     if len(text) < MIN_TEXT_LENGTH or text.startswith("/"):
+        logger.warning("Monitor: skipped (no usable text)")
         return
     text = text[:MAX_CHECKED_LENGTH]
 
     if not triage.has_risk_signals(text):
+        logger.warning("Monitor: no risk signals, not checked")
         return
     try:
         _hourly.check(f"chat:{chat['id']}")
@@ -110,6 +115,7 @@ def handle_group_message(message: dict, chat: dict, sender: dict) -> None:
     except Exception:
         logger.exception("Monitor check failed")
         return
+    logger.warning("Monitor: verdict=%s confidence=%s (alert needs likely_scam >= %s)", result.verdict, result.confidence, MIN_CONFIDENCE)
     if result.verdict != "likely_scam" or result.confidence < MIN_CONFIDENCE:
         return
 
