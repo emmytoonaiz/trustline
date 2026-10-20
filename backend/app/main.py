@@ -6,7 +6,7 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 
 from dotenv import load_dotenv
-from fastapi import BackgroundTasks, Depends, FastAPI, HTTPException, Request
+from fastapi import BackgroundTasks, Depends, FastAPI, HTTPException, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import PlainTextResponse
 
@@ -76,18 +76,22 @@ def visit(req: VisitRequest):
     return {"ok": True}
 
 
-def _require_admin(request: Request) -> None:
-    """Owner-only endpoints need the ADMIN_KEY in the X-Admin-Key header (and do not exist until it is set)."""
+def _require_admin(request: Request, response: Response) -> None:
+    """Owner-only endpoints need the ADMIN_KEY in the X-Admin-Key header (and do not exist until it is set).
+    Repeated wrong keys are locked out, and answers are never cached by the browser or a proxy."""
     key = os.getenv("ADMIN_KEY", "")
     if not key:
         raise HTTPException(status_code=404)
-    if not hmac.compare_digest(request.headers.get("x-admin-key", ""), key):
+    limits.admin_locked(request)
+    if not hmac.compare_digest(request.headers.get("x-admin-key", "").encode(), key.encode()):
+        limits.admin_key_failed(request)
         raise HTTPException(status_code=403)
+    response.headers["Cache-Control"] = "no-store"
 
 
 @app.get("/api/visits")
-def visits(request: Request, days: int = 30):
-    _require_admin(request)
+def visits(request: Request, response: Response, days: int = 30):
+    _require_admin(request, response)
     return visits_store.counts(max(1, min(days, 90)))
 
 
@@ -116,8 +120,8 @@ def feedback(req: FeedbackRequest, background: BackgroundTasks):
 
 
 @app.get("/api/feedback")
-def feedback_list(request: Request, limit: int = 50):
-    _require_admin(request)
+def feedback_list(request: Request, response: Response, limit: int = 50):
+    _require_admin(request, response)
     return feedback_store.latest(max(1, min(limit, 200)))
 
 

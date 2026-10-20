@@ -28,6 +28,14 @@ _update_ids = itertools.count(1000)
 _user_ids = itertools.count(5000)
 
 
+@pytest.fixture(autouse=True)
+def forget_wrong_admin_keys(monkeypatch):
+    """Every test is a fresh visitor as far as the admin lock-out is concerned."""
+    from app import limits
+
+    monkeypatch.setattr(limits, "_admin_fail_limiter", limits.RateLimiter(max_calls=5, window_seconds=600))
+
+
 @pytest.fixture(scope="session")
 def client():
     with TestClient(app) as c:
