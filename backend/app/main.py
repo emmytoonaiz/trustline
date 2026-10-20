@@ -9,11 +9,11 @@ from dotenv import load_dotenv
 from fastapi import BackgroundTasks, Depends, FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import PlainTextResponse
-from fastapi.staticfiles import StaticFiles
 
 load_dotenv()
 
-from app import checker, db, feedback_store, instagram, limits, reports_store, telegram_api, telegram_bot, verdict_engine, visits_store
+from app import checker, db, feedback_store, instagram, limits, ops_alerts, reports_store, telegram_api, telegram_bot, verdict_engine, visits_store
+from app.spa import SinglePageStaticFiles
 from app.i18n import normalize_lang
 from app.schemas import (
     FeedbackRequest,
@@ -31,6 +31,7 @@ async def lifespan(_: FastAPI):
     db.init_db()
     threading.Thread(target=telegram_bot.register_webhook, daemon=True).start()
     instagram.start_poller()
+    ops_alerts.start_key_watch()
     yield
 
 
@@ -180,4 +181,4 @@ def stats(language: str = "en"):
 # address, so the browser calls /api on its own origin. Absent locally (Vite serves it there).
 STATIC_DIR = Path(__file__).resolve().parent.parent / "static"
 if STATIC_DIR.is_dir():
-    app.mount("/", StaticFiles(directory=STATIC_DIR, html=True), name="frontend")
+    app.mount("/", SinglePageStaticFiles(directory=STATIC_DIR, html=True), name="frontend")

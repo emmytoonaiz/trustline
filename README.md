@@ -133,7 +133,7 @@ Set these as service variables in Railway (never commit them):
 | `DEMO_SEED_STATS` | Optional. Set to `1` to show made-up demo numbers in the community stats panel. Off by default so the panel only shows real reports. |
 | `BUSINESS_CONTACT` | Optional. An email address or link (e.g. a TikTok profile) for the "Join the pilot" button on the site. The button stays hidden until it is set. |
 | `ADMIN_KEY` | Optional. Secret that unlocks the owner-only `GET /api/visits` (visit counts per `?ref=` label) and `GET /api/feedback` (everything people wrote in the feedback form), sent as the `X-Admin-Key` header. These endpoints do not exist until it is set. |
-| `FEEDBACK_NOTIFY_CHAT_ID` | Optional. Your Telegram chat id (send `/myid` to the bot to find it). Each new piece of feedback is then forwarded to you there as it arrives. |
+| `FEEDBACK_NOTIFY_CHAT_ID` | Optional. Your Telegram chat id (send `/myid` to the bot to find it). Each new piece of feedback is then forwarded to you there as it arrives. The same chat also receives **operations alerts**: when the Anthropic key is rejected or expires, the credit balance runs out, or the daily AI limit is reached (each repeats at most every 6 to 12 hours; the key is also re-checked every 6 hours, so an expiry is noticed before visitors do). Set `OWNER_NOTIFY_CHAT_ID` instead if you want alerts in a different chat. |
 | `INSTAGRAM_ACCESS_TOKEN`, `INSTAGRAM_APP_SECRET`, `INSTAGRAM_VERIFY_TOKEN`, `INSTAGRAM_PAIRING_CODE` | Optional. Turn on Instagram comment monitoring for one account (see [docs/INSTAGRAM-SETUP.md](docs/INSTAGRAM-SETUP.md)). |
 | `MONITOR_MIN_CONFIDENCE`, `MONITOR_CHECKS_PER_HOUR`, `MONITOR_INCLUDE_OWNER` | Optional. Group-monitoring tuning (see the Telegram section). |
 

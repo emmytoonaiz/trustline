@@ -8,7 +8,7 @@ from typing import Optional
 import anthropic
 from pydantic import BaseModel
 
-from app import limits
+from app import limits, ops_alerts
 from app.i18n import LANG_NAMES, normalize_lang, t
 from app.schemas import MatchedPattern, VerifyResponse
 
@@ -137,6 +137,7 @@ def _llm_analyze(message: str, lang: str) -> LLMVerdict | None:
         return None
     if not limits.consume_llm_call():
         logger.warning("Daily AI-call ceiling reached; using rule-based fallback")
+        ops_alerts.notify("cap")
         return None
     try:
         response = _get_client().messages.parse(
@@ -148,8 +149,11 @@ def _llm_analyze(message: str, lang: str) -> LLMVerdict | None:
             output_format=LLMVerdict,
         )
         return response.parsed_output
-    except Exception:
+    except Exception as exc:
         logger.exception("LLM verdict call failed; falling back to rule-based heuristics")
+        kind = ops_alerts.classify_ai_error(exc)
+        if kind:
+            ops_alerts.notify(kind)
         return None
 
 
