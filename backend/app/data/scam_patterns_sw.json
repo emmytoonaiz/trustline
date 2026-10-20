@@ -198,5 +198,23 @@
       "Ukishachanganua na kulipa, pesa huenda moja kwa moja kwenye akaunti ya mlaghai na ni vigumu sana kuzirejesha — tofauti na muamala ulioshindwa, mara nyingi hakuna hitilafu ya kukuarifu."
     ],
     "advice": "Kabla ya kuchanganua, thibitisha kuwa nambari ya till/paybill au jina la akaunti linaloonyeshwa baada ya kuchanganua linalingana na biashara unayolipa. Ikiwa msimbo wa QR ulitumwa kwako moja kwa moja badala ya kuonyeshwa kwenye biashara, thibitisha kwanza na biashara kupitia nambari unayoijua."
+  },
+  "fake_online_vendor_pay_first": {
+    "category": "Muuzaji bandia mtandaoni (lipa kwanza, kisha anatoweka)",
+    "title": "Muuzaji wa mtandaoni anayetaka ulipe kwanza kisha anakupeleka WhatsApp",
+    "keywords": [
+      "malipo kabla ya kuletewa",
+      "lipa kwanza",
+      "malipo kwanza",
+      "niandikie whatsapp",
+      "nitumie ujumbe whatsapp",
+      "hakuna kurejeshewa pesa",
+      "lipa ili kuthibitisha oda"
+    ],
+    "why": [
+      "Ulaghai wa kawaida: muuzaji kwenye Facebook, Instagram au TikTok anaonyesha bidhaa nzuri, anasisitiza 'malipo kabla ya kuletewa', kisha anakupeleka WhatsApp ambako jukwaa halina kumbukumbu na huwezi kumripoti. Ukishalipa, anakuzuia na kutoweka.",
+      "Muuzaji halisi kwa kawaida anaweza kutoa malipo wakati wa kupokea, ziara dukani au akaunti ya biashara iliyothibitishwa; kukataa kila chaguo isipokuwa uhamisho wa awali kwenda akaunti binafsi ndiyo ishara ya hatari."
+    ],
+    "advice": "Usilipe kikamilifu kwa mgeni kabla ya kuletewa. Omba malipo wakati wa kupokea au amana ndogo na salio wakati wa kupokea, angalia umri wa ukurasa, maoni na anwani halisi, omba video ya moja kwa moja ya bidhaa, na tumia njia ya malipo yenye ulinzi wa mnunuzi. Akikataa chaguo zote salama, ondoka."
   }
 }

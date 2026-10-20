@@ -258,5 +258,39 @@
     "advice": "Before scanning, confirm the till/paybill number or account name shown after scanning matches the business you're paying. If a QR code was sent to you directly rather than displayed at the business, verify with the business through a known number first.",
     "source": "Community-reported QR payment fraud pattern",
     "severity": "high"
+  },
+  {
+    "id": "fake_online_vendor_pay_first",
+    "category": "Fake online vendor (pay first, then vanishes)",
+    "keywords": [
+      "payment before delivery",
+      "pay before delivery",
+      "pay before i deliver",
+      "we operate pay before",
+      "pay first",
+      "payment first",
+      "pay first to confirm",
+      "pay to confirm your order",
+      "no pay on delivery",
+      "no payment on delivery",
+      "no refund",
+      "chat me on whatsapp",
+      "chat on whatsapp",
+      "message me on whatsapp",
+      "dm me on whatsapp",
+      "order on whatsapp",
+      "whatsapp to order",
+      "dm to order",
+      "inbox to order",
+      "wa.me/"
+    ],
+    "title": "An online seller who wants payment first, then moves you to WhatsApp",
+    "why": [
+      "A common scam: a seller on Facebook, Instagram or TikTok shows attractive goods, insists on 'payment before delivery', then sends you to WhatsApp, where the platform keeps no record and you cannot report them. After you pay, they block you and disappear.",
+      "Real sellers can usually offer pay-on-delivery, a visit to their shop or a verified business account; refusing every option except an upfront transfer to a personal account is the warning sign."
+    ],
+    "advice": "Don't pay a stranger in full before delivery. Ask for pay-on-delivery, or a small deposit with the rest when you receive the goods. Check how old the seller's page is, its reviews and its real address, ask for a live video of the goods, and use a payment method that protects buyers. If they refuse every safe option, walk away.",
+    "source": "Community-reported social-commerce fraud pattern",
+    "severity": "high"
   }
 ]

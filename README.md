@@ -55,7 +55,7 @@ link, share an OTP, or send money.
   - *Accessibility*: large tap targets, plain language, mobile-first layout.
   - *Multilingual access*: English, **French**, **Swahili** (Kenya), **Yoruba** and **Hausa**
     (Nigeria), plus a Nigerian Pidgin interface. The four translated languages are supported
-    end to end — the interface, all 20 curated scam explanations
+    end to end — the interface, all 21 curated scam explanations
     (`backend/app/data/scam_patterns_<lang>.json`), Claude's live answers (it is told to reply
     in the user's language), the link notices, and the community stats. French and Swahili also
     carry local trigger phrases so a scam text in that language is caught instantly by the free

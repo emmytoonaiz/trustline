@@ -178,5 +178,14 @@
       "Ní kété tí o bá ti ṣàyẹ̀wò tí o sì ti sanwó, owó náà á lọ tààrà sí àkáǹtì oníjìbìtì, ó sì ṣòro gan-an láti gba padà — láìdà bí ìdúnàádúrà tí kò yọrí, kò sábà sí àṣìṣe kankan tó máa kìlọ̀ fún ọ."
     ],
     "advice": "Kí o tó ṣàyẹ̀wò, jẹ́rìísí pé nọ́ńbà till/paybill tàbí orúkọ àkáǹtì tí ó hàn lẹ́yìn ṣíṣàyẹ̀wò bá ilé-iṣẹ́ tí o ń sanwó fún mu. Bí wọ́n bá fi kóòdù QR ránṣẹ́ sí ọ tààrà dípò kí a fi hàn ní ilé-iṣẹ́ náà, jẹ́rìísí pẹ̀lú ilé-iṣẹ́ náà lákọ̀ọ́kọ́ nípasẹ̀ nọ́ńbà tí o mọ̀."
+  },
+  "fake_online_vendor_pay_first": {
+    "category": "Olùtajà orí ayélujára èké (sanwó kọ́kọ́, lẹ́yìn náà á parẹ́)",
+    "title": "Olùtajà orí ayélujára tó fẹ́ kí o sanwó kọ́kọ́, lẹ́yìn náà ó darí rẹ sí WhatsApp",
+    "why": [
+      "Ìjìbìtì tó wọ́pọ̀: olùtajà kan lórí Facebook, Instagram tàbí TikTok fi ọjà tó dára hàn, ó tẹnumọ́ 'ìsanwó ṣáájú ìfiránṣẹ́', lẹ́yìn náà ó darí rẹ sí WhatsApp níbi tí ẹ̀rọ náà kò ti ní àkọsílẹ̀ àti pé o kò lè fi ẹ̀sùn kàn án. Lẹ́yìn tí o bá ti sanwó, yóò dí ọ lọ́nà, yóò sì parẹ́.",
+      "Olùtajà gidi sábà máa ń fúnni ní ìsanwó nígbà ìfiránṣẹ́, ìbẹ̀wò sí ilé ìtajà tàbí àkáǹtì iṣẹ́ tí a ti jẹ́rìísí; kíkọ̀ gbogbo àṣàyàn àfi ìfiránṣẹ́ owó ṣáájú sí àkáǹtì ara ẹni ni àmì ewu."
+    ],
+    "advice": "Má ṣe san gbogbo owó fún àlejò kí ọjà tó dé. Béèrè fún ìsanwó nígbà ìfiránṣẹ́ tàbí owó ìdógò díẹ̀ pẹ̀lú ìyókù nígbà tí o bá gbà á, ṣàyẹ̀wò ọjọ́ orí ojú-ewé, àwọn àtúnyẹ̀wò àti àdírẹ́ẹ̀sì gidi, béèrè fún fídíò ààyè ọjà, kí o sì lo ọ̀nà ìsanwó tó ń dáàbò bo olùrà. Tí ó bá kọ̀ gbogbo àṣàyàn tó ní ààbò, fi í sílẹ̀."
   }
 }

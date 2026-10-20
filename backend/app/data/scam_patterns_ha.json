@@ -178,5 +178,14 @@
       "Da zarar ka duba ka biya, kuɗin yana tafiya kai tsaye zuwa asusun mai zamba kuma yana da wuya sosai a dawo da shi — ba kamar mu'amalar da ta gaza ba, galibi babu kuskuren da zai faɗakar da kai."
     ],
     "advice": "Kafin ka duba, ka tabbatar lambar till/paybill ko sunan asusun da ya bayyana bayan dubawa ya dace da kasuwancin da kake biya. Idan aka aiko maka lambar QR kai tsaye maimakon a nuna ta a kasuwancin, ka fara tabbatarwa da kasuwancin ta lambar da ka sani."
+  },
+  "fake_online_vendor_pay_first": {
+    "category": "Mai sayarwa na ƙarya a intanet (a biya tukuna, sannan ya ɓace)",
+    "title": "Mai sayarwa a intanet da ke buƙatar a biya tukuna, sannan ya tura ka WhatsApp",
+    "why": [
+      "Zamba ta yau da kullum: mai sayarwa a Facebook, Instagram ko TikTok yana nuna kaya masu kyau, yana dagewa a 'biya kafin isarwa', sannan ya tura ka WhatsApp inda dandalin ba shi da rikodi kuma ba za ka iya kai rahotonsa ba. Da zarar ka biya, yana toshe ka ya ɓace.",
+      "Mai sayarwa na gaske yawanci zai iya ba da biya a lokacin karɓa, ziyara a shago ko asusun kasuwanci da aka tabbatar; ƙin duk zaɓi sai canja kuɗi tukuna zuwa asusun mutum ɗaya alama ce ta haɗari."
+    ],
+    "advice": "Kada ka biya cikakken kuɗi ga baƙo kafin isarwa. Nemi biya a lokacin karɓa ko ƙaramin kuɗin ajiya da ragowar a lokacin karɓa, duba shekarun shafin, ra'ayoyi da ainihin adireshi, nemi bidiyo kai tsaye na kayan, kuma yi amfani da hanyar biya mai kare mai saye. Idan ya ƙi dukkan zaɓuɓɓuka masu aminci, ka tafi."
   }
 }

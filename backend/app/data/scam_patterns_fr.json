@@ -198,5 +198,24 @@
       "Une fois le code scanné et le paiement effectué, l'argent va directement sur le compte de l'escroc et est très difficile à récupérer — contrairement à une transaction échouée, rien ne vous alerte."
     ],
     "advice": "Avant de scanner, vérifiez que le numéro de till/paybill ou le nom du compte affiché après le scan correspond bien au commerce que vous payez. Si un code QR vous a été envoyé directement au lieu d'être affiché chez le commerçant, vérifiez d'abord auprès de lui via un numéro que vous connaissez."
+  },
+  "fake_online_vendor_pay_first": {
+    "category": "Faux vendeur en ligne (paiement d'abord, puis disparition)",
+    "title": "Un vendeur en ligne qui exige le paiement d'abord, puis vous renvoie vers WhatsApp",
+    "keywords": [
+      "paiement avant livraison",
+      "payez d'abord",
+      "paiement d'abord",
+      "écrivez-moi sur whatsapp",
+      "contactez-moi sur whatsapp",
+      "commander sur whatsapp",
+      "aucun remboursement",
+      "paiement pour confirmer votre commande"
+    ],
+    "why": [
+      "Arnaque courante : un vendeur sur Facebook, Instagram ou TikTok présente de beaux produits, exige un « paiement avant livraison » puis vous envoie sur WhatsApp, où la plateforme n'a aucune trace et où vous ne pouvez pas le signaler. Une fois payé, il vous bloque et disparaît.",
+      "Un vrai vendeur peut généralement proposer le paiement à la livraison, une visite en boutique ou un compte professionnel vérifié ; refuser toute option sauf un virement à l'avance sur un compte personnel est le signal d'alarme."
+    ],
+    "advice": "Ne payez pas l'intégralité à un inconnu avant la livraison. Demandez le paiement à la livraison ou un petit acompte avec le solde à la réception, vérifiez l'ancienneté de la page, les avis et l'adresse réelle, demandez une vidéo en direct des produits et utilisez un moyen de paiement offrant une protection à l'acheteur. S'il refuse toutes les options sûres, renoncez."
   }
 }
