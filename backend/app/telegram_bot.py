@@ -311,6 +311,8 @@ def _handle_command(chat_id: int, lang: str, text: str, message_id: int | None =
     command = text.split()[0].split("@")[0].lower()
     if command == "/language":
         tg.send_message(chat_id, html.escape(s(lang, "language_prompt")), _language_keyboard())
+    elif command == "/myid":
+        tg.send_message(chat_id, f"Your chat id: <code>{chat_id}</code>")
     elif command == "/instagram":
         instagram.handle_link_command(chat_id, lang, text, message_id)
     elif command == "/start":

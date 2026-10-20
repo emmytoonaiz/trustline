@@ -30,6 +30,16 @@ class VisitRequest(BaseModel):
     ref: Optional[str] = Field(default=None, max_length=40)
 
 
+class FeedbackRequest(BaseModel):
+    message: str = Field(min_length=3, max_length=2000)
+    rating: Optional[int] = Field(default=None, ge=1, le=5)
+    contact: Optional[str] = Field(default=None, max_length=200)
+    wants_pilot: bool = False
+    ref: Optional[str] = Field(default=None, max_length=40)
+    language: str = Field(default="en", max_length=8)
+    website: Optional[str] = Field(default=None, max_length=200)  # hidden field: real people leave it empty
+
+
 class ReportRequest(BaseModel):
     message: str = Field(min_length=1, max_length=4000)
     category: Optional[str] = Field(default=None, max_length=120)

@@ -168,6 +168,21 @@ class InstagramAlert(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now, index=True)
 
 
+class Feedback(Base):
+    """A note left through the website's feedback form. Contact details are optional and only for replying."""
+
+    __tablename__ = "feedback"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now, index=True)
+    rating: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    message: Mapped[str] = mapped_column(String(2000))
+    contact: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    wants_pilot: Mapped[bool] = mapped_column(Boolean, default=False)
+    ref: Mapped[str] = mapped_column(String(24), default="direct")
+    language: Mapped[str] = mapped_column(String(8), default="en")
+
+
 class SiteVisit(Base):
     """One website visit and the link label it came with (?ref=tiktok). Nothing identifies the visitor."""
 

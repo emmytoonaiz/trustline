@@ -40,3 +40,14 @@ export function recordVisit(ref) {
     body: JSON.stringify({ ref }),
   }).catch(() => {});
 }
+
+export async function sendFeedback(payload) {
+  const res = await fetch(`${BASE}/feedback`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ ...payload, ref: new URLSearchParams(window.location.search).get("ref") }),
+  });
+  if (res.status === 429) throw new Error("rate");
+  if (!res.ok) throw new Error("feedback request failed");
+  return res.json();
+}

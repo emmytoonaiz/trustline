@@ -1,4 +1,5 @@
 import hmac
+import html
 import os
 import threading
 from contextlib import asynccontextmanager
@@ -12,9 +13,10 @@ from fastapi.staticfiles import StaticFiles
 
 load_dotenv()
 
-from app import checker, db, instagram, limits, reports_store, telegram_api, telegram_bot, verdict_engine, visits_store
+from app import checker, db, feedback_store, instagram, limits, reports_store, telegram_api, telegram_bot, verdict_engine, visits_store
 from app.i18n import normalize_lang
 from app.schemas import (
+    FeedbackRequest,
     VisitRequest,
     ReportRequest,
     ReportResponse,
@@ -73,15 +75,49 @@ def visit(req: VisitRequest):
     return {"ok": True}
 
 
-@app.get("/api/visits")
-def visits(request: Request, days: int = 30):
-    """Visit counts per link label, for the owner only: needs the ADMIN_KEY in the X-Admin-Key header."""
+def _require_admin(request: Request) -> None:
+    """Owner-only endpoints need the ADMIN_KEY in the X-Admin-Key header (and do not exist until it is set)."""
     key = os.getenv("ADMIN_KEY", "")
     if not key:
         raise HTTPException(status_code=404)
     if not hmac.compare_digest(request.headers.get("x-admin-key", ""), key):
         raise HTTPException(status_code=403)
+
+
+@app.get("/api/visits")
+def visits(request: Request, days: int = 30):
+    _require_admin(request)
     return visits_store.counts(max(1, min(days, 90)))
+
+
+def _notify_feedback(req: FeedbackRequest, ref: str) -> None:
+    """Tells the owner on Telegram as soon as someone leaves feedback (set FEEDBACK_NOTIFY_CHAT_ID)."""
+    chat_id = os.getenv("FEEDBACK_NOTIFY_CHAT_ID", "").strip()
+    if not chat_id.lstrip("-").isdigit():
+        return
+    esc = html.escape
+    stars = f"{'★' * req.rating}{'☆' * (5 - req.rating)}" if req.rating else "no rating"
+    lines = [f"<b>New TrustLine feedback</b> · {stars} · via {esc(ref)}", "", esc(req.message[:1500])]
+    if req.contact:
+        lines += ["", f"Contact: {esc(req.contact[:200])}"]
+    if req.wants_pilot:
+        lines += ["", "🙋 Wants to join the business pilot"]
+    telegram_api.send_message(int(chat_id), "\n".join(lines))
+
+
+@app.post("/api/feedback", dependencies=[Depends(limits.limit_feedback)])
+def feedback(req: FeedbackRequest, background: BackgroundTasks):
+    if req.website:  # the hidden field was filled in: a bot, not a person. Pretend it worked.
+        return {"ok": True}
+    feedback_store.add(req.message, req.rating, req.contact, req.wants_pilot, req.ref, req.language)
+    background.add_task(_notify_feedback, req, visits_store.clean_ref(req.ref))
+    return {"ok": True}
+
+
+@app.get("/api/feedback")
+def feedback_list(request: Request, limit: int = 50):
+    _require_admin(request)
+    return feedback_store.latest(max(1, min(limit, 200)))
 
 
 @app.post("/telegram/webhook")

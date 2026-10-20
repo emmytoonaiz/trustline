@@ -48,6 +48,13 @@ _verify_limiter = RateLimiter(max_calls=20, window_seconds=60)
 _report_limiter = RateLimiter(max_calls=10, window_seconds=60)
 
 
+_feedback_limiter = RateLimiter(max_calls=3, window_seconds=600)
+
+
+def limit_feedback(request: Request) -> None:
+    _feedback_limiter.check(client_key(request))
+
+
 def limit_verify(request: Request) -> None:
     _verify_limiter.check(client_key(request))
 

@@ -3,6 +3,7 @@ import { getConfig, recordVisit, verifyMessage } from "./api.js";
 import { COPY, LANGUAGES } from "./copy.js";
 import VerdictCard from "./components/VerdictCard.jsx";
 import StatsPanel from "./components/StatsPanel.jsx";
+import FeedbackForm from "./components/FeedbackForm.jsx";
 
 export default function App() {
   const [lang, setLang] = useState("en");
@@ -12,6 +13,7 @@ export default function App() {
   const [statsKey, setStatsKey] = useState(0);
   const [telegramUrl, setTelegramUrl] = useState(null);
   const [businessContact, setBusinessContact] = useState(null);
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
 
   // Only the English text is written for the business section; other languages fall back to it.
   const t = { ...COPY.en, ...COPY[lang] };
@@ -80,18 +82,23 @@ export default function App() {
           <div className="app-title">{t.title}</div>
           <div className="app-subtitle">{t.subtitle}</div>
         </div>
-        <select
-          className="lang-select"
-          aria-label={t.languageLabel}
-          value={lang}
-          onChange={(e) => setLang(e.target.value)}
-        >
-          {LANGUAGES.map((l) => (
-            <option key={l.code} value={l.code}>
-              {l.name}
-            </option>
-          ))}
-        </select>
+        <div className="header-actions">
+          <button className="feedback-button" onClick={() => setFeedbackOpen(true)}>
+            💬 {t.feedbackButton}
+          </button>
+          <select
+            className="lang-select"
+            aria-label={t.languageLabel}
+            value={lang}
+            onChange={(e) => setLang(e.target.value)}
+          >
+            {LANGUAGES.map((l) => (
+              <option key={l.code} value={l.code}>
+                {l.name}
+              </option>
+            ))}
+          </select>
+        </div>
       </header>
 
       <main className="app-main">
@@ -166,6 +173,8 @@ export default function App() {
 
         <StatsPanel t={t} lang={lang} refreshKey={statsKey} />
       </main>
+
+      {feedbackOpen && <FeedbackForm t={t} lang={lang} onClose={() => setFeedbackOpen(false)} />}
     </div>
   );
 }
